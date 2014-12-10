@@ -48,6 +48,6 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 **06-18-2014**
 - added bg colors to the theme settings for masthead and banner
 
-Future Updates:
-Implement New 6.0 gwt design
-Improve stylings
+###### Future Updates:
+- Implement New 6.0 gwt design
+- Improve stylings
