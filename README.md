@@ -1,5 +1,5 @@
 # Goverment Website Template (GWT) for Drupal
-**Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph**
+Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
 ###### CHANGE LOGS
 **05-20-2014**
@@ -47,3 +47,8 @@
 
 **06-18-2014**
 - added bg colors to the theme settings for masthead and banner
+
+**01-07-2014**
+- Implement New 6.0 gwt design
+- Added Auxiliary region
+- fix theme settings for masthead and banner
