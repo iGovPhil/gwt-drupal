@@ -1,8 +1,0 @@
-name = iGov GWT Theme
-description = Adds more dynamic settings for the theme
-core = 7.x
-files[] = igov.module
-dependencies[] = image
-dependencies[] = field
-dependencies[] = block
-dependencies[] = jquery_update

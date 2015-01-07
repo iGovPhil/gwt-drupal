@@ -1,0 +1,202 @@
+<?php
+
+/**
+ * @file installation file of gwt_drupal_helper GWT theme module
+ */
+
+/**
+ * implementation of hook_install
+ */
+function gwt_drupal_helper_install(){
+	// $gwt_drupal_helper_slides = 'public://gwt_drupal_helper_slides'; 
+	// file_prepare_directory($gwt_drupal_helper_slides, FILE_CREATE_DIRECTORY);
+
+  _gwt_drupal_helper_install_style_slides();
+  _gwt_drupal_helper_install_content_slides();
+}
+
+/**
+ * helper function
+ * install image style slides
+ */
+function _gwt_drupal_helper_install_style_slides(){
+  // normal banner image style
+  $banner_normal = image_style_save(array('name' => 'gwt_slides_banner_normal'));
+
+  $effect = array(
+    'name' => 'image_scale_and_crop',
+    'data' => array(
+      'width' => 1160,
+      'height' => 400,
+    ),
+    'ieid' => 1,
+    'isid' => $banner_normal['isid'],
+  );
+  image_effect_save($effect);
+
+  // TODO: create an image style for full screen slider(1190x400)
+  // create an image style for half slider(775x270)
+  $banner_normal = image_style_save(array('name' => 'gwt_slides_banner_half'));
+
+  $effect = array(
+    'name' => 'image_scale_and_crop',
+    'data' => array(
+      'width' => 775,
+      'height' => 270,
+    ),
+    'ieid' => 1,
+    'isid' => $banner_normal['isid'],
+  );
+  image_effect_save($effect);
+}
+
+/**
+ * helper function
+ * install content type gwt_slides
+ */
+function _gwt_drupal_helper_install_content_slides(){
+  $entity_name = 'gwt_slides';
+  // create a new content type for slider
+  if (!in_array($entity_name, node_type_get_names())) {
+    $type = array(
+      'type' => $entity_name,
+      'name' => st('GWT Slides'),
+      'description' => st('Create and upload images for slider banner.'),
+      'base' => 'node_content',
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+      'title_label' => 'Slider Name'
+    );
+
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+  }
+
+  // create image field with a gwt_slides_banner_normal image style, add an alt for PWD
+  $field_name = 'field_gwt_slide_image';
+  // Make sure the field doesn't already exist.
+  if (!field_info_field($field_name)) {
+    // Create the field.
+    $field = array(
+      'field_name' => $field_name,
+      'type' => 'image',
+    );
+    field_create_field($field);
+    // add to the field content type
+    $instance = array( 'field_name' => $field_name,
+      'entity_type' => 'node',
+      'bundle' => $entity_name,
+      'label' => st('Image Slider'),
+      'description' => st('The image to be uploaded'),
+      'required' => TRUE,
+    );
+    field_create_instance($instance);
+  }
+
+  // create a caption field for the image
+  $field_name = 'field_gwt_image_caption';
+  // Make sure the field doesn't already exist.
+  if (!field_info_field($field_name)) {
+    // Create the field.
+    $field = array(
+      'field_name' => $field_name,
+      'type' => 'text_long',
+    );
+    field_create_field($field);
+    // add to the field content type
+    $instance = array(
+      'field_name' => $field_name,
+      'entity_type' => 'node',
+      'bundle' => $entity_name,
+      'label' => st('Caption'),
+      'description' => st('Caption of the image.'),
+      'required' => TRUE,
+    );
+    field_create_instance($instance);
+  }
+
+  // create a link field for the image
+  $field_name = 'field_gwt_image_link';
+  // Make sure the field doesn't already exist.
+  if (!field_info_field($field_name)) {
+    // Create the field.
+    $field = array(
+      'field_name' => $field_name,
+      'type' => 'text',
+      'settings' => array( 'max_length' => 255),
+    );
+    field_create_field($field);
+    // add to the field content type
+    $instance = array(
+      'field_name' => $field_name,
+      'entity_type' => 'node',
+      'bundle' => $entity_name,
+      'label' => st('Link'),
+      'description' => st('Clickable link for the slide. Set it blank to set no links.'),
+    );
+    field_create_instance($instance);
+  }
+
+  // create a weight field for the image
+  $field_name = 'field_gwt_weight';
+  // Make sure the field doesn't already exist.
+  if (!field_info_field($field_name)) {
+    // Create the field.
+    $field = array(
+      'field_name' => $field_name,
+      'type' => 'number_integer',
+      'settings' => array( 'max_length' => 64),
+    );
+    field_create_field($field);
+    // add to the field content type
+    $instance = array(
+      'field_name' => $field_name,
+      'entity_type' => 'node',
+      'bundle' => $entity_name,
+      'label' => st('Order Weight'),
+      'description' => st('Ordering weight of the slider that will be shown in order. Lower values shall be shown first.'),
+      // set the default value of 0
+      //'default_value' => 0,
+      'required' => TRUE,
+    );
+    field_create_instance($instance);
+  }
+
+  drupal_set_message('Created new content type: '.l('GWT Slides', 'node/add/gwt-slides'));
+  drupal_set_message('Created new block: '.l('GWT Banner Image Slider', 'admin/structure/block/manage/gwt_drupal_helper/gwt_drupal_helper_slides/configure'));
+  drupal_set_message('Created new block: '.l('GWT Transparency Seal', 'admin/structure/block/manage/gwt_drupal_helper/gwt_drupal_helper_trans_seal/configure'));
+}
+
+/**
+ * implementation of hook_uninstall
+ */
+function gwt_drupal_helper_uninstall(){
+  // TODO: delete the images files and folder
+  _gwt_drupal_helper_uninstall_style_slides();
+  _gwt_drupal_helper_uninstall_content_slides();
+}
+
+/**
+ * helper function
+ * uninstall the style slides
+ */
+function _gwt_drupal_helper_uninstall_style_slides(){
+  image_style_delete(image_style_load('gwt_slides_banner_normal'));
+  image_style_delete(image_style_load('gwt_slides_banner_half'));
+}
+
+/**
+ * helper function
+ * uninstall the content type gwt_slides
+ */
+function _gwt_drupal_helper_uninstall_content_slides(){
+  $entity_name = 'gwt_slides';
+
+  // uninstall content slides and its fields
+  field_delete_field('field_gwt_slide_image');
+  field_delete_field('field_gwt_image_link');
+  field_delete_field('field_gwt_image_caption');
+  field_delete_field('field_gwt_weight');
+  node_type_delete('gwt_slides');
+}

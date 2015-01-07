@@ -1,0 +1,8 @@
+name = Drupal GWT Helper Module
+description = Adds more dynamic settings for the theme
+core = 7.x
+files[] = gwt_drupal_helper.module
+dependencies[] = image
+dependencies[] = field
+dependencies[] = block
+configure = node/add/gwt-slides

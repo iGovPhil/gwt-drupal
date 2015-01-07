@@ -1,4 +1,0 @@
-name = iGov GWT Theme Module
-description = Adds more dynamic settings for the theme
-core = 7.x
-files[] = igov.module

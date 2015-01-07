@@ -1,0 +1,185 @@
+<?php
+/**
+ * igov theme module
+ */
+
+/**
+ * constant declaration
+ */
+// base image name
+define('GWT_SLIDER_IMAGE_NAME', 'slides_image-');
+// slider directory
+define('GWT_SLIDER_DIRECTORY', 'gwt_drupal_helper_slides/');
+
+// Create a block that handles the banner slider
+function gwt_drupal_helper_block_info(){
+
+  $blocks['gwt_drupal_helper_slides'] = array(
+    'info' => t('GWT: Banner Image Slider'),
+    'region' => 'banner',
+  );
+  $blocks['gwt_drupal_helper_trans_seal'] =  array(
+    'info' => t('GWT: Transparency Seal'),
+    'region' => 'sidebar_first',
+    'visibility' => 'BLOCK_VISIBILITY_LISTED',
+    'pages' => '',
+  );
+  $blocks['gwt_drupal_helper_pst'] =  array(
+    'info' => t('GWT: Philippine Standard Time'),
+    'region' => 'sidebar_first',
+    'visibility' => 'BLOCK_VISIBILITY_LISTED',
+    'pages' => '',
+  );
+
+  return $blocks;
+}
+
+function gwt_drupal_helper_block_configure($delta = '') {
+  // This example comes from node.module.
+  $form = array();
+
+  switch ($delta) {
+    case 'gwt_drupal_helper_slides':
+      // TODO: create a basic settings for image slider
+      // full width settings
+      $form['test'] = array(
+        //'#markup' => '<pre>'.print_r(image_styles(), 1).'</pre>',
+        );
+      break;
+    case 'gwt_drupal_helper_trans_seal':
+      $form['gwt_drupal_helper_fieldset'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Settings'),
+      );
+      $form['gwt_drupal_helper_fieldset']['trans_link'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Image Link',
+        '#description' => t('Transparency image link.').'<br/><strong>e.g.</strong> node/1 or &lt;front&gt;',
+        '#default_value' => variable_get('gwt_drupal_helper_trans_seal_link', 'node'),
+      );
+      break;
+  }
+  return $form;
+}
+
+/**
+ * implementation of hook_block_save()
+ */
+function gwt_drupal_helper_block_save($delta, $edit=array()){
+  switch ($delta) {
+    case 'gwt_drupal_helper_trans_seal':
+      // check if link exists
+      if(!drupal_valid_path($edit['trans_link'])){
+        break;
+      }
+      variable_set('gwt_drupal_helper_trans_seal_link', $edit['trans_link']);
+      break;
+	}
+}
+
+/**
+ * implementation of hook_block_view
+ */
+function gwt_drupal_helper_block_view($delta = ''){
+  $block = array();
+
+  switch ($delta) {
+    case 'gwt_drupal_helper_slides':
+      // check if there are already a gwt slides content types
+      
+      // load gwt slides content types
+      // print slides into foundation based slider
+      $block['subject'] = '';
+
+      $gwt_slides_content = _gwt_drupal_helper_get_gwt_slides();
+      $block['content'] = $gwt_slides_content;
+      break;
+    case 'gwt_drupal_helper_trans_seal':
+      $link = variable_get('gwt_drupal_helper_trans_seal_link', 'node');
+
+      // print the transparency seal here
+      $trans_seal = path_to_theme().'/images/transparency-seal.png';
+      $trans_seal = theme_image(
+        array(
+          'path' => $trans_seal,
+          'attributes' => array(
+            'alt' => 'transparency-seal',
+          ),
+        ));
+      
+      if($link != 'node'){
+        $trans_seal = l($trans_seal, $link, array(
+          'html' => true,
+          ));
+      }
+      $trans_seal = '<div class="transparency-seal">'.$trans_seal.'</div>';
+
+      $block['subject'] = t('Transparency Seal');
+      $block['content'] = $trans_seal;
+      break;
+    case 'gwt_drupal_helper_pst':
+      $pst_content = '<iframe src="http://oras.pagasa.dost.gov.ph/time_display/time/" frameborder="0" width="100%" allowtransparency="true" scrolling="no"></iframe>';
+      $block['subject'] = t('Philippine Standard Time');
+      $block['content'] = $pst_content;
+      break;
+  }
+
+  return $block;
+}
+
+/**
+ * helper function
+ * load all the gwt_slides content types 
+ */
+function _gwt_drupal_helper_get_gwt_slides(){
+  $type = "gwt_slides"; 
+  $nodes = node_load_multiple(array(), array('type' => $type)); 
+
+  $output = '';
+  $output .= '<ul class="banner-rsslides">';
+  foreach($nodes as $node){
+    //$output .= '<pre>'.print_r($node, 1).'</pre>';
+    //return $output;
+
+    /*
+    $image = theme('image_style', array(
+      'style_name' => 'gwt_slides_banner_normal',
+      'path' => $slides,
+    ));
+    */
+    $output .= '<li>';
+
+    // add link to the image and the caption.
+
+    // output the slide_image
+    // TODO: how to add image style here
+    $field_gwt_slide_image = field_get_items('node', $node, 'field_gwt_slide_image');
+    $field_gwt_slide_image_output = field_view_value('node', $node, 'field_gwt_slide_image', $field_gwt_slide_image[0]);
+
+    $output .= render($field_gwt_slide_image_output);
+    //return $output;
+
+    $field_gwt_image_caption = field_get_items('node', $node, 'field_gwt_image_caption');
+    $field_gwt_image_caption_output = field_view_value('node', $node, 'field_gwt_image_caption', $field_gwt_image_caption[0]);
+    $output .= '<div class="rs-caption">';
+    $output .= render($field_gwt_image_caption_output);
+    $output .= '</div>';
+
+    // TODO: add a image_style for the image field, remove the label
+    /*
+    $image_field = field_view_field('node', $node, 'field_gwt_slide_image', array(
+      'label' => 'hidden',
+      'settings' => array(
+        ),
+      // TODO: connect the weight to the weight field of the node of gwt_slides
+      'weight' => 0,
+      ));
+    return  render($image_field);
+    */
+    $output .= '</li>';
+    //return $image_field;
+  }
+
+  $output .= '</ul>';
+  return $output;
+}
