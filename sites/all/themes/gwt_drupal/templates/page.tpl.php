@@ -145,10 +145,10 @@
               ),
             )); ?>
           <?php endif; ?>
-          <?php if ($page['auxiliary_left']): ?>
+          <?php if (isset($page['auxiliary_left'])): ?>
           <?php print render($page['auxiliary_left']); ?>
           <?php endif; ?>
-          <?php if ($page['auxiliary_right']): ?>
+          <?php if (($page['auxiliary_right'])): ?>
           <?php print render($page['auxiliary_right']); ?>
           <?php endif; ?>
           </section>
