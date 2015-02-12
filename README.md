@@ -4,7 +4,6 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 ###### Future Updates
 - Fix Front page list template
 - add breadcrumb support
-- add panel top and bottom regions
 
 ###### CHANGE LOGS
 **05-20-2014**
@@ -53,7 +52,14 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 **06-18-2014**
 - added bg colors to the theme settings for masthead and banner
 
-**01-07-2014**
+**01-07-2015**
 - Implement New 6.0 gwt design
 - Added Auxiliary region
 - fix theme settings for masthead and banner
+
+**02-12-2015**
+- add panel top and bottom regions
+- Fix accessibility shortcuts
+- smaller fontsize for regions
+- added box-mode class for general blocks
+
