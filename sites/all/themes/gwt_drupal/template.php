@@ -525,6 +525,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     $variables['ear_content_2_class'] = ' large-3';
   }
 
+  // TODO: make a function that parse multiple region columns
   // create a dynamic column on agency footer
   $variables['footer_class'] = ' large-12';
   $variables['footer_2_class'] = '';
@@ -542,17 +543,11 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     elseif(!$variables['page']['footer_3'] && $variables['page']['footer_4']){
       $variables['footer_2_class'] = ' large-3';
       $variables['footer_3_class'] = '';
-      $variables['footer_4_class'] = '';
-      $variables['footer_4_class'] = ' large-3';
     }
     elseif($variables['page']['footer_3'] && !$variables['page']['footer_4']){
-      $variables['footer_2_class'] = ' large-3';
-      $variables['footer_3_class'] = ' large-3';
-      $variables['footer_4_class'] = '';
-    }
-    elseif(!$variables['page']['footer_3'] && !$variables['page']['footer_4']){
-      $variables['footer_2_class'] = ' large-3';
-      $variables['footer_3_class'] = '';
+      $variables['footer_class'] = ' large-4';
+      $variables['footer_2_class'] = ' large-4';
+      $variables['footer_3_class'] = ' large-4';
       $variables['footer_4_class'] = '';
     }
   }
@@ -562,17 +557,106 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     $variables['footer_3_class'] = ' large-3';
     $variables['footer_4_class'] = ' large-3';
     if(!$variables['page']['footer_3'] && $variables['page']['footer_4']){
-      $variables['footer_3_class'] = ' large-6';
-      $variables['footer_4_class'] = '';
-    }
-    elseif($variables['page']['footer_3'] && !$variables['page']['footer_4']){
       $variables['footer_3_class'] = '';
       $variables['footer_4_class'] = ' large-6';
+    }
+    elseif($variables['page']['footer_3'] && !$variables['page']['footer_4']){
+      $variables['footer_3_class'] = ' large-6';
+      $variables['footer_4_class'] = '';
     }
     elseif(!$variables['page']['footer_3'] && !$variables['page']['footer_4']){
       $variables['footer_class'] = ' large-12';
       $variables['footer_3_class'] = '';
       $variables['footer_4_class'] = '';
+    }
+  }
+
+  // create a dynamic column on agency panel_top
+  $variables['panel_top_class'] = ' large-12';
+  $variables['panel_top_2_class'] = '';
+  $variables['panel_top_3_class'] = '';
+  $variables['panel_top_4_class'] = '';
+  if($variables['page']['panel_top_2']){
+    $variables['panel_top_class'] = ' large-6';
+    $variables['panel_top_2_class'] = ' large-6';
+    $variables['panel_top_3_class'] = ' large-3';
+    $variables['panel_top_4_class'] = ' large-3';
+    if($variables['page']['panel_top_3'] && $variables['page']['panel_top_4']){
+      $variables['panel_top_class'] = ' large-3';
+      $variables['panel_top_2_class'] = ' large-3';
+    }
+    elseif(!$variables['page']['panel_top_3'] && $variables['page']['panel_top_4']){
+      $variables['panel_top_2_class'] = ' large-3';
+      $variables['panel_top_3_class'] = '';
+    }
+    elseif($variables['page']['panel_top_3'] && !$variables['page']['panel_top_4']){
+      $variables['panel_top_class'] = ' large-4';
+      $variables['panel_top_2_class'] = ' large-4';
+      $variables['panel_top_3_class'] = ' large-4';
+      $variables['panel_top_4_class'] = '';
+    }
+  }
+  else{
+    $variables['panel_top_class'] = ' large-6';
+    $variables['panel_top_2_class'] = '';
+    $variables['panel_top_3_class'] = ' large-3';
+    $variables['panel_top_4_class'] = ' large-3';
+    if(!$variables['page']['panel_top_3'] && $variables['page']['panel_top_4']){
+      $variables['panel_top_3_class'] = '';
+      $variables['panel_top_4_class'] = ' large-6';
+    }
+    elseif($variables['page']['panel_top_3'] && !$variables['page']['panel_top_4']){
+      $variables['panel_top_3_class'] = ' large-6';
+      $variables['panel_top_4_class'] = '';
+    }
+    elseif(!$variables['page']['panel_top_3'] && !$variables['page']['panel_top_4']){
+      $variables['panel_top_class'] = ' large-12';
+      $variables['panel_top_3_class'] = '';
+      $variables['panel_top_4_class'] = '';
+    }
+  }
+  // create a dynamic column on agency panel_bottom
+  $variables['panel_bottom_class'] = ' large-12';
+  $variables['panel_bottom_2_class'] = '';
+  $variables['panel_bottom_3_class'] = '';
+  $variables['panel_bottom_4_class'] = '';
+  if($variables['page']['panel_bottom_2']){
+    $variables['panel_bottom_class'] = ' large-6';
+    $variables['panel_bottom_2_class'] = ' large-6';
+    $variables['panel_bottom_3_class'] = ' large-3';
+    $variables['panel_bottom_4_class'] = ' large-3';
+    if($variables['page']['panel_bottom_3'] && $variables['page']['panel_bottom_4']){
+      $variables['panel_bottom_class'] = ' large-3';
+      $variables['panel_bottom_2_class'] = ' large-3';
+    }
+    elseif(!$variables['page']['panel_bottom_3'] && $variables['page']['panel_bottom_4']){
+      $variables['panel_bottom_2_class'] = ' large-3';
+      $variables['panel_bottom_3_class'] = '';
+    }
+    elseif($variables['page']['panel_bottom_3'] && !$variables['page']['panel_bottom_4']){
+      $variables['panel_bottom_class'] = ' large-4';
+      $variables['panel_bottom_2_class'] = ' large-4';
+      $variables['panel_bottom_3_class'] = ' large-4';
+      $variables['panel_bottom_4_class'] = '';
+    }
+  }
+  else{
+    $variables['panel_bottom_class'] = ' large-6';
+    $variables['panel_bottom_2_class'] = '';
+    $variables['panel_bottom_3_class'] = ' large-3';
+    $variables['panel_bottom_4_class'] = ' large-3';
+    if(!$variables['page']['panel_bottom_3'] && $variables['page']['panel_bottom_4']){
+      $variables['panel_bottom_3_class'] = '';
+      $variables['panel_bottom_4_class'] = ' large-6';
+    }
+    elseif($variables['page']['panel_bottom_3'] && !$variables['page']['panel_bottom_4']){
+      $variables['panel_bottom_3_class'] = ' large-6';
+      $variables['panel_bottom_4_class'] = '';
+    }
+    elseif(!$variables['page']['panel_bottom_3'] && !$variables['page']['panel_bottom_4']){
+      $variables['panel_bottom_class'] = ' large-12';
+      $variables['panel_bottom_3_class'] = '';
+      $variables['panel_bottom_4_class'] = '';
     }
   }
 
@@ -620,44 +704,50 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $accessibility = array();
   $gwt_drupal_acc_statement = theme_get_setting('gwt_drupal_acc_statement') ? theme_get_setting('gwt_drupal_acc_statement') : '';
   if($gwt_drupal_acc_statement){
-    $accessibility['0'] = array(
+    $accessibility[] = array(
       'url' => $gwt_drupal_acc_statement,
       'text' => t('Accessibility Statement'),
+      'key' => '0',
       );
   }
   $gwt_drupal_acc_home = theme_get_setting('gwt_drupal_acc_home') ? theme_get_setting('gwt_drupal_acc_home') : '';
   if($gwt_drupal_acc_home){
-    $accessibility['1'] = array(
+    $accessibility[] = array(
       'url' => $gwt_drupal_acc_home,
       'text' => t('Home'),
+      'key' => '1',
       );
   }
   $gwt_drupal_acc_faq = theme_get_setting('gwt_drupal_acc_faq') ? theme_get_setting('gwt_drupal_acc_faq') : '';
   if($gwt_drupal_acc_faq){
-    $accessibility['5'] = array(
-      'url' => $gwt_drupal_acc_maincontent,
+    $accessibility[] = array(
+      'url' => $gwt_drupal_acc_faq,
       'text' => t('Faqs'),
+      'key' => '5',
       );
   }
   $gwt_drupal_acc_contact = theme_get_setting('gwt_drupal_acc_contact') ? theme_get_setting('gwt_drupal_acc_contact') : '';
   if($gwt_drupal_acc_contact){
-    $accessibility['C'] = array(
+    $accessibility[] = array(
       'url' => $gwt_drupal_acc_contact,
       'text' => t('Contact'),
+      'key' => 'c',
       );
   }
   $gwt_drupal_acc_feedback = theme_get_setting('gwt_drupal_acc_feedback') ? theme_get_setting('gwt_drupal_acc_feedback') : '';
   if($gwt_drupal_acc_feedback){
-    $accessibility['K'] = array(
+    $accessibility[] = array(
       'url' => $gwt_drupal_acc_feedback,
       'text' => t('Feedbacks'),
+      'key' => 'k',
       );
   }
   $gwt_drupal_acc_search = theme_get_setting('gwt_drupal_acc_search') ? theme_get_setting('gwt_drupal_acc_search') : 'search/node/';
   if($gwt_drupal_acc_search){
-    $accessibility['S'] = array(
+    $accessibility[] = array(
       'url' => $gwt_drupal_acc_search,
       'text' => t('Search'),
+      'key' => 's',
       );
   }
 
@@ -667,25 +757,40 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   if($gwt_drupal_acc_maincontent){
     $variables['accesibility'] .= '<li><a href="'.$gwt_drupal_acc_maincontent.'" accesskey="R">Skip to Main Content</a></li>';
   }
-  /*foreach($accessibility as $access_key => $data){
-    $variables['accesibility'] .= '<li>';
-    $variables['accesibility'] .= l(
-      $data['text'],
-      $data['url'],
-      array(
-        'attributes' => array(
-          'accesskey' => $access_key,
-          'class' => 'skips',
-          ),
-        )
-      );
-    $variables['accesibility'] .= '</li>';
-  }*/
   $gwt_drupal_acc_sitemap = theme_get_setting('gwt_drupal_acc_sitemap') ? theme_get_setting('gwt_drupal_acc_sitemap') : '#footer';
   if($gwt_drupal_acc_sitemap){
     $variables['accesibility'] .= '<li><a href="'.$gwt_drupal_acc_sitemap.'" accesskey="M">Sitemap</a></li>';
   }
   $variables['accesibility'] .= '</ul>';
+  /*$test = l(
+      $accessibility[0]['text'],
+      $accessibility[0]['url'],
+      array(
+        'attributes' => array(
+          'accesskey' => 0,
+          'class' => 'skips',
+          ),
+        ));
+  drupal_set_message('<pre>'.print_r($accessibility, 1).'</pre>');
+  drupal_set_message('<pre>'.print_r($test, 1).'</pre>');*/
+
+  $variables['accesibility_shortcut'] = '<ul>';
+  foreach($accessibility as $access_key => $data){
+    $variables['accesibility_shortcut'] .= '<li>';
+    $variables['accesibility_shortcut'] .= l(
+      $data['text'],
+      $data['url'],
+      array(
+        'class' => 'skips',
+        'attributes' => array(
+          'accesskey' => $data['key'],
+          // 
+          ),
+        )
+      );
+    $variables['accesibility_shortcut'] .= '</li>';
+  }
+  $variables['accesibility_shortcut'] .= '</ul>';
 }
 
 /**

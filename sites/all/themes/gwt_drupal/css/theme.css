@@ -26,7 +26,7 @@ h1, h2, h3, h4, h5, h6 {font-family: 'Roboto', sans-serif; font-weight: bold; te
  * global styling
  */
 body, div, dl, dt, dd, ul, ol, li, pre, form, p, blockquote, th, td {
-	font-size: 13px;
+	/*font-size: 13px;*/
 }
 body.toolbar-drawer{
 	padding-top: 0 !important;
@@ -72,6 +72,9 @@ body.toolbar-drawer{
 html body.admin-menu{
 	padding: 0 !important;
 }
+#admin-menu ul li a{
+	font-size: 10px;
+}
 
 /**
  * region styling
@@ -79,25 +82,30 @@ html body.admin-menu{
 /** accessibility-links **/
 #accessibility-links{
 }
-#accessibility-links ul{
+#accessibility-links ul,
+#accessibility-shortcuts ul{
 	margin: 0;
 	overflow: hidden;
 	height: auto;
 	width: auto;
 }
-#accessibility-links ul li{
+#accessibility-links ul li,
+#accessibility-shortcuts ul li{
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
-#accessibility-links ul li a{
+#accessibility-links ul li a,
+#accessibility-shortcuts ul li a{
 	display: block;
 	padding: 0 20px;
 }
-#accessibility-links ul li a{
+#accessibility-links ul li a,
+#accessibility-shortcuts ul li a{
 	font-size: 0;
 }
-#accessibility-links ul li.access-focus a{
+#accessibility-links ul li.access-focus a,
+#accessibility-shortcuts ul li.access-focus a{
 	font-size: inherit;
 }
 
@@ -474,8 +482,6 @@ border: 1px solid #d8d8d8;
 
 /** content **/
 #page-title{
-	margin-bottom: 15px;
-	font-size: 22px;
 }
 
 /** sidebars **/
@@ -490,9 +496,18 @@ border: 1px solid #d8d8d8;
 	max-width: 250px;
 }
 
+.block .box-mode{
+	border-style: solid;
+	border-width: 1px;
+	padding: 1.25rem;
+	background: #F2F2F2;
+	margin-bottom: 1.25rem;
+	border-color: #D8D8D8;
+}
+
 /** footer **/
 #footer{
-	padding: 30px 0;
+	padding: 1.25rem 0;
 	background-color: #e9e9e9;
 	border-top: 1px solid #e1e1e1;
 }

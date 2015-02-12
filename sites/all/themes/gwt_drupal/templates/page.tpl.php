@@ -10,6 +10,9 @@
 <div id="accessibility-links">
 <?php print $accesibility; ?>
 </div>
+<div id="accessibility-shortcuts">
+<?php print $accesibility_shortcut; ?>
+</div>
 <div id="page">
 
 
@@ -157,6 +160,39 @@
     </div>
   </div>
 
+  <div id="panel-top">
+    <div class="row">
+      <?php if($panel_top = render($page['panel_top'])): ?>
+        <div class="columns<?php print $panel_top_class ?>">
+          <div class="panel-top">
+          <?php print $panel_top; ?>
+          </div>
+        </div>
+      <?php endif ?>
+      <?php if($panel_top_2 = render($page['panel_top_2'])): ?>
+        <div class="columns<?php print $panel_top_2_class ?>">
+          <div class="panel-top">
+          <?php print $panel_top_2; ?>
+          </div>
+        </div>
+      <?php endif ?>
+      <?php if($panel_top_3 = render($page['panel_top_3'])): ?>
+        <div class="columns<?php print $panel_top_3_class ?>">
+          <div class="panel-top">
+          <?php print $panel_top_3; ?>
+          </div>
+        </div>
+      <?php endif ?>
+      <?php if($panel_top_4 = render($page['panel_top_4'])): ?>
+        <div class="columns<?php print $panel_top_4_class ?>">
+          <div class="panel-top">
+          <?php print $panel_top_4; ?>
+          </div>
+        </div>
+      <?php endif ?>
+    </div>
+  </div>
+  
   <div id="main" role="document">
     <div class="row">
       <?php
@@ -174,7 +210,7 @@
         <?php print render($tabs); ?>
         <?php print render($title_prefix); ?>
         <?php if ($title): ?>
-          <h2 class="page__title title" id="page-title"><?php print $title; ?></h2>
+          <h5 class="page__title title" id="page-title"><?php print $title; ?></h5>
         <?php endif; ?>
         <?php print render($title_suffix); ?>
         <?php print render($page['help']); ?>
@@ -199,11 +235,52 @@
     </div>
   </div>
 
+  <div id="panel-bottom">
+    <div class="row">
+      <?php if($panel_bottom = render($page['panel_bottom'])): ?>
+        <div class="columns<?php print $panel_bottom_class ?>">
+          <div class="panel-bottom">
+          <?php print $panel_bottom; ?>
+          </div>
+        </div>
+      <?php endif ?>
+      <?php if($panel_bottom_2 = render($page['panel_bottom_2'])): ?>
+        <div class="columns<?php print $panel_bottom_2_class ?>">
+          <div class="panel-bottom">
+          <?php print $panel_bottom_2; ?>
+          </div>
+        </div>
+      <?php endif ?>
+      <?php if($panel_bottom_3 = render($page['panel_bottom_3'])): ?>
+        <div class="columns<?php print $panel_bottom_3_class ?>">
+          <div class="panel-bottom">
+          <?php print $panel_bottom_3; ?>
+          </div>
+        </div>
+      <?php endif ?>
+      <?php if($panel_bottom_4 = render($page['panel_bottom_4'])): ?>
+        <div class="columns<?php print $panel_bottom_4_class ?>">
+          <div class="panel-bottom">
+          <?php print $panel_bottom_4; ?>
+          </div>
+        </div>
+      <?php endif ?>
+    </div>
+  </div>
+
+  <?php
+  if(!empty($page['footer']) ||
+    !empty($page['footer_2']) ||
+    !empty($page['footer_3']) ||
+    !empty($page['footer_4'])):
+    ?>
   <footer id="footer">
     <div class="row">
+      <?php if($footer_1 = render($page['footer'])): ?>
       <div class="columns<?php print $footer_class ?>">
-        <?php print render($page['footer']); ?>
+        <?php print $footer_1; ?>
       </div>
+      <?php endif ?>
       <?php if($footer_2 = render($page['footer_2'])): ?>
         <div class="columns<?php print $footer_2_class ?>">
           <?php print $footer_2; ?>
@@ -221,6 +298,7 @@
       <?php endif ?>
     </div>
   </footer>
+  <?php endif ?>
   <div id="gwt-standard-footer">
   </div>
   <script type="text/javascript">
