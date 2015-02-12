@@ -1,6 +1,11 @@
 # Goverment Website Template (GWT) for Drupal
 Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
+###### Future Updates
+- Fix Front page list template
+- add breadcrumb support
+- add panel top and bottom regions
+
 ###### CHANGE LOGS
 **05-20-2014**
 - created iGOv GWT Theme
