@@ -5,6 +5,9 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - Fix Front page list template
 - add breadcrumb support
 
+###### Known Bugs
+- check helper module error: Notice: Undefined index: status in _block_rehash() (line 439 of C:\xampp\htdocs\FAQ_drupal\modules\block\block.module). 
+
 ###### CHANGE LOGS
 **05-20-2014**
 - created iGOv GWT Theme
