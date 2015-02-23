@@ -4,6 +4,7 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 ###### Future Updates
 - Fix Front page list template
 - add breadcrumb support
+- define division for the menu
 
 ###### Known Bugs
 - check helper module error: Notice: Undefined index: status in _block_rehash() (line 439 of C:\xampp\htdocs\FAQ_drupal\modules\block\block.module). 
