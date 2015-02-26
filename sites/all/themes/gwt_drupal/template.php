@@ -701,7 +701,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   // TODO: check if the auxiliary_menu is available
   $variables['menu_auxiliary_menu'] = '';
   if(menu_load_links('menu-auxiliary-menu')) {
-    $variables['menu_auxiliary_menu'] = menu_load_links('menu-auxiliary-menu')
+    $variables['menu_auxiliary_menu'] = menu_load_links('menu-auxiliary-menu');
   }
   
   $accessibility = array();
