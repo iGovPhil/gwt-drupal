@@ -699,7 +699,10 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
 
 
   // TODO: check if the auxiliary_menu is available
-  $variables['menu_auxiliary_menu'] = !empty(menu_load_links('menu-auxiliary-menu')) ? menu_load_links('menu-auxiliary-menu') : '';
+  $variables['menu_auxiliary_menu'] = '';
+  if(!empty(menu_load_links('menu-auxiliary-menu'))) {
+    $variables['menu_auxiliary_menu'] = menu_load_links('menu-auxiliary-menu')
+  }
   
   $accessibility = array();
   $gwt_drupal_acc_statement = theme_get_setting('gwt_drupal_acc_statement') ? theme_get_setting('gwt_drupal_acc_statement') : '';
