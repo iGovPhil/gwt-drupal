@@ -159,6 +159,24 @@
       </div>
     </div>
   </div>
+  <?php
+  if(isset($breadcrumb) || isset($page['breadcrumbs'])):
+    ?>
+  <div id="breadcrumbs">
+    <div class="row">
+      <div class="large-12 columns">
+      <?php if (isset($breadcrumb)): ?>
+      <?php print $breadcrumb; ?>
+      <?php endif; ?>
+      <?php if (isset($page['breadcrumbs'])): ?>
+      <?php print render($page['breadcrumbs']); ?>
+      <?php endif; ?>
+      </div>
+    </div>
+  </div>
+  <?php
+    endif;
+    ?>
 
   <div id="panel-top">
     <div class="row">
@@ -205,7 +223,6 @@
         <?php print $messages; ?>
         <div class="panel">
         <?php print render($page['highlighted']); ?>
-        <?php print $breadcrumb; ?>
         <a id="main-content"></a>
         <?php print render($tabs); ?>
         <?php print render($title_prefix); ?>
@@ -299,18 +316,6 @@
     </div>
   </footer>
   <?php endif ?>
-  <div id="gwt-standard-footer">
-  </div>
-  <script type="text/javascript">
-    (function(d, s, id) {
-      var js, gjs = d.getElementById('gwt-standard-footer');
-
-      js = d.createElement(s); js.id = id;
-      js.src = "http://gwt-footer.googlecode.com/git/footer.js";
-      gjs.parentNode.insertBefore(js, gjs);
-
-    }(document, 'script', 'gwt-footer-jsdk'));
-  </script>
 <div><a href="#page" id="back-to-top">Back to Top</a></div>
 </div>
 

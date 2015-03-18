@@ -5,6 +5,7 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - Fix Front page list template
 - add breadcrumb support
 - define division for the menu
+- application for drupal.org, prepare folders for 3rd party plugins
 
 ###### Known Bugs
 - check helper module error: Notice: Undefined index: status in _block_rehash() (line 439 of C:\xampp\htdocs\FAQ_drupal\modules\block\block.module). 
@@ -67,4 +68,7 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - Fix accessibility shortcuts
 - smaller fontsize for regions
 - added box-mode class for general blocks
+
+**03-18-2015**
+- Added default breadcrumb support
 

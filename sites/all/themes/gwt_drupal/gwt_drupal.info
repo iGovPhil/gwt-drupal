@@ -2,12 +2,7 @@ screenshot  = screenshot.png
 name        = GWT Drupal
 description = Government Web Template theme
 
-core        = 7.x
 engine      = phptemplate
-
-version = "3.0-rc1"
-core = "7.x"
-project = "gwt-drupal"
 
 stylesheets[all][] = system.menus.css
 stylesheets[all][] = system.messages.css
@@ -96,18 +91,18 @@ features[] = secondary_menu
 
 ; Set the default values of settings on the theme-settings.php form.
 
-settings[gwt_breadcrumb]           = yes
-settings[gwt_breadcrumb_separator] = ' › '
-settings[gwt_breadcrumb_home]      = 1
-settings[gwt_breadcrumb_trailing]  = 0
-settings[gwt_breadcrumb_title]     = 0
-settings[gwt_skip_link_anchor]     = main-menu
-settings[gwt_skip_link_text]       = Jump to navigation
-settings[gwt_html5_respond_meta][] = respond
-settings[gwt_html5_respond_meta][] = html5
-settings[gwt_html5_respond_meta][] = meta
-settings[gwt_rebuild_registry]     = 1
-settings[gwt_wireframes]           = 0
+settings[gwt_drupal_breadcrumb]           = yes
+settings[gwt_drupal_breadcrumb_separator] = ' › '
+settings[gwt_drupal_breadcrumb_home]      = 1
+settings[gwt_drupal_breadcrumb_trailing]  = 0
+settings[gwt_drupal_breadcrumb_title]     = 0
+settings[gwt_drupal_skip_link_anchor]     = main-menu
+settings[gwt_drupal_skip_link_text]       = Jump to navigation
+settings[gwt_drupal_html5_respond_meta][] = respond
+settings[gwt_drupal_html5_respond_meta][] = html5
+settings[gwt_drupal_html5_respond_meta][] = meta
+settings[gwt_drupal_rebuild_registry]     = 1
+settings[gwt_drupal_wireframes]           = 0
 
 ; To add a Panels layout (which can also be used by Display Suite), uncomment
 ; the line below and see the documentation at: https://drupal.org/node/495654

@@ -402,6 +402,17 @@ border: 1px solid #d8d8d8;
 #aux-nav.show-for-medium-up.open{ display: block !important;z-index: 1; }
 #aux-nav.open li.divider{ border: 0; }
 
+/** breadcrumbs **/
+#breadcrumbs{ background: #f7f7f7; border-top: solid 1px #ebebeb; border-bottom: solid 1px #ebebeb;}
+#breadcrumbs .breadcrumb{ background: #f7f7f7; padding-left: 15px;}
+#breadcrumbs .breadcrumb li{ 
+background: #f7f7f7;
+color: #000;
+font-size: 13px;
+line-height: 58px;
+display: inline;
+white-space: nowrap;}
+
 /** banner slider **/
 #block-gwt-drupal-helper-gwt-drupal-helper-slides{
 	position: relative;

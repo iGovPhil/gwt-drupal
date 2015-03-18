@@ -425,6 +425,7 @@ function gwt_drupal_html_head_alter(&$head) {
  *   The name of the template being rendered ("page" in this case.)
  */
 function gwt_drupal_preprocess_page(&$variables, $hook) {
+
   // Find the title of the menu used by the secondary links.
   $secondary_links = variable_get('menu_secondary_links_source', 'user-menu');
   if ($secondary_links) {
@@ -509,17 +510,17 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $variables['ear_content_class'] = '';
   $variables['ear_content_2_class'] = '';
   // if both banner are available
-  if($variables['page']['ear_content'] && $variables['page']['ear_content_2']){
+  if(isset($variables['page']['ear_content']) && isset($variables['page']['ear_content_2'])){
     $variables['name_slogan_class'] = ' large-6';
     $variables['ear_content_class'] = ' large-3';
     $variables['ear_content_2_class'] = ' large-3';
   }
-  elseif($variables['page']['ear_content'] && !$variables['page']['ear_content_2']){
+  elseif(isset($variables['page']['ear_content']) && !isset($variables['page']['ear_content_2'])){
     $variables['name_slogan_class'] = ' large-9';
     $variables['ear_content_class'] = ' large-3';
     //$variables['ear_content_2_class'] = '';
   }
-  elseif(!$variables['page']['ear_content'] && $variables['page']['ear_content_2']){
+  elseif(!isset($variables['page']['ear_content']) && isset($variables['page']['ear_content_2'])){
     $variables['name_slogan_class'] = ' large-9';
     //$variables['ear_content_class'] = '';
     $variables['ear_content_2_class'] = ' large-3';
@@ -531,20 +532,20 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $variables['footer_2_class'] = '';
   $variables['footer_3_class'] = '';
   $variables['footer_4_class'] = '';
-  if($variables['page']['footer_2']){
+  if(isset($variables['page']['footer_2'])){
     $variables['footer_class'] = ' large-6';
     $variables['footer_2_class'] = ' large-6';
     $variables['footer_3_class'] = ' large-3';
     $variables['footer_4_class'] = ' large-3';
-    if($variables['page']['footer_3'] && $variables['page']['footer_4']){
+    if(isset($variables['page']['footer_3']) && isset($variables['page']['footer_4'])){
       $variables['footer_class'] = ' large-3';
       $variables['footer_2_class'] = ' large-3';
     }
-    elseif(!$variables['page']['footer_3'] && $variables['page']['footer_4']){
+    elseif(!isset($variables['page']['footer_3']) && isset($variables['page']['footer_4'])){
       $variables['footer_2_class'] = ' large-3';
       $variables['footer_3_class'] = '';
     }
-    elseif($variables['page']['footer_3'] && !$variables['page']['footer_4']){
+    elseif(isset($variables['page']['footer_3']) && !isset($variables['page']['footer_4'])){
       $variables['footer_class'] = ' large-4';
       $variables['footer_2_class'] = ' large-4';
       $variables['footer_3_class'] = ' large-4';
@@ -556,15 +557,15 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     $variables['footer_2_class'] = '';
     $variables['footer_3_class'] = ' large-3';
     $variables['footer_4_class'] = ' large-3';
-    if(!$variables['page']['footer_3'] && $variables['page']['footer_4']){
+    if(!isset($variables['page']['footer_3']) && isset($variables['page']['footer_4'])){
       $variables['footer_3_class'] = '';
       $variables['footer_4_class'] = ' large-6';
     }
-    elseif($variables['page']['footer_3'] && !$variables['page']['footer_4']){
+    elseif(isset($variables['page']['footer_3']) && !isset($variables['page']['footer_4'])){
       $variables['footer_3_class'] = ' large-6';
       $variables['footer_4_class'] = '';
     }
-    elseif(!$variables['page']['footer_3'] && !$variables['page']['footer_4']){
+    elseif(!isset($variables['page']['footer_3']) && !isset($variables['page']['footer_4'])){
       $variables['footer_class'] = ' large-12';
       $variables['footer_3_class'] = '';
       $variables['footer_4_class'] = '';
@@ -576,20 +577,20 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $variables['panel_top_2_class'] = '';
   $variables['panel_top_3_class'] = '';
   $variables['panel_top_4_class'] = '';
-  if($variables['page']['panel_top_2']){
+  if(isset($variables['page']['panel_top_2'])){
     $variables['panel_top_class'] = ' large-6';
     $variables['panel_top_2_class'] = ' large-6';
     $variables['panel_top_3_class'] = ' large-3';
     $variables['panel_top_4_class'] = ' large-3';
-    if($variables['page']['panel_top_3'] && $variables['page']['panel_top_4']){
+    if(isset($variables['page']['panel_top_3']) && isset($variables['page']['panel_top_4'])){
       $variables['panel_top_class'] = ' large-3';
       $variables['panel_top_2_class'] = ' large-3';
     }
-    elseif(!$variables['page']['panel_top_3'] && $variables['page']['panel_top_4']){
+    elseif(!isset($variables['page']['panel_top_3']) && isset($variables['page']['panel_top_4'])){
       $variables['panel_top_2_class'] = ' large-3';
       $variables['panel_top_3_class'] = '';
     }
-    elseif($variables['page']['panel_top_3'] && !$variables['page']['panel_top_4']){
+    elseif(isset($variables['page']['panel_top_3']) && !isset($variables['page']['panel_top_4'])){
       $variables['panel_top_class'] = ' large-4';
       $variables['panel_top_2_class'] = ' large-4';
       $variables['panel_top_3_class'] = ' large-4';
@@ -601,15 +602,15 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     $variables['panel_top_2_class'] = '';
     $variables['panel_top_3_class'] = ' large-3';
     $variables['panel_top_4_class'] = ' large-3';
-    if(!$variables['page']['panel_top_3'] && $variables['page']['panel_top_4']){
+    if(!isset($variables['page']['panel_top_3']) && isset($variables['page']['panel_top_4'])){
       $variables['panel_top_3_class'] = '';
       $variables['panel_top_4_class'] = ' large-6';
     }
-    elseif($variables['page']['panel_top_3'] && !$variables['page']['panel_top_4']){
+    elseif(isset($variables['page']['panel_top_3']) && !isset($variables['page']['panel_top_4'])){
       $variables['panel_top_3_class'] = ' large-6';
       $variables['panel_top_4_class'] = '';
     }
-    elseif(!$variables['page']['panel_top_3'] && !$variables['page']['panel_top_4']){
+    elseif(!isset($variables['page']['panel_top_3']) && !isset($variables['page']['panel_top_4'])){
       $variables['panel_top_class'] = ' large-12';
       $variables['panel_top_3_class'] = '';
       $variables['panel_top_4_class'] = '';
@@ -620,20 +621,20 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $variables['panel_bottom_2_class'] = '';
   $variables['panel_bottom_3_class'] = '';
   $variables['panel_bottom_4_class'] = '';
-  if($variables['page']['panel_bottom_2']){
+  if(isset($variables['page']['panel_bottom_2'])){
     $variables['panel_bottom_class'] = ' large-6';
     $variables['panel_bottom_2_class'] = ' large-6';
     $variables['panel_bottom_3_class'] = ' large-3';
     $variables['panel_bottom_4_class'] = ' large-3';
-    if($variables['page']['panel_bottom_3'] && $variables['page']['panel_bottom_4']){
+    if(isset($variables['page']['panel_bottom_3']) && isset($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_class'] = ' large-3';
       $variables['panel_bottom_2_class'] = ' large-3';
     }
-    elseif(!$variables['page']['panel_bottom_3'] && $variables['page']['panel_bottom_4']){
+    elseif(!isset($variables['page']['panel_bottom_3']) && isset($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_2_class'] = ' large-3';
       $variables['panel_bottom_3_class'] = '';
     }
-    elseif($variables['page']['panel_bottom_3'] && !$variables['page']['panel_bottom_4']){
+    elseif(isset($variables['page']['panel_bottom_3']) && !isset($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_class'] = ' large-4';
       $variables['panel_bottom_2_class'] = ' large-4';
       $variables['panel_bottom_3_class'] = ' large-4';
@@ -645,20 +646,20 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     $variables['panel_bottom_2_class'] = '';
     $variables['panel_bottom_3_class'] = ' large-3';
     $variables['panel_bottom_4_class'] = ' large-3';
-    if(!$variables['page']['panel_bottom_3'] && $variables['page']['panel_bottom_4']){
+    if(!isset($variables['page']['panel_bottom_3']) && isset($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_3_class'] = '';
       $variables['panel_bottom_4_class'] = ' large-6';
     }
-    elseif($variables['page']['panel_bottom_3'] && !$variables['page']['panel_bottom_4']){
+    elseif(isset($variables['page']['panel_bottom_3']) && !isset($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_3_class'] = ' large-6';
       $variables['panel_bottom_4_class'] = '';
     }
-    elseif(!$variables['page']['panel_bottom_3'] && !$variables['page']['panel_bottom_4']){
+    elseif(!isset($variables['page']['panel_bottom_3']) && !isset($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_class'] = ' large-12';
       $variables['panel_bottom_3_class'] = '';
       $variables['panel_bottom_4_class'] = '';
     }
-  }
+  } 
 
   // load the color used from theme_settings
   $variables['gwt_drupal_masthead_styles'] = 'style=" ';

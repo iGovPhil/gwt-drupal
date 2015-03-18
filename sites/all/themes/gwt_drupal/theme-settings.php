@@ -18,6 +18,59 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
   if (isset($form_id)) {
     return;
   }
+  // Create the form using Forms API
+  $form['breadcrumb'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('Breadcrumb settings'),
+  );
+  $form['breadcrumb']['gwt_drupal_breadcrumb'] = array(
+    '#type'          => 'select',
+    '#title'         => t('Display breadcrumb'),
+    '#default_value' => theme_get_setting('gwt_drupal_breadcrumb'),
+    '#options'       => array(
+                          'yes'   => t('Yes'),
+                          'admin' => t('Only in admin section'),
+                          'no'    => t('No'),
+                        ),
+  );
+  $form['breadcrumb']['breadcrumb_options'] = array(
+    '#type' => 'container',
+    '#states' => array(
+      'invisible' => array(
+        ':input[name="gwt_drupal_breadcrumb"]' => array('value' => 'no'),
+      ),
+    ),
+  );
+  $form['breadcrumb']['breadcrumb_options']['gwt_drupal_breadcrumb_separator'] = array(
+    '#type'          => 'textfield',
+    '#title'         => t('Breadcrumb separator'),
+    '#description'   => t('Text only. Don’t forget to include spaces.'),
+    '#default_value' => theme_get_setting('gwt_drupal_breadcrumb_separator'),
+    '#size'          => 5,
+    '#maxlength'     => 10,
+  );
+  $form['breadcrumb']['breadcrumb_options']['gwt_drupal_breadcrumb_home'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Show home page link in breadcrumb'),
+    '#default_value' => theme_get_setting('gwt_drupal_breadcrumb_home'),
+  );
+  $form['breadcrumb']['breadcrumb_options']['gwt_drupal_breadcrumb_trailing'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Append a separator to the end of the breadcrumb'),
+    '#default_value' => theme_get_setting('gwt_drupal_breadcrumb_trailing'),
+    '#description'   => t('Useful when the breadcrumb is placed just before the title.'),
+    '#states' => array(
+      'disabled' => array(
+        ':input[name="gwt_drupal_breadcrumb_title"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['breadcrumb']['breadcrumb_options']['gwt_drupal_breadcrumb_title'] = array(
+    '#type'          => 'checkbox',
+    '#title'         => t('Append the content title to the end of the breadcrumb'),
+    '#default_value' => theme_get_setting('gwt_drupal_breadcrumb_title'),
+    '#description'   => t('Useful when the breadcrumb is not placed just before the title.'),
+  );
 
   // Create the form using Forms API: http://api.drupal.org/api/7
 
@@ -32,7 +85,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
 
   // Remove some of the base theme's settings.
   /* -- Delete this line if you want to turn off this setting.
-  unset($form['themedev']['zen_wireframes']); // We don't need to toggle wireframes on this site.
+  unset($form['themedev']['gwt_drupal_wireframes']); // We don't need to toggle wireframes on this site.
   // */
 
   $form['gwt_drupal'] = array(
