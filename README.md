@@ -3,7 +3,6 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
 ###### Future Updates
 - Fix Front page list template
-- define division for the menu
 - application for drupal.org, prepare folders for 3rd party plugins
 
 ###### Known Bugs
@@ -74,4 +73,5 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
 **04-10-2015**
 - Updated GWT-Footer Script
+- added drop shadow for dropdown menu
 
