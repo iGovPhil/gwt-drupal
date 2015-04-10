@@ -316,7 +316,16 @@
     </div>
   </footer>
   <?php endif ?>
-<div><a href="#page" id="back-to-top">Back to Top</a></div>
-</div>
+  <div id="gwt-standard-footer"></div>
+  <script type="text/javascript">
+  (function(d, s, id) {
+    var js, gjs = d.getElementById('gwt-standard-footer');
 
+      js = d.createElement(s); js.id = id;
+      js.src = "//cdn.i.gov.ph/gwt-footer/footer.js";
+      gjs.parentNode.insertBefore(js, gjs);
+  }(document, 'script', 'gwt-footer-jsdk'));
+  </script>
+  <div><a href="#page" id="back-to-top">Back to Top</a></div>
+</div>
 <?php print render($page['bottom']); ?>

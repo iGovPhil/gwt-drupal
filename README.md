@@ -3,13 +3,13 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
 ###### Future Updates
 - Fix Front page list template
-- add breadcrumb support
 - define division for the menu
 - application for drupal.org, prepare folders for 3rd party plugins
 
 ###### Known Bugs
 - check helper module error: Notice: Undefined index: status in _block_rehash() (line 439 of C:\xampp\htdocs\FAQ_drupal\modules\block\block.module). 
 - check notice error - undefined index panel_top_2,panel_top_3,panel_top_4, panel_bottom_2, panel_bottom_3, panel_bottom_4
+- add mac accessibility - alt + option
 
 ###### CHANGE LOGS
 **05-20-2014**
@@ -71,4 +71,7 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
 **03-18-2015**
 - Added default breadcrumb support
+
+**04-10-2015**
+- Updated GWT-Footer Script
 
