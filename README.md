@@ -75,3 +75,5 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - Updated GWT-Footer Script
 - added drop shadow for dropdown menu
 
+**04-16-2015**
+- Fix compatibility issue on Drupal 7.36
