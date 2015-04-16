@@ -1,6 +1,8 @@
 screenshot  = screenshot.png
 name        = GWT Drupal
 description = Government Web Template theme
+version = VERSION
+core = 7.x
 
 engine      = phptemplate
 
@@ -35,36 +37,36 @@ scripts[] = js/foundation/foundation.topbar.js
 scripts[] = js/foundation/jquery.cookie.js
 scripts[] = js/theme.js
 
-regions[navigation]     = Top bar Left
-regions[top_bar_right]  = Top Bar Right
-regions[header]         = MastHead
-regions[ear_content]	= Ear Content 1
-regions[ear_content_2]	= Ear Content 2
-regions[banner]         = Banner Slider
-regions[banner_2]       = Banner Content 1
-regions[banner_3]       = Banner Content 2
-regions[auxiliary_left] = Auxiliary Left
-regions[auxiliary_right]= Auxiliary right
-regions[breadcrumbs]    = Breadcrumbs
-regions[highlighted]    = Highlighted
-regions[help]           = Help
-regions[panel_top]      = Panel Top 1
-regions[panel_top_2]    = Panel Top 2
-regions[panel_top_3]    = Panel Top 3
-regions[panel_top_4]    = Panel Top 4
-regions[content]        = Content
-regions[sidebar_first]  = Left sidebar
-regions[sidebar_second] = Right sidebar
-regions[panel_bottom]   = Panel Bottom 1
-regions[panel_bottom_2] = Panel Bottom 2
-regions[panel_bottom_3] = Panel Bottom 3
-regions[panel_bottom_4] = Panel Bottom 4
-regions[footer]         = Agency Footer 1
-regions[footer_2]       = Agency Footer 2
-regions[footer_3]       = Agency Footer 3
-regions[footer_4]       = Agency Footer 4
-;regions[footer_standard] = Standard Footer
-regions[bottom]         = Page bottom
+regions[navigation]     = 'Top bar Left'
+regions[top_bar_right]  = 'Top Bar Right'
+regions[header]         = 'MastHead'
+regions[ear_content]	= 'Ear Content 1'
+regions[ear_content_2]	= 'Ear Content 2'
+regions[banner]         = 'Banner Slider'
+regions[banner_2]       = 'Banner Content 1'
+regions[banner_3]       = 'Banner Content 2'
+regions[auxiliary_left] = 'Auxiliary Left'
+regions[auxiliary_right]= 'Auxiliary right'
+regions[breadcrumbs]    = 'Breadcrumbs'
+regions[highlighted]    = 'Highlighted'
+regions[help]           = 'Help'
+regions[panel_top]      = 'Panel Top 1'
+regions[panel_top_2]    = 'Panel Top 2'
+regions[panel_top_3]    = 'Panel Top 3'
+regions[panel_top_4]    = 'Panel Top 4'
+regions[content]        = 'Content'
+regions[sidebar_first]  = 'Left sidebar'
+regions[sidebar_second] = 'Right sidebar'
+regions[panel_bottom]   = 'Panel Bottom 1'
+regions[panel_bottom_2] = 'Panel Bottom 2'
+regions[panel_bottom_3] = 'Panel Bottom 3'
+regions[panel_bottom_4] = 'Panel Bottom 4'
+regions[footer]         = 'Agency Footer 1'
+regions[footer_2]       = 'Agency Footer 2'
+regions[footer_3]       = 'Agency Footer 3'
+regions[footer_4]       = 'Agency Footer 4'
+;regions[footer_standard] = 'Standard Footer'
+regions[bottom]         = 'Page bottom'
 
 ; The page_top and page_bottom regions are hidden, which means they will not
 ; show up on the blocks administration page. But they are required in order for
