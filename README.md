@@ -9,6 +9,7 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - check helper module error: Notice: Undefined index: status in _block_rehash() (line 439 of C:\xampp\htdocs\FAQ_drupal\modules\block\block.module). 
 - check notice error - undefined index panel_top_2,panel_top_3,panel_top_4, panel_bottom_2, panel_bottom_3, panel_bottom_4
 - add mac accessibility - alt + option
+- auxiliary menu block region bug
 
 ###### CHANGE LOGS
 **05-20-2014**
