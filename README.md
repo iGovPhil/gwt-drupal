@@ -78,3 +78,6 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
 **04-16-2015**
 - Fix compatibility issue on Drupal 7.36
+
+**05-22-2015**
+- Change the font size of the sidebar headings
