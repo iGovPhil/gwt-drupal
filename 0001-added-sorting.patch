@@ -1,0 +1,36 @@
+From 1eec25419f4518bb50bfd3648e7db2810963293d Mon Sep 17 00:00:00 2001
+From: jeturian <jeturian@gmail.com>
+Date: Thu, 11 Jun 2015 13:29:40 +0800
+Subject: [PATCH] added sorting
+
+---
+ .../all/modules/gwt_drupal_helper/gwt_drupal_helper.module  | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/sites/all/modules/gwt_drupal_helper/gwt_drupal_helper.module b/sites/all/modules/gwt_drupal_helper/gwt_drupal_helper.module
+index 0a49c44..53e2f09 100644
+--- a/sites/all/modules/gwt_drupal_helper/gwt_drupal_helper.module
++++ b/sites/all/modules/gwt_drupal_helper/gwt_drupal_helper.module
+@@ -133,7 +133,18 @@ function gwt_drupal_helper_block_view($delta = ''){
+  */
+ function _gwt_drupal_helper_get_gwt_slides(){
+   $type = "gwt_slides"; 
+-  $nodes = node_load_multiple(array(), array('type' => $type)); 
++
++  // TODO: optimize the query, if needed.
++  $query = new EntityFieldQuery();
++  $query->entityCondition('entity_type', 'node')
++    ->propertyCondition('status', 1)
++    ->propertyCondition('type', $type)
++    ->fieldOrderBy('field_gwt_weight', 'value', 'DESC')
++    ;
++  $result = $query->execute();
++
++  $nodes = node_load_multiple(array_keys($result['node']));
++  // $nodes = node_load_multiple(array(), array('type' => $type)); 
+ 
+   $output = '';
+   $output .= '<ul class="banner-rsslides">';
+-- 
+1.9.1
+

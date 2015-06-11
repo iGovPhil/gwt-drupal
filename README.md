@@ -81,3 +81,6 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
 **05-22-2015**
 - Change the font size of the sidebar headings
+
+**06-11-2015**
+- Fix the sorting issue on GWT-slider order weight field
