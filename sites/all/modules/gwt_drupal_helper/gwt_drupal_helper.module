@@ -133,7 +133,18 @@ function gwt_drupal_helper_block_view($delta = ''){
  */
 function _gwt_drupal_helper_get_gwt_slides(){
   $type = "gwt_slides"; 
-  $nodes = node_load_multiple(array(), array('type' => $type)); 
+
+  // TODO: optimize the query, if needed.
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'node')
+    ->propertyCondition('status', 1)
+    ->propertyCondition('type', $type)
+    ->fieldOrderBy('field_gwt_weight', 'value', 'DESC')
+    ;
+  $result = $query->execute();
+
+  $nodes = node_load_multiple(array_keys($result['node']));
+  // $nodes = node_load_multiple(array(), array('type' => $type)); 
 
   $output = '';
   $output .= '<ul class="banner-rsslides">';
