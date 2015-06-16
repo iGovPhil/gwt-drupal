@@ -295,6 +295,8 @@ function gwt_drupal_preprocess_html(&$variables, $hook) {
   $variables['add_html5_shim']          = in_array('html5', $html5_respond_meta);
   $variables['default_mobile_metatags'] = in_array('meta', $html5_respond_meta);
 
+  $variables['path_to_gwt'] = drupal_get_path('theme', 'gwt_drupal');
+
   // Attributes for html element.
   $variables['html_attributes_array'] = array(
     'lang' => $variables['language']->language,
