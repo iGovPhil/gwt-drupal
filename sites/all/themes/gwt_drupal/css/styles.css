@@ -25,4 +25,8 @@ disable responsive.css, use foundation.css instead
 
 @import "foundation/foundation.css";
 @import "theme.css";
+
+/* enable this line to embed custom override css in the theme */
+/*
 @import "main.css";
+*/
