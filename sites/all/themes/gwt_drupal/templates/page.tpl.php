@@ -127,9 +127,11 @@
   <div id="auxiliary">
     <div class="row">
       <div class="large-12 columns">
+          <?php if ($menu_auxiliary_menu): ?>
         <div class="aux-nav-btn-container hide-for-medium-up" >
           <button id="aux-nav-btn" data-dropdown="aux-nav">Auxiliary Menu</button>
         </div>
+          <?php endif; ?>
         <div id="aux-nav" class="show-for-medium-up" data-dropdown-content>
           <section>
           <?php if ($menu_auxiliary_menu): ?>
@@ -160,7 +162,7 @@
     </div>
   </div>
   <?php
-  if(isset($breadcrumb) || isset($page['breadcrumbs'])):
+  if($breadcrumb || $page['breadcrumbs']):
     ?>
   <div id="breadcrumbs">
     <div class="row">
