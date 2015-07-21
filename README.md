@@ -7,7 +7,7 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - Use menu block as replacement to auxiliary menu
 
 ###### Known Bugs
-- No known bugs
+- White screen error on certain installation
 
 ###### CHANGE LOGS
 **05-20-2014**
