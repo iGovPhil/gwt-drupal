@@ -7,7 +7,9 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - Use menu block as replacement to auxiliary menu
 
 ###### Known Bugs
-- White screen error on certain installation
+- White screen error on certain installation (updates), no admin menu
+- Access key missing node error
+- 3 colum layout issue
 
 ###### CHANGE LOGS
 **05-20-2014**
