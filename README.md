@@ -3,13 +3,13 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
 ###### Future Updates
 - Fix Front page list template
-- application for drupal.org, prepare folders for 3rd party plugins
 - Use menu block as replacement to auxiliary menu
+- implement mega menu
 
 ###### Known Bugs
 - White screen error on certain installation (updates), no admin menu
 - Access key missing node error
-- 3 colum layout issue
+- 3 column layout issue
 
 ###### CHANGE LOGS
 **05-20-2014**
@@ -39,6 +39,8 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - added install script that creates an image style that is used to automatically resize image slides when displayed
 
 **06-01-2014**
+
+
 - added uninstall script that cleans up the fields and content types, maybe also deletes the uploaded images on unsinstallation
 - added uninstall script that delete the image style
 
@@ -87,3 +89,12 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
 **07-03-2015**
 - Fixed empty auxiliary on responsive layout
+
+**08-20-2015**
+
+**08/20/2015**
+- Added new Mega menu
+- Added new accessibility features
+  - High Contrast Mode
+  - Grayscale Mode
+  - Toggle font size

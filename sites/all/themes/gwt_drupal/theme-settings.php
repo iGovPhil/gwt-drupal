@@ -268,15 +268,3 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
 */
   // We are editing the $form in place, so we don't need to return anything.
 }
-
-/**
- * helper function
- * implementation of hook_validate()
- *
-function _gwt_drupal_masthead_background_image_validate($element, &$form_state) {
-  drupal_set_message('<pre>'.print_r($element, 1).'</pre>');
-  if (!is_numeric($element['#value'])) {
-    // form_error($element, t('Please enter a number.'));
-  }
-}
-*/

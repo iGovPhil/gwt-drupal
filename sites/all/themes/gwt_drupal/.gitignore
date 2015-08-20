@@ -1,0 +1,9 @@
+# ignore files that are not allowed/recommended for drupal.org
+# use pareview.sh to test automatically
+
+README.md
+.gitignore
+
+# remove 3rd party plugins
+
+

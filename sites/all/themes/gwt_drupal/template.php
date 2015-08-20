@@ -29,7 +29,6 @@ function gwt_drupal_links__system_main_menu($variables) {
   // return $test;
   // */
 
-
   // heading not needed in main menu
   $heading = $variables['heading'];
   // global $language_url;
@@ -107,6 +106,10 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
     $num_links = count($links);
 
     $i = 1;
+    // if drupal helper exists add mega menu  
+    if(module_exists('gwt_drupal_helper')){
+      $mega_menu = gwt_drupal_mega_menu_load_all();
+    }
     foreach ($links as $key => $link_full) {
       // check if the key is really a link by checking if the key is an int
       $keys = explode(' ', $key);
@@ -115,6 +118,7 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
         break;
       }
 
+      $attr = array();
       $link = $link_full['link'];
       $class = array('menu-'.$menu_id);
       $has_sub_menu = false;
@@ -139,7 +143,19 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
       }
       // add custom divider for the links
       // $output .= '<li class="divider"></li>';
-      $output .= '<li' . drupal_attributes(array('class' => $class)) . '>';
+
+      if(module_exists('gwt_drupal_helper')){
+        $mlid = $link['mlid'];
+        if(isset($mega_menu[$mlid])){
+          $class = array('menu-'.$menu_id, 'has-megamenu');
+          $attr['data-menu-link'] = array($menu_id);
+          // disable children menu dropdown to avoid conflict
+          $has_sub_menu = false;
+        }
+      }
+      $attr['class'] = $class;
+
+      $output .= '<li' . drupal_attributes($attr) . '>';
 
       if (isset($link['href'])) {
         // Pass in $link as $options, they share the same keys.
@@ -427,6 +443,13 @@ function gwt_drupal_html_head_alter(&$head) {
  *   The name of the template being rendered ("page" in this case.)
  */
 function gwt_drupal_preprocess_page(&$variables, $hook) {
+  global $base_url;
+  // $variables['path_to_theme'] = $base_url.'/'.path_to_theme();
+  $js_variables = array(
+    'theme_path' => $base_url.'/'.path_to_theme(),
+  );
+  drupal_add_js(array('gwt_drupal' => $js_variables), 'setting');
+  // drupal_add_js(drupal_get_path('theme', 'MYTHEME') .'/mytheme.js', 'file');
 
   // Find the title of the menu used by the secondary links.
   $secondary_links = variable_get('menu_secondary_links_source', 'user-menu');
@@ -797,6 +820,101 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     $variables['accesibility_shortcut'] .= '</li>';
   }
   $variables['accesibility_shortcut'] .= '</ul>';
+
+  $variables['gwt_mega_menu'] = _gwt_drupal_mega_menu_formatted();
+}
+
+/**
+ * retrieve all the mega menu items
+ */
+function _gwt_drupal_mega_menu_formatted(){
+  // dependent on gwt_drupal_helper module
+  if(!module_exists('gwt_drupal_helper')){
+    return;
+  }
+  $output = '';
+  
+  $mega_menu = gwt_drupal_mega_menu_load_all();
+  // $output .= '<pre>'.print_r($mega_menu, 1).'</pre>';
+  // print_r($mega_menu);
+  $output .= '<div id="nav-megamenu">';
+  foreach($mega_menu as $mlid => $item){
+    $attr = array();
+    // TODO: load the node content
+    // TODO: also load sub menu for loading of sub mega menu
+    $nid = $item->nid;
+    $mlid = $item->mlid;
+    // $menu_link = menu_link_load($mlid);
+    // $output .= '<pre>'.print_r($menu_link, 1).'</pre>';
+    // $sub_items = menu_tree_all_data('main-menu', $menu_link, 2);
+
+    $node = node_load($nid);
+    $node_view = node_view($node);
+
+    $node_view['#theme'] = 'mega_menu';
+    // drupal_render($node_view['#node']->title);
+
+    $rendered_node = drupal_render($node_view);
+    $attr['class'] = array(
+      'mega-menu-item',
+      'mega-menu-item-'.$mlid,
+      'row',
+      'fullwidth',
+      'collapse',
+      );
+    $attr['data-menu-item'] = $mlid;
+
+    $output .= "<div ".drupal_attributes($attr).">\n";
+    if(!empty($item->children)){
+      $mega_menu_sub_items = "";
+      $mega_menu_sub_items .= "<li class=\"tab-title active\">";
+      $mega_menu_sub_items .= '<a href="#mega-menu-item-'.$mlid.'" data-tab-link="'.$mlid.'">'.$node_view['#node']->title.'</a>';
+      $mega_menu_sub_items .= "</li>\n";
+      
+      $mega_menu_sub_items_content = '';
+      $mega_menu_sub_items_content .= "<div class=\"mega-sub-content active\" id=\"mega-menu-item-".$mlid."\" data-tab-item=\"".$mlid."\">\n";
+      $mega_menu_sub_items_content .= '<h3 class="mega-menu-title">'.$node_view['#node']->title.'</h3>';
+      $mega_menu_sub_items_content .= $rendered_node;
+      $mega_menu_sub_items_content .= "</div>\n";
+
+      $output .= "<div class=\"mega-sub-menu large-3 columns\">\n";
+      $output .= "<h3 class=\"mega-menu-title\">".$node_view['#node']->title.'</h3>';
+      foreach($item->children as $child_mlid => $child_item){
+        $child_nid = $child_item->nid;
+        $child_node = node_load($child_nid);
+        $child_node_view = node_view($child_node);
+        $child_node_view['#theme'] = 'mega_menu';
+        $child_rendered_node = drupal_render($child_node_view);
+
+        $mega_menu_sub_items .= '<li class="tab-title">';
+        $mega_menu_sub_items .= '<a href="#mega-menu-item-'.$child_mlid.'" data-tab-link="'.$child_mlid.'">'.$child_node_view['#node']->title.'</a>';
+        $mega_menu_sub_items .= "</li>\n";
+
+        $mega_menu_sub_items_content .= "<div class=\"mega-sub-content\" id=\"mega-menu-item-".$child_mlid."\" data-tab-item=\"".$child_mlid."\">\n";
+        $mega_menu_sub_items_content .= '<h3 class="mega-menu-title">'.$child_node_view['#node']->title.'</h3>';
+        $mega_menu_sub_items_content .= $child_rendered_node;
+        $mega_menu_sub_items_content .= "</div>\n";
+      }
+      $output .= "<ul class=\"mega-sub-items tabs\" data-tab>\n";
+      $output .= $mega_menu_sub_items;
+      $output .= "</ul>\n";
+      $output .= "</div>\n";
+
+      $output .= "<div class=\"mega-sub-contents large-9 columns\">\n";
+      $output .= $mega_menu_sub_items_content;
+      $output .= "</div>\n";
+    }
+    else{
+      $output .= "<div class=\"mega-menu-contents row\">\n";
+      $output .= "<h2 class=\"mega-menu-title\">".$node_view['#node']->title."</h2>\n";
+      $output .= $rendered_node;
+      $output .= "</div>\n";
+    }
+
+    $output .= "</div>\n";
+  }
+  $output .= "</div>\n";
+  return $output;
 }
 
 /**

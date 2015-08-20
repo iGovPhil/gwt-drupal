@@ -1,7 +1,7 @@
 screenshot  = screenshot.png
 name        = GWT Drupal
 description = Government Web Template theme
-version = 3.4.2
+version = 3.5
 core = 7.x
 
 engine      = phptemplate
@@ -13,6 +13,9 @@ stylesheets[all][] = system.theme.css
 ; Then we add our own stylesheet.
 stylesheets[all][] = css/styles.css
 stylesheets[all][] = css/responsiveslides.css
+
+; accessibility
+stylesheets[all][] = accessibility/fonts/css/a11y-toolbar.css
 
 ; Optionally add some JavaScripts to your theme.
 

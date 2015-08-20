@@ -135,8 +135,6 @@ html body.admin-menu{
 
 #navigation{
 	background-color: #f7f7f7;
-	height: 58px;
-	line-height: 58px;
 }
 #navigation .links{
 	float: left;
@@ -618,6 +616,9 @@ border: 1px solid #222;
 		height: auto;
 		background: #f7f7f7
 	}
+	#navigation{
+		position: static;
+	}
 }
 /** media query for large screens **/
 @media only screen and (min-width: 40.063em){
@@ -649,4 +650,136 @@ border: 1px solid #222;
 	#aux-nav li.has-dropdown > .dropdown > li.has-dropdown > a:after{  border: none;  content: "\00bb";  top: 1rem;  margin-top: 4px;  right: 5px;  line-height: 1.2; }
 	#aux-nav li.has-dropdown > .dropdown > li > .dropdown{  position: absolute;  top: 0;  left: 100%; }
 	#aux-nav li.has-dropdown:hover > .dropdown{  display: block !important; }
+}
+
+#navigation{
+	position: fixed;
+	z-index: 100;
+	width: 100%;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+#header{
+}
+
+/** mega-menu **/
+#nav-megamenu{
+	margin: 0;
+	background: #E9E9E9;
+	margin-top: 58px;
+	/*
+	position: fixed;
+	display: none;
+	top: 58px;
+	z-index: 100;
+	width: 100%;
+	height: 100%;
+	*/
+}/*
+body.mega-menu-active{
+	overflow: hidden;
+}*/
+/** level 2 sub navigation **/
+.mega-sub-menu{
+	text-align: right;
+}
+.mega-sub-menu h3{
+	padding: 3rem 2rem 0px;
+}
+.mega-sub-items.tabs{
+	margin: 0;
+	list-style: none;
+}
+.mega-sub-items.tabs .tab-title a{
+	background: #E9E9E9;
+	font-family: "Roboto";
+	text-transform: uppercase;
+	padding: 1rem 2rem;
+	display: block;
+	color: #222;
+}
+.mega-sub-items.tabs .tab-title.active a{
+	background: #F5F5F5;
+	color: #222;
+	display: block;
+}
+.mega-sub-items.tabs .tab-title a:hover{
+	background: #D3D3D3;
+}
+.mega-menu-item{
+	height: 100%;
+-webkit-box-shadow: inset 2px -11px 5px -10px rgba(0,0,0,0.75);
+-moz-box-shadow: inset 2px -11px 5px -10px rgba(0,0,0,0.75);
+box-shadow: inset 2px -11px 5px -10px rgba(0,0,0,0.75);
+padding-bottom: 30px;
+}
+.mega-menu-item .mega-menu-contents{
+	max-width: 1280px;
+	margin: 0 auto !important;
+	height: 100%;
+	overflow: auto;
+}
+.mega-menu-item .mega-sub-contents{
+	background: #F5F5F5;
+}
+.mega-menu-item .mega-sub-contents .mega-sub-content{
+	padding: 2rem;
+}
+.fullwidth{
+	max-width: initial;
+}
+
+/**
+ * accessibility
+ */
+#accessibility-widget #openMenu{
+	position: absolute;
+	left: 38px;
+	padding: 0px;
+	margin: 0px;
+	border-radius: 0px 3px 3px 0px;
+	background-color: #F7F7F7 !important;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+	padding: 3px;
+	width: 2em;
+}
+#accessibility-widget{
+    float:left;
+    position:fixed;
+  	top: 50%;
+    z-index: 200;
+	left: -38px;
+}
+#accessibility-widget ul{
+    list-style: none;
+    margin:0;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+#accessibility-widget ul li{
+    text-align: center;
+    display: block;
+}
+#accessibility-widget ul li a{
+	display: block;
+	color: #000;
+	padding: 3px 8px;
+	
+	background: #e2e2e2;
+	text-align: center;
+	border-top: 1px solid #f5f5f5;
+	border-bottom: 1px solid #d2d2d2;
+}
+#accessibility-widget ul li a#accessibility-contrast{
+}
+#accessibility-widget ul li a#accessibility-fontsize{
+}
+#accessibility-widget ul li a:hover
+{
+	background: #fff;
+}
+#accessibility-widget ul li a span.offscreen{
+	display: none;
+}
+#accessibility-widget ul li a span.aticon{
+	font-size: 1.5em;
 }

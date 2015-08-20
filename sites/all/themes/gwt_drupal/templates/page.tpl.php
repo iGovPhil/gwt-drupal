@@ -13,46 +13,57 @@
 <div id="accessibility-shortcuts">
 <?php print $accesibility_shortcut; ?>
 </div>
-<div id="page">
 
+<div id="accessibility-widget">
+  <div id="acsblty-button">
+    <a href="#" id="openMenu"><img class="is_closed" src="<?php echo $base_path.$directory; ?>/images/arrow-right.png" width="32" height="32"></a>
+  </div>
+  <ul>
+    <li><a href="#" id="accessibility-contrast" class="toggle-contrast"><span class="offscreen">Toggle High Contrast</span><span class="aticon-adjust aticon"></span></a></li>
+    <li><a href="#" id="accessibility-grayscale" class="toggle-grayscale"><span class="offscreen">Toggle Grayscale</span><span class="aticon-tint aticon"></span></a></li>
+    <li><a href="#" id="accessibility-fontsize" class="toggle-fontsize"><span class="offscreen">Toggle Font size</span><span class="aticon-font aticon"></span></a></li>
+  </ul>
+</div>
 
-  <div id="navigation">
-    <div class="row">
-      <?php
-      /**
-       * mandatory region
-       */
-      ?>
-      <div class="small-12 large-12 columns toplayer">
-        <nav id="top-bar" role="navigation" class="top-bar nomargin" tabindex="-1" data-topbar>
-          <ul id="main-static-link" class="links inline clearfix">
-            <li id="static-link-gov"><h3><a href="http://www.gov.ph">GOVPH</a></h3></li>
-            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-          </ul>
-          <section class="top-bar-section">
-            <?php if ($page['top_bar_right']): ?>
-             <?php print render($page['top_bar_right']); ?>
-            <?php endif; ?>
-            <?php if ($main_menu): ?>
-              <?php
-              print theme('links__system_main_menu', array(
-                'links' => $main_menu,
-                'attributes' => array(
-                  // 'id' => 'main-nav',
-                  'class' => array('links', 'clearfix'),
-                ),
-                'heading' => array(
-                  'text' => t('Main menu'),
-                  'level' => 'h2',
-                  'class' => array('element-invisible'),
-                ),
-              )); ?>
-            <?php endif; ?>
-          </section>
-        </nav>
-      </div>
+<div id="navigation">
+  <div class="row">
+    <?php
+    /**
+     * mandatory region
+     */
+    ?>
+    <div class="small-12 large-12 columns toplayer">
+      <nav id="top-bar" role="navigation" class="top-bar nomargin" tabindex="-1" data-topbar>
+        <ul id="main-static-link" class="links inline clearfix">
+          <li id="static-link-gov"><h3><a href="http://www.gov.ph">GOVPH</a></h3></li>
+          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+        <section class="top-bar-section">
+          <?php if ($page['top_bar_right']): ?>
+           <?php print render($page['top_bar_right']); ?>
+          <?php endif; ?>
+          <?php if ($main_menu): ?>
+            <?php
+            print theme('links__system_main_menu', array(
+              'links' => $main_menu,
+              'attributes' => array(
+                // 'id' => 'main-nav',
+                'class' => array('links', 'clearfix'),
+              ),
+              'heading' => array(
+                'text' => t('Main menu'),
+                'level' => 'h2',
+                'class' => array('element-invisible'),
+              ),
+            )); ?>
+          <?php endif; ?>
+        </section>
+      </nav>
     </div>
   </div>
+</div>
+<?php echo $gwt_mega_menu; ?>
+<div id="page">
 
   <header class="header" id="header" <?php print $gwt_drupal_masthead_styles; ?>>
     <section class="header-section row">
