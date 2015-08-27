@@ -14,9 +14,6 @@ stylesheets[all][] = system.theme.css
 stylesheets[all][] = css/styles.css
 stylesheets[all][] = css/responsiveslides.css
 
-; accessibility
-stylesheets[all][] = accessibility/fonts/css/a11y-toolbar.css
-
 ; Optionally add some JavaScripts to your theme.
 
 scripts[] = js/jquery-1.8/jquery.min.js

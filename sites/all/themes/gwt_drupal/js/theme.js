@@ -142,23 +142,24 @@ Drupal.behaviors.my_custom_behavior = {
     if (readCookie('a11y-high-contrast')) {
         $('body').addClass('contrast');
         $('head').append($("<link href='" + a11y_stylesheet_path + "' id='highContrastStylesheet' rel='stylesheet' type='text/css' />"));
-        $('#is_normal_contrast').attr('id', 'is_high_contrast').attr('aria-checked', true).addClass('active');
+        $('#accessibility-contrast').attr('aria-checked', true).addClass('active');
         $('.a11y-toolbar ul li a i').addClass('icon-white');
     }
     $('.toggle-contrast').on('click', function () {
     var a11y_stylesheet_path = Drupal.settings.gwt_drupal.theme_path+'/accessibility/a11y-contrast.css';
-        if ($(this).attr('id') == "is_normal_contrast") {
+        if (!$(this).hasClass('active')) {
             $('head').append($("<link href='" + a11y_stylesheet_path + "' id='highContrastStylesheet' rel='stylesheet' type='text/css' />"));
             $('body').addClass('contrast');
-            $(this).attr('id', 'is_high_contrast').attr('aria-checked', true).addClass('active');
-            $(this).parent().parent().find('i').addClass('icon-white');
+            // $(this).parent().parent().find('i').addClass('icon-white');
             createCookie('a11y-high-contrast', '1');
+            $(this).attr('aria-checked', true).addClass('active');
             return false;
-        } else {
+        }
+        else {
             $('#highContrastStylesheet').remove();
             $('body').removeClass('contrast');
-            $(this).attr('id', 'is_normal_contrast').removeAttr('aria-checked').removeClass('active');
-            $(this).parent().parent().find('i').removeClass('icon-white');
+            $(this).removeAttr('aria-checked').removeClass('active');
+            // $(this).parent().parent().find('i').removeClass('icon-white');
             eraseCookie('a11y-high-contrast');
             return false;
         }
@@ -167,23 +168,23 @@ Drupal.behaviors.my_custom_behavior = {
 
     // Saturation handler
     var a11y_desaturate_path = Drupal.settings.gwt_drupal.theme_path+'/accessibility/a11y-desaturate.css';
-    if (readCookie('a11y-desaturated')) {
+    if(readCookie('a11y-desaturated')) {
         $('body').addClass('desaturated');
-     $('head').append($("<link href='" + a11y_desaturate_path + "' id='desaturateStylesheet' rel='stylesheet' type='text/css' />"));
-        $('#is_normal_color').attr('id', 'is_grayscale').attr('aria-checked', true).addClass('active');
+        $('head').append($("<link href='" + a11y_desaturate_path + "' id='desaturateStylesheet' rel='stylesheet' type='text/css' />"));
+        $('#accessibility-grayscale').attr('aria-checked', true).addClass('active');
     };
     
     $('.toggle-grayscale').on('click', function () {
-        if ($(this).attr('id') == "is_normal_color") {
-         $('head').append($("<link href='" + a11y_desaturate_path + "' id='desaturateStylesheet' rel='stylesheet' type='text/css' />"));
+        if(!$(this).hasClass('active')){
+            $('head').append($("<link href='" + a11y_desaturate_path + "' id='desaturateStylesheet' rel='stylesheet' type='text/css' />"));
             $('body').addClass('desaturated');
-            $(this).attr('id', 'is_grayscale').attr('aria-checked', true).addClass('active');
+            $(this).attr('aria-checked', true).addClass('active');
             createCookie('a11y-desaturated', '1');
             return false;
         } else {
-         $('#desaturateStylesheet').remove();
+            $('#desaturateStylesheet').remove();
             $('body').removeClass('desaturated');
-            $(this).attr('id', 'is_normal_color').removeAttr('aria-checked').removeClass('active');
+            $(this).removeAttr('aria-checked').removeClass('active');
             eraseCookie('a11y-desaturated');
             return false;
         }
@@ -194,20 +195,20 @@ Drupal.behaviors.my_custom_behavior = {
     if (readCookie('a11y-larger-fontsize')) {
         $('body').addClass('fontsize');
      $('head').append($("<link href='" + a11y_fontsize_path + "' id='fontsizeStylesheet' rel='stylesheet' type='text/css' />"));
-        $('#is_normal_fontsize').attr('id', 'is_large_fontsize').attr('aria-checked', true).addClass('active');
+        $('#accessibility-fontsize').attr('aria-checked', true).addClass('active');
     }
 
     $('.toggle-fontsize').on('click', function () {
-        if ($(this).attr('id') == "is_normal_fontsize") {
-         $('head').append($("<link href='" + a11y_fontsize_path + "' id='fontsizeStylesheet' rel='stylesheet' type='text/css' />"));
+        if(!$(this).hasClass('active')) {
+            $('head').append($("<link href='" + a11y_fontsize_path + "' id='fontsizeStylesheet' rel='stylesheet' type='text/css' />"));
             $('body').addClass('fontsize');
-            $(this).attr('id', 'is_large_fontsize').attr('aria-checked', true).addClass('active');
+            $(this).attr('aria-checked', true).addClass('active');
             createCookie('a11y-larger-fontsize', '1');
             return false;
         } else {
-         $('#fontsizeStylesheet').remove();
-         $('body').removeClass('fontsize');
-            $(this).attr('id', 'is_normal_fontsize').removeAttr('aria-checked').removeClass('active');
+            $('#fontsizeStylesheet').remove();
+            $('body').removeClass('fontsize');
+            $(this).removeAttr('aria-checked').removeClass('active');
             eraseCookie('a11y-larger-fontsize');
             return false;
         }
@@ -215,16 +216,16 @@ Drupal.behaviors.my_custom_behavior = {
 
 
     // Accessibility
-    $('#openMenu').on('click', function(){
-        if ($(this).attr('class') == "is_open") {
-            $('#accessibility-widget').animate({left: '-38px'});
-            $(this).children('img')[0].src = Drupal.settings.gwt_drupal.theme_path + "/images/arrow-right.png";
-            $(this).attr('class', 'is_closed');
-
-        } else {
+    $('#accessibility-mode').click(function(e){
+        e.preventDefault();
+        $(this).toggleClass('active');
+        if($(this).hasClass('active')){
             $('#accessibility-widget').animate({left: '0px'});
-            $(this).children('img')[0].src = Drupal.settings.gwt_drupal.theme_path + "/images/arrow-left.png";
-            $(this).attr('class', 'is_open');
+            $(this).animate({left: '0px', opacity: 1, paddingLeft: '9px', paddingRight: '9px'});
+        }
+        else{
+            $('#accessibility-widget').animate({left: '-42px'});
+            $(this).animate({left: '-10px', opacity: 0.8, paddingLeft: '5px', paddingRight: '5px'});
         }
     });
   }

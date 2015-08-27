@@ -731,23 +731,13 @@ padding-bottom: 30px;
 /**
  * accessibility
  */
-#accessibility-widget #openMenu{
-	position: absolute;
-	left: 38px;
-	padding: 0px;
-	margin: 0px;
-	border-radius: 0px 3px 3px 0px;
-	background-color: #F7F7F7 !important;
-	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-	padding: 3px;
-	width: 2em;
-}
 #accessibility-widget{
     float:left;
     position:fixed;
   	top: 50%;
     z-index: 200;
-	left: -38px;
+	left: -42px;
+	margin-top: -42px;
 }
 #accessibility-widget ul{
     list-style: none;
@@ -762,24 +752,63 @@ padding-bottom: 30px;
 #accessibility-widget ul li a{
 	display: block;
 	color: #000;
-	padding: 3px 8px;
-	
 	background: #e2e2e2;
 	text-align: center;
 	border-top: 1px solid #f5f5f5;
 	border-bottom: 1px solid #d2d2d2;
+	padding: 5px;
 }
-#accessibility-widget ul li a#accessibility-contrast{
+#accessibility-widget ul li a span{
+	display: block;
+	text-indent: -9999px;
+	background: url(../images/accessibility-sprites.png) no-repeat;
+    height: 24px;
+    width: 24px;
+    margin: 4px;
 }
-#accessibility-widget ul li a#accessibility-fontsize{
+#accessibility-widget ul li #accessibility-mode{
+	position: fixed;
+	left: -10px;
+	border-radius: 0px 3px 0 0px;
+	margin-top: -43px;
+	background: #ff7c7c;
+	border-bottom: 0;
+	opacity: 0.8;
 }
-#accessibility-widget ul li a:hover
-{
-	background: #fff;
+#accessibility-widget ul li #accessibility-mode span{
+	background-position: 0 0;
+	height: 22px;
+	margin: 5px 0px;
 }
-#accessibility-widget ul li a span.offscreen{
-	display: none;
+#accessibility-widget ul li a#accessibility-mode.active{
 }
-#accessibility-widget ul li a span.aticon{
-	font-size: 1.5em;
+#accessibility-widget ul li a#accessibility-mode.active span{
+	background-position: 0px -22px;
+}
+#accessibility-widget ul li a#accessibility-contrast span{
+    background-position: 0px -44px;
+}
+#accessibility-widget ul li a#accessibility-grayscale span{
+    background-position: 0px -69px !important;
+}
+#accessibility-widget ul li a#accessibility-fontsize span{
+    background-position: 0px -94px !important;
+}
+body.contrast #accessibility-widget ul li a#accessibility-mode span{
+	background: -24px 0px url(../images/accessibility-sprites.png) no-repeat !important;
+}
+body.contrast #accessibility-widget ul li a#accessibility-mode.active span{
+	background: -24px -22px url(../images/accessibility-sprites.png) no-repeat !important;
+}
+body.contrast #accessibility-widget ul li a#accessibility-contrast span{
+	background: -24px -44px url(../images/accessibility-sprites.png) no-repeat !important;
+}
+body.contrast #accessibility-widget ul li a#accessibility-grayscale span{
+	background: -24px -69px url(../images/accessibility-sprites.png) no-repeat !important;
+}
+body.contrast #accessibility-widget ul li a#accessibility-fontsize span{
+	background: -24px -94px url(../images/accessibility-sprites.png) no-repeat !important;
+}
+#accessibility-widget ul li a:hover{
+	background-color: #fff;
 }

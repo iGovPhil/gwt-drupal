@@ -15,13 +15,11 @@
 </div>
 
 <div id="accessibility-widget">
-  <div id="acsblty-button">
-    <a href="#" id="openMenu"><img class="is_closed" src="<?php echo $base_path.$directory; ?>/images/arrow-right.png" width="32" height="32"></a>
-  </div>
   <ul>
-    <li><a href="#" id="accessibility-contrast" class="toggle-contrast"><span class="offscreen">Toggle High Contrast</span><span class="aticon-adjust aticon"></span></a></li>
-    <li><a href="#" id="accessibility-grayscale" class="toggle-grayscale"><span class="offscreen">Toggle Grayscale</span><span class="aticon-tint aticon"></span></a></li>
-    <li><a href="#" id="accessibility-fontsize" class="toggle-fontsize"><span class="offscreen">Toggle Font size</span><span class="aticon-font aticon"></span></a></li>
+    <li><a href="#" id="accessibility-mode" title="Accessibility Menu"><span class="offscreen">Toggle Accessibility Menu</span></a></li>
+    <li><a href="#" id="accessibility-contrast" class="toggle-contrast" title="Toggle High Contrast"><span class="offscreen">Toggle High Contrast</span></a></li>
+    <li><a href="#" id="accessibility-grayscale" class="toggle-grayscale" title="Toggle Grey Scale"><span class="offscreen">Toggle Grayscale</span></a></li>
+    <li><a href="#" id="accessibility-fontsize" class="toggle-fontsize" title="Toggle Font Size"><span class="offscreen">Toggle Font size</span></a></li>
   </ul>
 </div>
 
