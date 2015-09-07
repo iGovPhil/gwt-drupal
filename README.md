@@ -9,7 +9,6 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 ###### Known Bugs
 - White screen error on certain installation (updates), no admin menu
 - Access key missing node error
-- 3 column layout issue
 - some access keys not working properly (site map)
 - dynamic column panel top, panel bottom, and agency footer
 
@@ -93,10 +92,11 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - Fixed empty auxiliary on responsive layout
 
 **08-20-2015**
-
-**08/20/2015**
 - Added new Mega menu
 - Added new accessibility features
   - High Contrast Mode
   - Grayscale Mode
   - Toggle font size
+
+**09-07-2015**
+- fixed the region balance error
