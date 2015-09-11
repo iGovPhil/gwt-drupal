@@ -441,25 +441,17 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $variables['content_class'] = '';
   $variables['sidebar_first_class'] = ' large-3 medium-3';
   $variables['sidebar_second_class'] = ' large-3 medium-3';
-  // if both sidbars are present set the content css for 3 column layout
-  if($variables['page']['sidebar_first'] && $variables['page']['sidebar_second']){
+  if(!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])){
     $variables['content_class'] .= ' large-6 medium-6 large-push-3 medium-push-3';
     $variables['sidebar_first_class'] .= ' large-pull-6 medium-push-6';
-    // $variables['sidebar_second_class'] .= '';
   }
-  // if left sidebar only
-  elseif($variables['page']['sidebar_first'] && !$variables['page']['sidebar_second']){
+  elseif(!empty($variables['page']['sidebar_first']) && empty($variables['page']['sidebar_second'])){
     $variables['content_class'] .= ' large-9 medium-9 large-push-3 medium-push-3';
     $variables['sidebar_first_class'] .= ' large-pull-9 medium-pull-9';
-    //$variables['sidebar_second_class'] .= '';
   }
-  // if right sidebar only
-  elseif(!$variables['page']['sidebar_first'] && $variables['page']['sidebar_second']){
+  elseif(empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])){
     $variables['content_class'] .= ' large-9 medium-9';
-    //$variables['sidebar_first_class'] .= ' pull-9';
-    //$variables['sidebar_second_class'] .= '';
   }
-  // if no sidebars present
   else{
     $variables['content_class'] .= ' large-12';
   }
@@ -471,38 +463,32 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $variables['banner_container_class'] = ' has-border';
 
 //  TODO: bug! banner slider and container should not show (if no content on other content) if the banner is medium size media
-  if($variables['page']['banner']){
-    // if both banner are available
-    if($variables['page']['banner_2'] && $variables['page']['banner_3']){
+  if(!empty($variables['page']['banner'])){
+    if(!empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
       $variables['banner_class'] = ' large-6';
       $variables['banner_2_class'] = ' large-3';
       $variables['banner_3_class'] = ' large-3';
     }
-    elseif($variables['page']['banner_2'] && !$variables['page']['banner_3']){
+    elseif(!empty($variables['page']['banner_2']) && empty($variables['page']['banner_3'])){
       $variables['banner_class'] = ' large-8';
       $variables['banner_2_class'] = ' large-4';
-      //$variables['banner_3_class'] = '';
     }
-    elseif(!$variables['page']['banner_2'] && $variables['page']['banner_3']){
+    elseif(empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
       $variables['banner_class'] = ' large-9';
-      //$variables['banner_2_class'] = '';
       $variables['banner_3_class'] = ' large-3';
     }
   }
-  elseif(!$variables['page']['banner']){
+  elseif(empty($variables['page']['banner'])){
     $variables['banner_class'] = '';
     $variables['banner_container_class'] = '';
-    // if both banner are available
-    if($variables['page']['banner_2'] && $variables['page']['banner_3']){
+    if(!empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
       $variables['banner_2_class'] = ' large-6';
       $variables['banner_3_class'] = ' large-6';
     }
-    elseif($variables['page']['banner_2'] && !$variables['page']['banner_3']){
+    elseif(!empty($variables['page']['banner_2']) && empty($variables['page']['banner_3'])){
       $variables['banner_2_class'] = ' large-12';
-      //$variables['banner_3_class'] = '';
     }
-    elseif(!$variables['page']['banner_2'] && $variables['page']['banner_3']){
-      //$variables['banner_2_class'] = '';
+    elseif(empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
       $variables['banner_3_class'] = ' large-12';
     }
   }
@@ -512,17 +498,17 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $variables['ear_content_class'] = '';
   $variables['ear_content_2_class'] = '';
   // if both banner are available
-  if(isset($variables['page']['ear_content']) && isset($variables['page']['ear_content_2'])){
+  if(!empty($variables['page']['ear_content']) && !empty($variables['page']['ear_content_2'])){
     $variables['name_slogan_class'] = ' large-6';
     $variables['ear_content_class'] = ' large-3';
     $variables['ear_content_2_class'] = ' large-3';
   }
-  elseif(isset($variables['page']['ear_content']) && !isset($variables['page']['ear_content_2'])){
+  elseif(!empty($variables['page']['ear_content']) && !empty($variables['page']['ear_content_2'])){
     $variables['name_slogan_class'] = ' large-9';
     $variables['ear_content_class'] = ' large-3';
     //$variables['ear_content_2_class'] = '';
   }
-  elseif(!isset($variables['page']['ear_content']) && isset($variables['page']['ear_content_2'])){
+  elseif(empty($variables['page']['ear_content']) && !empty($variables['page']['ear_content_2'])){
     $variables['name_slogan_class'] = ' large-9';
     //$variables['ear_content_class'] = '';
     $variables['ear_content_2_class'] = ' large-3';
@@ -531,135 +517,96 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   // TODO: make a function that parse multiple region columns
   // create a dynamic column on agency footer
   $variables['footer_class'] = ' large-12';
-  $variables['footer_2_class'] = '';
-  $variables['footer_3_class'] = '';
-  $variables['footer_4_class'] = '';
-  if(isset($variables['page']['footer_2'])){
+  if(!empty($variables['page']['footer_2'])){
     $variables['footer_class'] = ' large-6';
     $variables['footer_2_class'] = ' large-6';
     $variables['footer_3_class'] = ' large-3';
     $variables['footer_4_class'] = ' large-3';
-    if(isset($variables['page']['footer_3']) && isset($variables['page']['footer_4'])){
+    if(!empty($variables['page']['footer_3']) && !empty($variables['page']['footer_4'])){
       $variables['footer_class'] = ' large-3';
       $variables['footer_2_class'] = ' large-3';
     }
-    elseif(!isset($variables['page']['footer_3']) && isset($variables['page']['footer_4'])){
+    elseif(empty($variables['page']['footer_3']) && !empty($variables['page']['footer_4'])){
       $variables['footer_2_class'] = ' large-3';
-      $variables['footer_3_class'] = '';
     }
-    elseif(isset($variables['page']['footer_3']) && !isset($variables['page']['footer_4'])){
+    elseif(!empty($variables['page']['footer_3']) && empty($variables['page']['footer_4'])){
       $variables['footer_class'] = ' large-4';
       $variables['footer_2_class'] = ' large-4';
       $variables['footer_3_class'] = ' large-4';
-      $variables['footer_4_class'] = '';
     }
   }
   else{
     $variables['footer_class'] = ' large-6';
-    $variables['footer_2_class'] = '';
     $variables['footer_3_class'] = ' large-3';
     $variables['footer_4_class'] = ' large-3';
-    if(!isset($variables['page']['footer_3']) && isset($variables['page']['footer_4'])){
-      $variables['footer_3_class'] = '';
+    if(empty($variables['page']['footer_3']) && !empty($variables['page']['footer_4'])){
       $variables['footer_4_class'] = ' large-6';
     }
-    elseif(isset($variables['page']['footer_3']) && !isset($variables['page']['footer_4'])){
+    elseif(!empty($variables['page']['footer_3']) && empty($variables['page']['footer_4'])){
       $variables['footer_3_class'] = ' large-6';
-      $variables['footer_4_class'] = '';
-    }
-    elseif(!isset($variables['page']['footer_3']) && !isset($variables['page']['footer_4'])){
-      $variables['footer_class'] = ' large-12';
-      $variables['footer_3_class'] = '';
-      $variables['footer_4_class'] = '';
     }
   }
 
   // create a dynamic column on agency panel_top
   $variables['panel_top_class'] = ' large-12';
-  $variables['panel_top_2_class'] = '';
-  $variables['panel_top_3_class'] = '';
-  $variables['panel_top_4_class'] = '';
-  if(isset($variables['page']['panel_top_2'])){
+  if(!empty($variables['page']['panel_top_2'])){
     $variables['panel_top_class'] = ' large-6';
     $variables['panel_top_2_class'] = ' large-6';
     $variables['panel_top_3_class'] = ' large-3';
     $variables['panel_top_4_class'] = ' large-3';
-    if(isset($variables['page']['panel_top_3']) && isset($variables['page']['panel_top_4'])){
+    if(!empty($variables['page']['panel_top_3']) && !empty($variables['page']['panel_top_4'])){
       $variables['panel_top_class'] = ' large-3';
       $variables['panel_top_2_class'] = ' large-3';
     }
-    elseif(!isset($variables['page']['panel_top_3']) && isset($variables['page']['panel_top_4'])){
+    elseif(empty($variables['page']['panel_top_3']) && !empty($variables['page']['panel_top_4'])){
       $variables['panel_top_2_class'] = ' large-3';
-      $variables['panel_top_3_class'] = '';
     }
-    elseif(isset($variables['page']['panel_top_3']) && !isset($variables['page']['panel_top_4'])){
+    elseif(!empty($variables['page']['panel_top_3']) && empty($variables['page']['panel_top_4'])){
       $variables['panel_top_class'] = ' large-4';
       $variables['panel_top_2_class'] = ' large-4';
       $variables['panel_top_3_class'] = ' large-4';
-      $variables['panel_top_4_class'] = '';
     }
   }
   else{
     $variables['panel_top_class'] = ' large-6';
-    $variables['panel_top_2_class'] = '';
     $variables['panel_top_3_class'] = ' large-3';
     $variables['panel_top_4_class'] = ' large-3';
-    if(!isset($variables['page']['panel_top_3']) && isset($variables['page']['panel_top_4'])){
-      $variables['panel_top_3_class'] = '';
+    if(empty($variables['page']['panel_top_3']) && !empty($variables['page']['panel_top_4'])){
       $variables['panel_top_4_class'] = ' large-6';
     }
-    elseif(isset($variables['page']['panel_top_3']) && !isset($variables['page']['panel_top_4'])){
+    elseif(!empty($variables['page']['panel_top_3']) && empty($variables['page']['panel_top_4'])){
       $variables['panel_top_3_class'] = ' large-6';
-      $variables['panel_top_4_class'] = '';
-    }
-    elseif(!isset($variables['page']['panel_top_3']) && !isset($variables['page']['panel_top_4'])){
-      $variables['panel_top_class'] = ' large-12';
-      $variables['panel_top_3_class'] = '';
-      $variables['panel_top_4_class'] = '';
     }
   }
   // create a dynamic column on agency panel_bottom
   $variables['panel_bottom_class'] = ' large-12';
-  $variables['panel_bottom_2_class'] = '';
-  $variables['panel_bottom_3_class'] = '';
-  $variables['panel_bottom_4_class'] = '';
-  if(isset($variables['page']['panel_bottom_2'])){
+  if(!empty($variables['page']['panel_bottom_2'])){
     $variables['panel_bottom_class'] = ' large-6';
     $variables['panel_bottom_2_class'] = ' large-6';
     $variables['panel_bottom_3_class'] = ' large-3';
     $variables['panel_bottom_4_class'] = ' large-3';
-    if(isset($variables['page']['panel_bottom_3']) && isset($variables['page']['panel_bottom_4'])){
+    if(!empty($variables['page']['panel_bottom_3']) && !empty($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_class'] = ' large-3';
       $variables['panel_bottom_2_class'] = ' large-3';
     }
-    elseif(!isset($variables['page']['panel_bottom_3']) && isset($variables['page']['panel_bottom_4'])){
+    elseif(empty($variables['page']['panel_bottom_3']) && !empty($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_2_class'] = ' large-3';
-      $variables['panel_bottom_3_class'] = '';
     }
-    elseif(isset($variables['page']['panel_bottom_3']) && !isset($variables['page']['panel_bottom_4'])){
+    elseif(!empty($variables['page']['panel_bottom_3']) && empty($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_class'] = ' large-4';
       $variables['panel_bottom_2_class'] = ' large-4';
       $variables['panel_bottom_3_class'] = ' large-4';
-      $variables['panel_bottom_4_class'] = '';
     }
   }
   else{
     $variables['panel_bottom_class'] = ' large-6';
-    $variables['panel_bottom_2_class'] = '';
     $variables['panel_bottom_3_class'] = ' large-3';
     $variables['panel_bottom_4_class'] = ' large-3';
-    if(!isset($variables['page']['panel_bottom_3']) && isset($variables['page']['panel_bottom_4'])){
-      $variables['panel_bottom_3_class'] = '';
+    if(empty($variables['page']['panel_bottom_3']) && !empty($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_4_class'] = ' large-6';
     }
-    elseif(isset($variables['page']['panel_bottom_3']) && !isset($variables['page']['panel_bottom_4'])){
+    elseif(!empty($variables['page']['panel_bottom_3']) && empty($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_3_class'] = ' large-6';
-      $variables['panel_bottom_4_class'] = '';
-    }
-    elseif(!isset($variables['page']['panel_bottom_3']) && !isset($variables['page']['panel_bottom_4'])){
-      $variables['panel_bottom_class'] = ' large-12';
-      $variables['panel_bottom_3_class'] = '';
-      $variables['panel_bottom_4_class'] = '';
     }
   } 
 
