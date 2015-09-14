@@ -12,6 +12,8 @@ function gwt_drupal_helper_install(){
 	// file_prepare_directory($gwt_drupal_helper_slides, FILE_CREATE_DIRECTORY);
 
   _gwt_drupal_helper_install_style_slides();
+
+  // TODO: check if the content type gwt_slides is already installed
   _gwt_drupal_helper_install_content_slides();
 }
 
@@ -193,10 +195,38 @@ function _gwt_drupal_helper_uninstall_style_slides(){
 function _gwt_drupal_helper_uninstall_content_slides(){
   $entity_name = 'gwt_slides';
 
+  // TODO: delete all the gwt_slides content types
   // uninstall content slides and its fields
-  field_delete_field('field_gwt_slide_image');
+  /*field_delete_field('field_gwt_slide_image');
   field_delete_field('field_gwt_image_link');
   field_delete_field('field_gwt_image_caption');
-  field_delete_field('field_gwt_weight');
-  node_type_delete('gwt_slides');
+  field_delete_field('field_gwt_weight');*/
+  // node_type_delete('gwt_slides');
+}
+
+function gwt_drupal_helper_schema(){
+  $schema = array();
+  $schema['gwt_drupal_mega_menu'] = array(
+    'description' => 'Records for mega menu relations for contents',
+    'fields' => array(
+      'mlid' => array(
+        'type' => 'int',
+        'length' => 10,
+        'default' => 0,
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'length' => 10,
+        'default' => 0,
+      ),
+    ),
+    // 'unique key' => array('mlid'),
+    'foreign keys' => array(
+      'mega_menu_links' => array(
+        'table' => 'menu_links',
+        'columns' => array('mlid' => 'mlid'),
+      ),
+    ),
+  );
+  return $schema;
 }

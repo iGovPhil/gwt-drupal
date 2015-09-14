@@ -194,3 +194,238 @@ function _gwt_drupal_helper_get_gwt_slides(){
   $output .= '</ul>';
   return $output;
 }
+
+/**
+ * implementation of hook_form_alter()
+ */
+function gwt_drupal_helper_form_alter(&$form, &$form_alter, $form_id){
+  // add a form on the menu_edit_item
+  // check first if the default values is main-menu:0
+
+  // TODO: add a settings to check if the Mega menu is enabled
+  if($form_id == 'menu_edit_item'){
+    if(substr($form['parent']['#default_value'], 0, 9) == 'main-menu' &&
+      $form['original_item']['#value']['depth'] == 1){
+      // TODO: add a note that mega menu can only display up to level 2 only
+      // drupal_set_message('<pre>'.print_r($form, 1).'</pre>');
+      $mlid = $form['mlid']['#value'];
+      
+      // add checkbox for MEGA_MENU
+      $gwt_mega_menu = array(
+        '#type' => 'fieldset', 
+        '#title' => t('GWT Mega Menu'),
+        '#collapsible' => TRUE, 
+        '#collapsed' => FALSE,
+      );
+      $gwt_mega_menu['gwt_mega_menu_check'] = array(
+        '#type' => 'checkbox', 
+        '#title' => t('Enable Mega Menu'),
+        // TODO: add a note that sub items up to level 1 will be loaded as well
+        '#description' => t('Check to enable the mega menu for the item. When enabled, the <strong>Display Body</strong> will be loaded as the content of the Mega Menu.<br/>The Sub-items up to level 2 of the menu will be loaded as multi tab-iterface of it.'),
+      );
+      $gwt_mega_menu['gwt_mega_menu_display_body'] = array(
+        '#type' => 'textfield', 
+        '#title' => t('Display Body'),
+        '#description' => t('The display body the content of the mega menu.<br/><strong>Note: </strong> The body will not display if the content is <strong>&lt;front&gt;</strong>.'),
+        '#disabled' => TRUE,
+        '#default_value' => $form['link_path']['#default_value'],
+      );
+
+      if($form['link_path']['#default_value'] == '<front>'){
+        $gwt_mega_menu['gwt_mega_menu_check']['#disabled'] = true;
+      }
+      $mega_menu = gwt_drupal_mega_menu_load($mlid);
+      if($mega_menu){
+        $gwt_mega_menu['gwt_mega_menu_check']['#default_value'] = true;
+      }
+
+      $form['gwt_mega_menu'] = $gwt_mega_menu;
+
+      $form['#validate'][] = 'gwt_drupal_helper_menu_edit_item_validate';
+      $form['#submit'][] = 'gwt_drupal_helper_menu_edit_item_submit';
+    }
+  }
+}
+
+function gwt_drupal_mega_menu_load($mlid = 0){
+  if($mlid == 'new'){
+    return false;
+  }
+
+  $result = db_select('gwt_drupal_mega_menu', 'm')
+    ->fields('m')
+    ->condition('mlid', $mlid, '=')
+    ->execute()
+    ->fetchAssoc()
+    ;
+  // $aids = array($aid);
+  return $result;
+  // return $result;
+}
+
+function gwt_drupal_mega_menu_load_all(){
+  $mega_menu = db_select('gwt_drupal_mega_menu', 'm')
+    ->fields('m')
+    ->execute()
+    ->fetchAll()
+    ;
+
+  $items = array();
+  foreach($mega_menu as $x => $item){
+    $items[$item->mlid] = $item;
+  }
+
+  // reallign the menu items with its parent
+  $cleaned_item = array();
+  foreach($items as $mlid => $item){
+    if(!isset($cleaned_item[$mlid])){
+      $cleaned_item[$mlid] = new stdClass();
+    }
+    $cleaned_item[$mlid]->mlid = $item->mlid;
+    $cleaned_item[$mlid]->nid = $item->nid;
+    $cleaned_item[$mlid]->pmlid = $item->pmlid;
+
+    $menu_link = menu_link_load($mlid);
+    if($menu_link['has_children']){
+      // load all sub menu
+      $sub_items = _menu_link_load_by_plid($mlid);
+      foreach($sub_items as $sub_item){
+        if($sub_item['external'] || $sub_item['hidden']){
+          break;
+        }
+        $cleaned_item[$mlid]->children[$sub_item['mlid']] = new stdClass();
+        $cleaned_item[$mlid]->children[$sub_item['mlid']]->mlid = $sub_item['mlid'];
+
+        if(substr($sub_item['link_path'], 0, 5) == 'node/'){
+          $nid = (int)substr($sub_item['link_path'], 5);
+        }
+        $cleaned_item[$mlid]->children[$sub_item['mlid']]->nid = $nid;
+        $cleaned_item[$mlid]->children[$sub_item['mlid']]->pmlid = $mlid;
+      }
+    }
+  }
+  // $aids = array($aid);
+  return $cleaned_item;
+  // return $result;
+}
+
+/**
+ * helper function
+ * loads menu item by parentid
+ */
+function _menu_link_load_by_plid($plid) {
+  if (is_numeric($plid)) {
+    $query = db_select('menu_links', 'ml');
+    $query->leftJoin('menu_router', 'm', 'm.path = ml.router_path');
+    $query->fields('ml');
+    // Weight should be taken from {menu_links}, not {menu_router}.
+    $query->addField('ml', 'weight', 'link_weight');
+    $query->fields('m');
+    $query->condition('ml.plid', $plid);
+    if ($items = $query->execute()->fetchAll(PDO::FETCH_ASSOC)) {
+      foreach($items as $item){
+        $item ['weight'] = $item ['link_weight'];
+        _menu_link_translate($item);
+      }
+      return $items;
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * function callback of gwt_drupal_helper_form_alter form validate
+ */
+function gwt_drupal_helper_menu_edit_item_validate($form, &$form_state){
+  // if the menu is not main-menu:0 OR the link_path is <front> do not save to the database
+
+  // return false;
+  // drupal_set_message('<pre>'.print_r($form_state, 1).'</pre>');
+  // form_set_error('gwt_mega_menu_display_body', t(''));
+
+  $values = $form_state['values'];
+}
+
+/**
+ * function callback of gwt_drupal_helper_form_alter form submit
+ */
+function gwt_drupal_helper_menu_edit_item_submit($form, &$form_state){
+  $values = $form_state['values'];
+  if($values['link_path'] == '<front>' || substr($values['parent'], 0, 9) != 'main-menu' || $values['depth'] > 2){
+    return false;
+  }
+
+  // retrieve mlid
+  $mlid = $values['mlid'];
+  if(substr($values['link_path'], 0, 5) == 'node/'){
+    $nid = (int)substr($values['link_path'], 5);
+  }
+
+  // TODO: validate if the node is external, hidden, disabled
+
+  $mega_menu = gwt_drupal_mega_menu_load($mlid);
+  drupal_set_message('<pre>'.print_r($mega_menu, 1).'</pre>');
+
+  // get the $nid from the menu
+  // save the relation to the gwt_drupal_mega_menu
+  $fields = array(
+    'nid' => $nid,
+    'pmlid' => $values['original_item']['plid'],
+  );
+
+  // TODO: after loading the menu item, load all the sub-items (up to level 2) as well.
+
+  // if the menu is already loaded and unchecked, delete the row
+  if($mega_menu && $values['gwt_mega_menu_check'] != 1){
+    $success = db_delete('gwt_drupal_mega_menu')
+      ->condition('mlid', $mlid)
+      ->execute();
+
+    if($success){
+      drupal_set_message('Mega Menu have been removed.');
+    }
+    return true;
+  }
+
+  // todo: if the mega menu has sub items, automatically add them as children items
+  if($mega_menu){
+    $update = db_update('gwt_drupal_mega_menu')->fields($fields);
+    $update->condition('mlid', $mlid, '=');
+
+    $success = $update->execute();
+    if($success){
+      drupal_set_message('Mega Menu updated.');
+    }
+  }
+  else{
+    $fields['mlid'] = $mlid;
+    $insert = db_insert('gwt_drupal_mega_menu')->fields($fields);
+
+    $success = $insert->execute();
+    if($success){
+      drupal_set_message('Mega Menu saved.');
+    }
+  }
+  return true;
+}
+
+/**
+ * Get the children of a menu item in a given menu.
+ *
+ * @param string $title
+ *   The title of the parent menu item.
+ * @param string $menu
+ *   The internal menu name.
+ * 
+ * @return array
+ *   The children of the given parent. 
+ */
+function _gwt_drupal_helpdesk_submenu_tree_all_data($title, $menu = 'main-menu') {
+  $tree = menu_tree_all_data($menu);
+  foreach ($tree as $branch) {
+    if ($branch['link']['title'] == $title) {
+      return $branch['below'];
+    }
+  }
+  return array();
+}

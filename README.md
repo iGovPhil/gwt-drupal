@@ -100,3 +100,6 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 
 **09-07-2015**
 - fixed the region balance error
+
+**09-11-2015**
+- fixed fatal error undeclared function error

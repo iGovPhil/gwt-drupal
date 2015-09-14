@@ -521,7 +521,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $variables['ear_content_class'] = '';
   $variables['ear_content_2_class'] = '';
   // if both banner are available
-  if(!empty($variables['page']['ear_content']) && empty($variables['page']['ear_content_2'])){
+  if(!empty($variables['page']['ear_content']) && !empty($variables['page']['ear_content_2'])){
     $variables['name_slogan_class'] = ' large-6';
     $variables['ear_content_class'] = ' large-3';
     $variables['ear_content_2_class'] = ' large-3';
@@ -634,6 +634,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   } 
 
   // load the color used from theme_settings
+  // TODO: use the drupal way of printing attributes
   $variables['gwt_drupal_masthead_styles'] = 'style=" ';
   if($gwt_drupal_masthead_bg_color = theme_get_setting('gwt_drupal_masthead_bg_color')){
     $variables['gwt_drupal_masthead_styles'] .= 'background-color: '.$gwt_drupal_masthead_bg_color.'; ';
@@ -768,7 +769,9 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   }
   $variables['accesibility_shortcut'] .= '</ul>';
 
-  $variables['gwt_mega_menu'] = _gwt_drupal_mega_menu_formatted();
+  if(!module_exists('gwt_drupal_helper')){
+    $variables['gwt_mega_menu'] = _gwt_drupal_mega_menu_formatted();
+  }
 }
 
 /**
