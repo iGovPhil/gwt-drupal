@@ -679,14 +679,17 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   }
   
   $accessibility = array();
+  /*
   $gwt_drupal_acc_statement = theme_get_setting('gwt_drupal_acc_statement') ? theme_get_setting('gwt_drupal_acc_statement') : '';
   if($gwt_drupal_acc_statement){
     $accessibility[] = array(
       'url' => $gwt_drupal_acc_statement,
       'text' => t('Accessibility Statement'),
       'key' => '0',
+      'class' => array('toggle-statement'),
       );
   }
+  */
   $gwt_drupal_acc_home = theme_get_setting('gwt_drupal_acc_home') ? theme_get_setting('gwt_drupal_acc_home') : '';
   if($gwt_drupal_acc_home){
     $accessibility[] = array(
@@ -748,18 +751,20 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
           'class' => 'skips',
           ),
         ));
-  drupal_set_message('<pre>'.print_r($accessibility, 1).'</pre>');
+  // drupal_set_message('<pre>'.print_r($data['class'], 1).'</pre>');
   drupal_set_message('<pre>'.print_r($test, 1).'</pre>');*/
 
   $variables['accesibility_shortcut'] = '<ul>';
+  $variables['accesibility_shortcut'] .= '<li><a href="#" class="skips toggle-statement" title="Toggle Accessibility Statement" accesskey="0">Toggle Accessibility Statement</a></li>';
   foreach($accessibility as $access_key => $data){
+    $data['class'] = isset($data['class']) && is_array($data['class']) ? $data['class'] : array();
     $variables['accesibility_shortcut'] .= '<li>';
     $variables['accesibility_shortcut'] .= l(
       $data['text'],
       $data['url'],
       array(
-        'class' => 'skips',
         'attributes' => array(
+          'class' => array_merge(array('skips'), $data['class']),
           'accesskey' => $data['key'],
           // 
           ),

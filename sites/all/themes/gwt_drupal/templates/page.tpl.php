@@ -13,14 +13,39 @@
 <div id="accessibility-shortcuts">
 <?php print $accesibility_shortcut; ?>
 </div>
-
 <div id="accessibility-widget">
   <ul>
     <li><a href="#" id="accessibility-mode" title="Accessibility Menu"><span class="offscreen">Toggle Accessibility Menu</span></a></li>
+    <li><a href="#" id="accessibility-statement" title="Accessibility Statement" class="toggle-statement" title="Toggle Accessibility Statement"><span class="offscreen">Toggle Accessibility Statement</span></a></li>
     <li><a href="#" id="accessibility-contrast" class="toggle-contrast" title="Toggle High Contrast"><span class="offscreen">Toggle High Contrast</span></a></li>
     <li><a href="#" id="accessibility-grayscale" class="toggle-grayscale" title="Toggle Grey Scale"><span class="offscreen">Toggle Grayscale</span></a></li>
-    <li><a href="#" id="accessibility-fontsize" class="toggle-fontsize" title="Toggle Font Size"><span class="offscreen">Toggle Font size</span></a></li>
+    <!-- <li><a href="#" id="accessibility-fontsize" class="toggle-fontsize" title="Toggle Font Size"><span class="offscreen">Toggle Font size</span></a></li> -->
   </ul>
+</div>
+
+<div id="accessibility-statement-content" title="Accessibility Statement" role="dialog">
+  <textarea class="statement-textarea" readonly>
+Shortcut Keys Combination Activation
+
+Combination keys used for each browser.
+
+Chrome for Linux press (Alt+Shift+shortcut_key)
+Chrome for Windows press (Alt+shortcut_key)
+For Firefox press (Alt+Shift+shortcut_key)
+For Internet Explorer press (Alt+Shift+shortcut_key) then press (enter)
+ 
+
+Accessibility Statement (Combination + 0): Statement page that will show the available accessibility keys.
+Home Page (Combination + 1): Accessibility key for redirecting to homepage.
+Main Content (Combination + R): Shortcut for viewing the content section of the current page.
+FAQ (Combination + 5): Shortcut for FAQ page.
+Contact (Combination + C): Shortcut for contact page or form inquiries.
+Feedback (Combination + K): Shortcut for feedback page.
+Site Map (Combination + M): Shortcut for site map (footer agency) section of the page.
+Search (Combination + S): Shortcut for search page.
+Press esc, or click the close the button to close this dialog box.
+  </textarea>
+  <input type="button" value="close" class="toggle-statement"/>
 </div>
 
 <div id="navigation">
@@ -60,7 +85,9 @@
     </div>
   </div>
 </div>
+<?php if(isset($gwt_mega_menu)): ?>
 <?php echo $gwt_mega_menu; ?>
+<?php endif; ?>
 <div id="page">
 
   <header class="header" id="header" <?php print $gwt_drupal_masthead_styles; ?>>
@@ -339,4 +366,5 @@
   </script>
   <div><a href="#page" id="back-to-top">Back to Top</a></div>
 </div>
+<div id="darklight"></div>
 <?php print render($page['bottom']); ?>

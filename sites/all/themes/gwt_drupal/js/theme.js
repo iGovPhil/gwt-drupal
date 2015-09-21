@@ -190,30 +190,31 @@ Drupal.behaviors.my_custom_behavior = {
         }
     });
 
-    var a11y_fontsize_path = Drupal.settings.gwt_drupal.theme_path+'/accessibility/a11y-fontsize.css';
-    // Fontsize handler
-    if (readCookie('a11y-larger-fontsize')) {
-        $('body').addClass('fontsize');
-     $('head').append($("<link href='" + a11y_fontsize_path + "' id='fontsizeStylesheet' rel='stylesheet' type='text/css' />"));
-        $('#accessibility-fontsize').attr('aria-checked', true).addClass('active');
+    var statementActive = false;
+    var oldFocus = document;
+    var statementFunction = function(e){
+        // e.preventDefault();
+        $('.toggle-statement').toggleClass('statement-active');
+        $('#accessibility-statement-content').toggleClass('statement-active');
+        if($('.toggle-statement').hasClass('statement-active')){
+            statementActive = true;
+            $('#darklight').fadeIn();
+            oldFocus = $(":focus");
+            $('#accessibility-statement-content .statement-textarea').focus();
+        }
+        else{
+            statementActive = false;
+            $('#darklight').fadeOut();
+            $(oldFocus).focus();
+        }
     }
-
-    $('.toggle-fontsize').on('click', function () {
-        if(!$(this).hasClass('active')) {
-            $('head').append($("<link href='" + a11y_fontsize_path + "' id='fontsizeStylesheet' rel='stylesheet' type='text/css' />"));
-            $('body').addClass('fontsize');
-            $(this).attr('aria-checked', true).addClass('active');
-            createCookie('a11y-larger-fontsize', '1');
-            return false;
-        } else {
-            $('#fontsizeStylesheet').remove();
-            $('body').removeClass('fontsize');
-            $(this).removeAttr('aria-checked').removeClass('active');
-            eraseCookie('a11y-larger-fontsize');
-            return false;
+    $('.toggle-statement').click(statementFunction);
+    $('#darklight').click(statementFunction);
+    $(document).keydown(function(e) {
+        if(statementActive && e.which == 27){
+            statementFunction(e);
         }
     });
-
 
     // Accessibility
     $('#accessibility-mode').click(function(e){
