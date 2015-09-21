@@ -274,15 +274,15 @@ function gwt_drupal_breadcrumb($variables) {
       if (empty($variables['title'])) {
         $variables['title'] = t('You are here');
       }
-      // Unless overridden by a preprocess function, make the heading invisible.
-      if (!isset($variables['title_attributes_array']['class'])) {
-        $variables['title_attributes_array']['class'][] = 'element-invisible';
-      }
+      $variables['title_attributes_array']['class'][] = 'breadcrumbs-here-label';
 
       // Build the breadcrumb trail.
-      $output = '<nav class="breadcrumb" role="navigation">';
-      $output .= '<h2' . drupal_attributes($variables['title_attributes_array']) . '>' . $variables['title'] . '</h2>';
-      $output .= '<ol><li>' . implode($breadcrumb_separator . '</li><li>', $breadcrumb) . $trailing_separator . '</li></ol>';
+      $output = '<nav role="navigation">';
+      $output .= '<ol class="breadcrumbs">'.
+        '<li'.drupal_attributes($variables['title_attributes_array']) . '>' . $variables['title'] . ':</li>'.
+        '<li>' . implode('<span class="breadcrumb-separator">' . $breadcrumb_separator . '</span>' . '</li>'.
+        '<li>', $breadcrumb) . '<span class="breadcrumb-separator">' . $trailing_separator . '</span></li>'.
+      '</ol>';
       $output .= '</nav>';
     }
   }
