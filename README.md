@@ -10,7 +10,7 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - White screen error on certain installation (updates), no admin menu
 - Access key missing node error
 - some access keys not working properly (site map)
-- dynamic column panel top, panel bottom, and agency footer
+- ~~dynamic column panel top, panel bottom, and agency footer~~
 
 ###### CHANGE LOGS
 **05-20-2014**
