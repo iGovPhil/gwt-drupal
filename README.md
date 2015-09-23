@@ -107,3 +107,8 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 **09-21-2015**
 - removed font-resize, added accessibility statement pop-up
 - restyled the breadcrumbs
+
+**09-23-2015**
+- change the accessibility widget to right side
+- fix overlap top menu
+
