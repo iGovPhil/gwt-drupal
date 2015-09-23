@@ -797,7 +797,7 @@ padding-bottom: 30px;
 #accessibility-widget ul li a#accessibility-mode.active{
 }
 #accessibility-widget ul li a#accessibility-mode span{
-	background-position: 0px -22px;
+	background-position: -5px -22px;
 }
 #accessibility-widget ul li a#accessibility-mode.active span{
 	background-position: 0px 0px;
