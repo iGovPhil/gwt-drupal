@@ -750,14 +750,14 @@ padding-bottom: 30px;
     position:fixed;
   	top: 50%;
     z-index: 200;
-	left: -42px;
+	right: -42px;
 	margin-top: -42px;
 }
 #accessibility-widget ul{
     list-style: none;
     margin:0;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 #accessibility-widget ul li{
     text-align: center;
@@ -782,8 +782,8 @@ padding-bottom: 30px;
 }
 #accessibility-widget ul li #accessibility-mode{
 	position: fixed;
-	left: -10px;
-	border-radius: 0px 3px 0 0px;
+	right: -10px;
+	border-radius: 3px 0 0 0;
 	margin-top: -43px;
 	background: #ff7c7c;
 	border-bottom: 0;
@@ -796,11 +796,18 @@ padding-bottom: 30px;
 }
 #accessibility-widget ul li a#accessibility-mode.active{
 }
-#accessibility-widget ul li a#accessibility-mode.active span{
+#accessibility-widget ul li a#accessibility-mode span{
 	background-position: 0px -22px;
+}
+#accessibility-widget ul li a#accessibility-mode.active span{
+	background-position: 0px 0px;
 }
 #accessibility-widget ul li a#accessibility-contrast span{
     background-position: 0px -44px;
+}
+#accessibility-widget ul li a#accessibility-grayscale{
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 #accessibility-widget ul li a#accessibility-grayscale span{
     background-position: 0px -69px !important;
@@ -809,10 +816,10 @@ padding-bottom: 30px;
     background-position: 0px -94px !important;
 }
 body.contrast #accessibility-widget ul li a#accessibility-mode span{
-	background: -24px 0px url(../images/accessibility-sprites.png) no-repeat !important;
+	background: -24px -22px url(../images/accessibility-sprites.png) no-repeat !important;
 }
 body.contrast #accessibility-widget ul li a#accessibility-mode.active span{
-	background: -24px -22px url(../images/accessibility-sprites.png) no-repeat !important;
+	background: -24px 0px url(../images/accessibility-sprites.png) no-repeat !important;
 }
 body.contrast #accessibility-widget ul li a#accessibility-contrast span{
 	background: -24px -44px url(../images/accessibility-sprites.png) no-repeat !important;
