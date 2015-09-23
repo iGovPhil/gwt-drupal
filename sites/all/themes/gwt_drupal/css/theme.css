@@ -806,7 +806,6 @@ padding-bottom: 30px;
     background-position: 0px -44px;
 }
 #accessibility-widget ul li a#accessibility-grayscale{
-	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
 }
 #accessibility-widget ul li a#accessibility-grayscale span{
