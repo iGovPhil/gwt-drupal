@@ -774,7 +774,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   }
   $variables['accesibility_shortcut'] .= '</ul>';
 
-  if(!module_exists('gwt_drupal_helper')){
+  if(module_exists('gwt_drupal_helper')){
     $variables['gwt_mega_menu'] = _gwt_drupal_mega_menu_formatted();
   }
 }
@@ -792,7 +792,7 @@ function _gwt_drupal_mega_menu_formatted(){
   $mega_menu = gwt_drupal_mega_menu_load_all();
   // $output .= '<pre>'.print_r($mega_menu, 1).'</pre>';
   // print_r($mega_menu);
-  $output .= '<div id="nav-megamenu">';
+  // $output .= '<div id="nav-megamenu">';
   foreach($mega_menu as $mlid => $item){
     $attr = array();
     // TODO: load the node content
@@ -868,7 +868,7 @@ function _gwt_drupal_mega_menu_formatted(){
 
     $output .= "</div>\n";
   }
-  $output .= "</div>\n";
+  // $output .= "</div>\n";
   return $output;
 }
 
