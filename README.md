@@ -112,3 +112,6 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - change the accessibility widget to right side
 - fix overlap top menu
 
+**09-28-2015**
+- hide header section if logo or site name is hidden
+- added accessibility widget toggle theme settings
