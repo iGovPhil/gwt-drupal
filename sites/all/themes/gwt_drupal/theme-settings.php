@@ -180,6 +180,13 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#title'         => t('Accessibility settings'),
   );
 
+  $form['gwt_drupal_acc']['gwt_drupal_acc_widget'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Accessibility Widget'), 
+    '#default_value' => theme_get_setting('gwt_drupal_acc_widget'),
+    '#description' => t('Check to show the accesssibility widget.'), 
+  );
+
   $form['gwt_drupal_acc']['gwt_drupal_acc_label'] = array(
     '#markup' => "
     <label>Shortcut Keys Combination Activation</label>
@@ -192,7 +199,6 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     </ul>
     "
   );
-
   $form['gwt_drupal_acc']['gwt_drupal_acc_statement'] = array(
     '#type' => 'textfield', 
     '#title' => t('Accessibility Statement (Combination + 0):'), 
