@@ -85,11 +85,14 @@ Press esc, or click the close the button to close this dialog box.
     </div>
   </div>
 </div>
+<div id="nav-megamenu">
 <?php if(isset($gwt_mega_menu)): ?>
 <?php echo $gwt_mega_menu; ?>
 <?php endif; ?>
+</div>
 <div id="page">
 
+  <?php if ($logo || $site_name || $site_slogan): ?>
   <header class="header" id="header" <?php print $gwt_drupal_masthead_styles; ?>>
     <section class="header-section row">
       <div class="columns<?php print $name_slogan_class ?>">
@@ -129,6 +132,7 @@ Press esc, or click the close the button to close this dialog box.
       <?php endif ?>
     </section>
   </header>
+  <?php endif ?>
 
   <?php
   if($page['banner'] ||
