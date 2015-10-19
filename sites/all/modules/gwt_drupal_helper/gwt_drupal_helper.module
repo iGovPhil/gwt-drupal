@@ -364,7 +364,7 @@ function gwt_drupal_helper_menu_edit_item_submit($form, &$form_state){
   // TODO: validate if the node is external, hidden, disabled
 
   $mega_menu = gwt_drupal_mega_menu_load($mlid);
-  drupal_set_message('<pre>'.print_r($mega_menu, 1).'</pre>');
+  // drupal_set_message('<pre>'.print_r($mega_menu, 1).'</pre>');
 
   // get the $nid from the menu
   // save the relation to the gwt_drupal_mega_menu

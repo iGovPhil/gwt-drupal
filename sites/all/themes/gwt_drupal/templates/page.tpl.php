@@ -13,6 +13,7 @@
 <div id="accessibility-shortcuts">
 <?php print $accesibility_shortcut; ?>
 </div>
+<?php if($accessibility_widget): ?>
 <div id="accessibility-widget">
   <ul>
     <li><a href="#" id="accessibility-mode" title="Accessibility Menu"><span class="offscreen">Toggle Accessibility Menu</span></a></li>
@@ -22,6 +23,7 @@
     <!-- <li><a href="#" id="accessibility-fontsize" class="toggle-fontsize" title="Toggle Font Size"><span class="offscreen">Toggle Font size</span></a></li> -->
   </ul>
 </div>
+<?php endif; ?>
 
 <div id="accessibility-statement-content" title="Accessibility Statement" role="dialog">
   <textarea class="statement-textarea" readonly>

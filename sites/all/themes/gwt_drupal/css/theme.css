@@ -22,6 +22,25 @@
 /*typography*/
 h1, h2, h3, h4, h5, h6 {font-family: 'Roboto', sans-serif; font-weight: bold; text-transform: uppercase;}
 
+h1{
+	font-size: 43px !important;
+}
+h2{
+	font-size: 23px !important;
+}
+h3{
+	font-size: 20px !important;
+}
+h4{
+	font-size: 18px !important;
+}
+h5{
+	font-size: 13px !important;
+}
+h6{
+	font-size: 10px !important;
+}
+
 /**
  * global styling
  */

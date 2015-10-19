@@ -591,7 +591,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     }
   }
   else{
-    $variables['panel_top_class'] = ' large-6';
+    $variables['panel_top_class'] = ' large-12';
     $variables['panel_top_3_class'] = ' large-3';
     $variables['panel_top_4_class'] = ' large-3';
     if(empty($variables['page']['panel_top_3']) && !empty($variables['page']['panel_top_4'])){
@@ -773,6 +773,8 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     $variables['accesibility_shortcut'] .= '</li>';
   }
   $variables['accesibility_shortcut'] .= '</ul>';
+
+  $variables['accessibility_widget'] = theme_get_setting('gwt_drupal_acc_widget');
 
   if(module_exists('gwt_drupal_helper')){
     $variables['gwt_mega_menu'] = _gwt_drupal_mega_menu_formatted();
