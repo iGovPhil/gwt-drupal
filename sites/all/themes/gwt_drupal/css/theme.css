@@ -208,6 +208,7 @@ html body.admin-menu{
 	position: absolute;
 	top: 50%;
 	right: 0;
+        color:yellow;
 }
 .top-bar-section li:not(.has-form) a:not(.button),
 .top-bar-section li.active:not(.has-form) a:not(.button) {

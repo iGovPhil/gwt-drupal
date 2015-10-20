@@ -9,17 +9,17 @@
 /* uses foundation normalize css */
 @import "foundation/normalize.css";
 
-/* Layout rules *
+/* Layout rules * sample
 disable responsive.css, use foundation.css instead
 @import "layouts/responsive.css";
-*/
+  edited */
 
 /* Component (SMACSS module) rules */
 @import "components/misc.css";
 /* Optionally, add your own components here. */
 @import "print.css";
 
-/* SMACSS theme rules */
+/* SMACSS theme rules codde*/
 /* @import "theme-A.css"; */
 /* @import "theme-B.css"; */
 
