@@ -230,3 +230,48 @@ function gwt_drupal_helper_schema(){
   );
   return $schema;
 }
+
+/**
+ * first update of the gwt helper module
+ */
+function gwt_drupal_helper_update_7201(){
+  if(!db_table_exists('gwt_drupal_mega_menu')){
+    $schema['gwt_drupal_mega_menu'] = array(
+      'description' => 'Records for mega menu relations for contents',
+      'fields' => array(
+        'mlid' => array(
+          'type' => 'int',
+          'length' => 10,
+          'default' => 0,
+        ),
+        'nid' => array(
+          'type' => 'int',
+          'length' => 10,
+          'default' => 0,
+        ),
+        'pmlid' => array(
+          // 'description' => 'Parent menu link item ID reference',
+          'type' => 'int',
+          'length' => 10,
+          'default' => 0,
+        ),
+      ),
+      // 'unique key' => array('mlid'),
+      'foreign keys' => array(
+        'mega_menu_links' => array(
+          'table' => 'menu_links',
+          'columns' => array('mlid' => 'mlid'),
+        ),
+      ),
+    );
+  }
+  if (!db_field_exists('gwt_drupal_mega_menu', 'pmlid')) {
+    $spec = array(
+      // 'description' => 'Parent menu link item ID reference',
+      'type' => 'int',
+      'length' => 10,
+      'default' => 0,
+    );
+    db_add_field('gwt_drupal_mega_menu', 'pmlid', $spec);
+  }
+}

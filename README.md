@@ -11,6 +11,8 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 - Access key missing node error
 - some access keys not working properly (site map)
 - ~~dynamic column panel top, panel bottom, and agency footer~~
+- access key icons not showing (missing image)
+- banner-slides content type link url.
 
 ###### CHANGE LOGS
 **05-20-2014**
@@ -115,3 +117,6 @@ Authored by: Voltz Jeturian voltz.jeturian@icto.dost.gov.ph
 **09-28-2015**
 - hide header section if logo or site name is hidden
 - added accessibility widget toggle theme settings
+
+**10-21-2015**
+- added update script to missing field column for mega menu
