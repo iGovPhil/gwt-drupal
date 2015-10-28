@@ -149,7 +149,7 @@ function _gwt_drupal_helper_get_gwt_slides(){
   $output = '';
   $output .= '<ul class="banner-rsslides">';
   foreach($nodes as $node){
-    //$output .= '<pre>'.print_r($node, 1).'</pre>';
+    // $output .= '<pre>'.print_r($node, 1).'</pre>';
     //return $output;
 
     /*
@@ -166,15 +166,42 @@ function _gwt_drupal_helper_get_gwt_slides(){
     // TODO: how to add image style here
     $field_gwt_slide_image = field_get_items('node', $node, 'field_gwt_slide_image');
     $field_gwt_slide_image_output = field_view_value('node', $node, 'field_gwt_slide_image', $field_gwt_slide_image[0]);
-
-    $output .= render($field_gwt_slide_image_output);
-    //return $output;
+    
+    $render_gwt_slide = render($field_gwt_slide_image_output);
 
     $field_gwt_image_caption = field_get_items('node', $node, 'field_gwt_image_caption');
     $field_gwt_image_caption_output = field_view_value('node', $node, 'field_gwt_image_caption', $field_gwt_image_caption[0]);
-    $output .= '<div class="rs-caption">';
-    $output .= render($field_gwt_image_caption_output);
-    $output .= '</div>';
+    $render_gwt_image_caption = render($field_gwt_image_caption_output);
+
+    $gwt_image_caption_output = '<div class="rs-caption">';
+    $gwt_image_caption_output .= $render_gwt_image_caption;
+    $gwt_image_caption_output .= '</div>';
+
+    $field_gwt_slide_link = field_get_items('node', $node, 'field_gwt_image_link');
+    $field_gwt_slide_link_output = field_view_value('node', $node, 'field_gwt_image_link', $field_gwt_slide_link[0]);
+    $is_external = url_is_external($field_gwt_slide_link_output['#markup']);
+
+    // check if theres a URL link
+    if($field_gwt_slide_link_output['#access'] && $field_gwt_slide_link_output['#markup']){
+      $render_gwt_slide = l($render_gwt_slide, $field_gwt_slide_link_output['#markup'], array(
+        'html' => TRUE,
+        'external' => $is_external,
+        'attributes' => array(
+          'title' => $render_gwt_image_caption,
+          'target' => $is_external ? '_blank' : '',
+        ),
+      ));
+      $gwt_image_caption_output = l($gwt_image_caption_output, $field_gwt_slide_link_output['#markup'], array(
+        'html' => TRUE,
+        'external' => $is_external,
+        'attributes' => array(
+          'title' => $render_gwt_image_caption,
+          'target' => $is_external ? '_blank' : '',
+        ),
+      ));
+    }
+    $output .= $render_gwt_slide;
+    $output .= $gwt_image_caption_output;
 
     // TODO: add a image_style for the image field, remove the label
     /*
