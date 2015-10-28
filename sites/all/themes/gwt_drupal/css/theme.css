@@ -769,7 +769,6 @@ padding-bottom: 30px;
     position:fixed;
   	top: 50%;
     z-index: 200;
-	right: -42px;
 	margin-top: -42px;
 }
 #accessibility-widget ul{
@@ -777,6 +776,8 @@ padding-bottom: 30px;
     margin:0;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
+	position: fixed;
+	right: -42px;
 }
 #accessibility-widget ul li{
     text-align: center;
