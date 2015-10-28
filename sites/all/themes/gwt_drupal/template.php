@@ -559,7 +559,6 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     }
   }
   else{
-    $variables['footer_class'] = ' large-6';
     $variables['footer_3_class'] = ' large-3';
     $variables['footer_4_class'] = ' large-3';
     if(empty($variables['page']['footer_3']) && !empty($variables['page']['footer_4'])){
@@ -591,7 +590,6 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     }
   }
   else{
-    $variables['panel_top_class'] = ' large-12';
     $variables['panel_top_3_class'] = ' large-3';
     $variables['panel_top_4_class'] = ' large-3';
     if(empty($variables['page']['panel_top_3']) && !empty($variables['page']['panel_top_4'])){
@@ -622,7 +620,6 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     }
   }
   else{
-    $variables['panel_bottom_class'] = ' large-6';
     $variables['panel_bottom_3_class'] = ' large-3';
     $variables['panel_bottom_4_class'] = ' large-3';
     if(empty($variables['page']['panel_bottom_3']) && !empty($variables['page']['panel_bottom_4'])){
