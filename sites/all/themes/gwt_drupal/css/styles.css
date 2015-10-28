@@ -30,3 +30,8 @@ disable responsive.css, use foundation.css instead
 /*
 @import "main.css";
 */
+
+body {
+	background-color: red;
+	font-family: "Times New Roman", Serif;
+}
