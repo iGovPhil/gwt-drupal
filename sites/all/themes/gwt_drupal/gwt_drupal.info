@@ -105,6 +105,7 @@ settings[gwt_drupal_html5_respond_meta][] = html5
 settings[gwt_drupal_html5_respond_meta][] = meta
 settings[gwt_drupal_rebuild_registry]     = 1
 settings[gwt_drupal_wireframes]           = 0
+settings[gwt_drupal_acc_widget]           = 0
 
 ; To add a Panels layout (which can also be used by Display Suite), uncomment
 ; the line below and see the documentation at: https://drupal.org/node/495654

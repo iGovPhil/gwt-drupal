@@ -183,7 +183,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
   $form['gwt_drupal_acc']['gwt_drupal_acc_widget'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable Accessibility Widget'), 
-    '#default_value' => theme_get_setting('gwt_drupal_acc_widget') ? theme_get_setting('gwt_drupal_acc_widget') : true,
+    '#default_value' => theme_get_setting('gwt_drupal_acc_widget'),
     '#description' => t('Check to show the accesssibility widget.'), 
   );
 
