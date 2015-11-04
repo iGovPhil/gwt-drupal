@@ -138,6 +138,9 @@ Drupal.behaviors.my_custom_behavior = {
     });
     // TODO: add a function that gets the height of the body, then fullscreens the data tab link
 
+    if(typeof Drupal.settings.gwt_drupal.theme_path === 'undefined'){
+        return; // a simple validation catch for undefined variable.
+    }
     var a11y_stylesheet_path = Drupal.settings.gwt_drupal.theme_path+'/accessibility/a11y-contrast.css';
     if (readCookie('a11y-high-contrast')) {
         $('body').addClass('contrast');
@@ -221,11 +224,11 @@ Drupal.behaviors.my_custom_behavior = {
         e.preventDefault();
         $(this).toggleClass('active');
         if($(this).hasClass('active')){
-            $('#accessibility-widget').animate({right: '0px'});
+            $('#accessibility-widget ul').animate({right: '0px'});
             $(this).animate({right: '0px', opacity: 1, paddingLeft: '9px', paddingRight: '9px'});
         }
         else{
-            $('#accessibility-widget').animate({right: '-42px'});
+            $('#accessibility-widget ul').animate({right: '-42px'});
             $(this).animate({right: '-10px', opacity: 0.8, paddingLeft: '5px', paddingRight: '5px'});
         }
     });
