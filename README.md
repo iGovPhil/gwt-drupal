@@ -4,16 +4,13 @@
 - Fix Front page list template
 - Use menu block as replacement to auxiliary menu
 - implement mega menu
+- Support Images styles for banner slider
 
 ###### Known Bugs
 - White screen error on certain installation (updates), no admin menu
 - Access key missing node error
 - some access keys not working properly (site map)
 - add dynamic settings for PST (add multiple version)
-- ~~dynamic column panel top, panel bottom, and agency footer~~
-- ~~banner-slides content type link url.~~
-- ~~content title heading need to use h1~~
-- ~~access key icons not showing (missing image)~~
 
 ###### CHANGE LOGS
 **05-20-2014**
