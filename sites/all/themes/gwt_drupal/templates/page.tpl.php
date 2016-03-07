@@ -7,6 +7,8 @@
  * @see https://drupal.org/node/1728148
  */
 ?>
+<?php /*
+// temporarily disable as per version 2.0.
 <div id="accessibility-links">
 <?php print $accesibility; ?>
 </div>
@@ -49,7 +51,8 @@ Press esc, or click the close the button to close this dialog box.
   </textarea>
   <input type="button" value="close" class="toggle-statement"/>
 </div>
-
+*/
+?>
 <div id="navigation">
   <div class="row">
     <?php
@@ -64,8 +67,8 @@ Press esc, or click the close the button to close this dialog box.
           <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
         </ul>
         <section class="top-bar-section">
-          <?php if ($page['top_bar_right']): ?>
-           <?php print render($page['top_bar_right']); ?>
+          <?php if ($page['top_bar_search']): ?>
+           <?php print render($page['top_bar_search']); ?>
           <?php endif; ?>
           <?php if ($main_menu): ?>
             <?php
@@ -82,6 +85,9 @@ Press esc, or click the close the button to close this dialog box.
               ),
             )); ?>
           <?php endif; ?>
+          <?php if ($page['top_bar_right']): ?>
+           <?php print render($page['top_bar_right']); ?>
+          <?php endif; ?>
         </section>
       </nav>
     </div>
@@ -95,16 +101,25 @@ Press esc, or click the close the button to close this dialog box.
 <div id="page">
 
   <?php if ($logo || $site_name || $site_slogan): ?>
-  <header class="header" id="header" <?php print $gwt_drupal_masthead_styles; ?>>
+  <header id="header" <?php print $gwt_drupal_masthead_styles; ?>>
     <section class="header-section row">
       <div class="columns<?php print $name_slogan_class ?>">
+        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo-link">
         <?php if ($logo): ?>
+          <div><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></div>
+        <?php endif; ?>
+        <?php if($site_name): ?>
+          <h4 id="republic-text">Republic of the Philippines</h4>
+        <?php endif; ?>
+        </a>
+        <?php /*if ($logo): ?>
           <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
         <?php endif; ?>
 
         <?php if ($site_name || $site_slogan): ?>
           <div class="header__name-and-slogan" id="name-and-slogan">
             <?php if ($site_name): ?>
+              <div class=""></div>
               <h1 class="header__site-name" id="site-name">
                 <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" class="header__site-link" rel="home"><span><?php print $site_name; ?></span></a>
               </h1>
@@ -114,7 +129,7 @@ Press esc, or click the close the button to close this dialog box.
             <?php endif; ?>
 
           </div>
-        <?php endif; ?>
+        <?php endif;*/ ?>
 
         <?php print render($page['header']); ?>
       </div>

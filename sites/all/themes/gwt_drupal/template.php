@@ -444,6 +444,10 @@ function gwt_drupal_html_head_alter(&$head) {
  */
 function gwt_drupal_preprocess_page(&$variables, $hook) {
   global $base_url;
+  // override site_name and site_slogan
+  $variables['site_name'] = theme_get_setting('toggle_name') ? theme_get_setting('site_name') : '';
+  $variables['site_slogan'] = theme_get_setting('site_slogan') ? theme_get_setting('site_slogan') : '';
+
   // $variables['path_to_theme'] = $base_url.'/'.path_to_theme();
   $js_variables = array(
     'theme_path' => $base_url.'/'.path_to_theme(),
@@ -632,23 +636,34 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
 
   // load the color used from theme_settings
   // TODO: use the drupal way of printing attributes
-  $variables['gwt_drupal_masthead_styles'] = 'style=" ';
+  $masthead_attr = array(
+    'style' => array(),
+    'class' => array('header'),
+  );
+  if($variables['site_name']){
+    $masthead_attr['class'][] = 'has_site_name';
+  }
+  if($variables['site_slogan']){
+    $masthead_attr['class'][] = 'has_site_slogan';
+  }
+
   if($gwt_drupal_masthead_bg_color = theme_get_setting('gwt_drupal_masthead_bg_color')){
-    $variables['gwt_drupal_masthead_styles'] .= 'background-color: '.$gwt_drupal_masthead_bg_color.'; ';
+    $masthead_attr['style'][] = 'background-color: '.$gwt_drupal_masthead_bg_color.'; ';
   }
 
   $masthead_fid = theme_get_setting('gwt_drupal_masthead_bg_image');
   if($masthead_fid){
     $file = file_load($masthead_fid);
     if(isset($file->uri)){
-      $variables['gwt_drupal_masthead_styles'] .= 'background-image: url('.file_create_url($file->uri).'); ';
+      $masthead_attr['style'][] = 'background-image: url('.file_create_url($file->uri).'); ';
     }
   }
 
   if($gwt_drupal_masthead_font = theme_get_setting('gwt_drupal_masthead_font_color')){
-    $variables['gwt_drupal_masthead_styles'] .= 'color: '.$gwt_drupal_masthead_font.'; ';
+    $masthead_attr['style'][] = 'color: '.$gwt_drupal_masthead_font.'; ';
   }
-  $variables['gwt_drupal_masthead_styles'] .= '" ';
+  $variables['gwt_drupal_masthead_styles'] = drupal_attributes($masthead_attr);
+  // drupal_set_message(print_r($variables['gwt_drupal_masthead_styles'], 1));
 
   $variables['gwt_drupal_banner_styles'] = 'style=" ';
   if($gwt_drupal_banner_bg_color = theme_get_setting('gwt_drupal_banner_bg_color')){

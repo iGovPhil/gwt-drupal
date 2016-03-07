@@ -57,6 +57,18 @@ function gwt_drupal_helper_block_configure($delta = '') {
         '#description' => t('Transparency image link.').'<br/><strong>e.g.</strong> node/1 or &lt;front&gt;',
         '#default_value' => variable_get('gwt_drupal_helper_trans_seal_link', 'node'),
       );
+      $form['gwt_drupal_helper_fieldset']['alt_text'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Alt Text Attribute',
+        '#description' => t('Transparency image alt attribute.'),
+        '#default_value' => variable_get('gwt_drupal_helper_alt_text_attr', 'Transparency Seal'),
+      );
+      $form['gwt_drupal_helper_fieldset']['title_text'] = array(
+        '#type' => 'textfield',
+        '#title' => 'Title Text Attribute',
+        '#description' => t('Transparency image text attribute.'),
+        '#default_value' => variable_get('gwt_drupal_helper_title_text_attr', 'Transparency Seal'),
+      );
       break;
   }
   return $form;
@@ -73,6 +85,8 @@ function gwt_drupal_helper_block_save($delta, $edit=array()){
         break;
       }
       variable_set('gwt_drupal_helper_trans_seal_link', $edit['trans_link']);
+      variable_set('gwt_drupal_helper_alt_text_attr', $edit['alt_text']);
+      variable_set('gwt_drupal_helper_title_text_attr', $edit['title_text']);
       break;
 	}
 }
@@ -96,6 +110,8 @@ function gwt_drupal_helper_block_view($delta = ''){
       break;
     case 'gwt_drupal_helper_trans_seal':
       $link = variable_get('gwt_drupal_helper_trans_seal_link', 'node');
+      $alt = variable_get('gwt_drupal_helper_alt_text_attr', 'node');
+      $title = variable_get('gwt_drupal_helper_title_text_attr', 'node');
 
       // print the transparency seal here
       $trans_seal = path_to_theme().'/images/transparency-seal.png';
@@ -103,7 +119,8 @@ function gwt_drupal_helper_block_view($delta = ''){
         array(
           'path' => $trans_seal,
           'attributes' => array(
-            'alt' => 'transparency-seal',
+            'alt' => $alt,
+            'title' => $title,
           ),
         ));
       
@@ -139,9 +156,13 @@ function _gwt_drupal_helper_get_gwt_slides(){
   $query->entityCondition('entity_type', 'node')
     ->propertyCondition('status', 1)
     ->propertyCondition('type', $type)
-    ->fieldOrderBy('field_gwt_weight', 'value', 'DESC')
+    ->fieldOrderBy('field_gwt_weight', 'value', 'ASC')
     ;
   $result = $query->execute();
+  // if no results found
+  if(!isset($result['node'])){
+    return false;
+  }
 
   $nodes = node_load_multiple(array_keys($result['node']));
   // $nodes = node_load_multiple(array(), array('type' => $type)); 
@@ -231,6 +252,10 @@ function gwt_drupal_helper_form_alter(&$form, &$form_alter, $form_id){
 
   // TODO: add a settings to check if the Mega menu is enabled
   if($form_id == 'menu_edit_item'){
+    if(!isset($form['original_item']['#value']['depth'])){
+      return false;
+    }
+
     if(substr($form['parent']['#default_value'], 0, 9) == 'main-menu' &&
       $form['original_item']['#value']['depth'] == 1){
       // TODO: add a note that mega menu can only display up to level 2 only

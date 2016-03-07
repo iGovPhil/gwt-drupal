@@ -54,10 +54,11 @@ body.toolbar-drawer{
 /**
  * general classes
  */
+/*
 .row{
 	width: 100%;
 	max-width: 1280px;
-}
+}*/
 .menu li{
 }
 .menu li.first{
@@ -236,13 +237,17 @@ html body.admin-menu{
 #top-bar li li{
 	border-right: 0;
 }
-.top-bar .toggle-topbar.menu-icon{
+#navigation .top-bar li.toggle-topbar.menu-icon{
 	right: 5px;
 	top: 16px;
 	position: absolute;
+	height: 58px;
+	padding-right: 12px;
 }
-.top-bar .toggle-topbar.menu-icon a{
+.top-bar #main-static-link li.toggle-topbar.menu-icon a{
+	height: 58px;
 	color: #000;
+	padding-right: 36px;
 }
 .top-bar .toggle-topbar.menu-icon a span{
 	/*
@@ -252,7 +257,7 @@ html body.admin-menu{
 	padding-right: 2px;
 }
 .top-bar .toggle-topbar.menu-icon a::after{
-	right: -4px;
+	right: 12px;
 	top: 6px;
 	box-shadow: 0 16px 0 1px #000, 0 22px 0 1px #000, 0 28px 0 1px #000;
 }
@@ -272,10 +277,11 @@ html body.admin-menu{
 .top-bar-section li.active:not(.has-form) a:not(.button):hover{
 	background: #E4E4E4;
 }
-/** top bar right navigation **/
-.region-top-bar-right{
-	border-right: solid 1px #ebebeb;
+
+#top-bar .region-top-bar-search.right{
+	height: 58px;
 }
+/** top bar right navigation **/
 .region-top-bar-right div.divider{
 	border-bottom: none;
 	border-top: none;
@@ -331,7 +337,6 @@ html body.admin-menu{
 }
 #top-bar.expanded #block-search-form input[name="search_block_form"]{
 	width: 100%;
-	margin-bottom: 20px;
 }
 #top-bar.expanded .region-top-bar-right{
 	border: 0;
@@ -535,7 +540,7 @@ border: 1px solid #d8d8d8;
 
 .sidebars .transparency-seal img{
 	width: 100%;
-	max-width: 250px;
+	max-width: 225px;
 }
 
 .block .box-mode{
@@ -550,7 +555,7 @@ border: 1px solid #d8d8d8;
 /** footer **/
 #footer{
 	padding: 1.25rem 0;
-	background-color: #e9e9e9;
+	background-color: #F0F0F0;
 	border-top: 1px solid #e1e1e1;
 }
 
@@ -615,6 +620,15 @@ border: 1px solid #222;
 	}
 	#top-bar.expanded .region-top-bar-right{
 		margin-top: 0;
+	}
+	#top-bar .region-top-bar-search.right{
+		display: none;
+	}
+	#top-bar.expanded .region-top-bar-search.right{
+		float: none !important;
+		display: block;
+		margin: 58px 0 0 0;
+		padding: 20px 0;
 	}
 	#top-bar li{
 		border-right: 0;
@@ -698,7 +712,7 @@ border: 1px solid #222;
 #nav-megamenu{
 	margin: 0;
 	background: #E9E9E9;
-	margin-top: 58px;
+	padding-top: 58px;
 	/*
 	position: fixed;
 	display: none;

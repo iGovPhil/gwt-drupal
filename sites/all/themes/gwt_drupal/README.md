@@ -1,1 +1,1 @@
-/var/www/gwt-drupal/README.md
+README.md

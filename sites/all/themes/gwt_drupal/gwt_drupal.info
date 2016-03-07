@@ -39,6 +39,7 @@ scripts[] = js/theme.js
 
 regions[navigation]     = 'Top bar Left'
 regions[top_bar_right]  = 'Top Bar Right'
+regions[top_bar_search]  = 'Top Bar Search'
 regions[header]         = 'MastHead'
 regions[ear_content]	= 'Ear Content 1'
 regions[ear_content_2]	= 'Ear Content 2'

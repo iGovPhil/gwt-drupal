@@ -14,6 +14,8 @@ drupal_add_css(drupal_get_path('theme', 'gwt_drupal') .'/js/spectrum/spectrum.cs
 function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form_id = NULL)  {
   global $base_url;
 
+  // drupal_set_message('<pre>'.print_r($form, 1).'</pre>');
+
   // Work-around for a core bug affecting admin themes. See issue #943212.
   if (isset($form_id)) {
     return;
@@ -88,12 +90,32 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
   unset($form['themedev']['gwt_drupal_wireframes']); // We don't need to toggle wireframes on this site.
   // */
 
-  $form['gwt_drupal'] = array(
-    '#type'          => 'fieldset',
-    '#title'         => t('Government Website Template(GWT) settings'),
+  // TODO: on enable of site name or by default, display the field
+  // theme_get_setting('site_name')
+  $display_site_name = (bool)$form['theme_settings']['toggle_name']['#default_value'] ? '' : 'display: none;';
+  $display_site_slogan = (bool)$form['theme_settings']['toggle_slogan']['#default_value'] ? '' : 'display: none;';
+  $form['logo']['site_name'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Site Name',
+    '#default_value' => theme_get_setting('site_name'),
+    '#prefix' => '<div style="'.$display_site_name.'" id="site-name-container">',
+    '#suffix' => '</div>',
+  );
+  // TODO: on enable of site name or by default, display the field
+  $form['logo']['site_slogan'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Site Tagline/Site Slogan',
+    '#default_value' => theme_get_setting('site_slogan'),
+    '#prefix' => '<div style="'.$display_site_slogan.'" id="site-slogan-container">',
+    '#suffix' => '</div>',
   );
 
-  $form['gwt_drupal']['gwt_drupal_masthead_bg_color'] = array(
+  $form['gwt_drupal_header'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('Header and Banner settings'),
+  );
+
+  $form['gwt_drupal_header']['gwt_drupal_masthead_bg_color'] = array(
     '#type' => 'textfield', 
     '#title' => t('Masthead Background Color:'), 
     '#default_value' => theme_get_setting('gwt_drupal_masthead_bg_color'),
@@ -104,7 +126,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#field_suffix' => '</div>',
   );
 
-  $form['gwt_drupal']['gwt_drupal_masthead_font_color'] = array(
+  $form['gwt_drupal_header']['gwt_drupal_masthead_font_color'] = array(
     '#type' => 'textfield', 
     '#title' => t('Masthead Font Color:'), 
     '#default_value' => theme_get_setting('gwt_drupal_masthead_font_color'),
@@ -115,7 +137,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#field_suffix' => '</div>',
   );
 
-  $form['gwt_drupal']['gwt_drupal_masthead_bg_image'] = array(
+  $form['gwt_drupal_header']['gwt_drupal_masthead_bg_image'] = array(
     '#type' => 'managed_file',
     '#title' => t('Masthead background image:'),
     '#default_value' => theme_get_setting('gwt_drupal_masthead_bg_image'),
@@ -126,7 +148,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#description' => t('Background of the masthead, allowed extensions: jpg, jpeg, png, gif<br/><strong>Note:</strong> The masthead background is different from the Logo.'),
   );
 
-  $form['gwt_drupal']['gwt_drupal_banner_bg_color'] = array(
+  $form['gwt_drupal_header']['gwt_drupal_banner_bg_color'] = array(
     '#type' => 'textfield', 
     '#title' => t('Banner Background Color:'), 
     '#default_value' => theme_get_setting('gwt_drupal_banner_bg_color'),
@@ -138,7 +160,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
   );
 
   $banner_font = theme_get_setting('gwt_drupal_banner_font_color');
-  $form['gwt_drupal']['gwt_drupal_banner_font_color'] = array(
+  $form['gwt_drupal_header']['gwt_drupal_banner_font_color'] = array(
     '#type' => 'textfield', 
     '#title' => t('Banner Font Color:'), 
     '#default_value' => $banner_font ? $banner_font: '#666666',
@@ -149,7 +171,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#field_suffix' => '</div>',
   );
 
-  $form['gwt_drupal']['gwt_drupal_banner_bg_image'] = array(
+  $form['gwt_drupal_header']['gwt_drupal_banner_bg_image'] = array(
     '#type' => 'managed_file',
     '#title' => t('Banner background image'),
     '#default_value' => theme_get_setting('gwt_drupal_banner_bg_image'),
@@ -161,7 +183,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     ),
   );
 
-  $form['gwt_drupal']['form_script'] = array(
+  $form['gwt_drupal_header']['form_script'] = array(
     '#markup' => '<script type="text/javascript">
     jQuery(document).ready(function($){
       $(\'.colorpicker-container input[type="text"]\').spectrum({
@@ -171,10 +193,29 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
           clickoutFiresChange: true,
           showButtons: false
       });
+      var siteName = $(\'#site-name-container\');
+      $(\'#edit-toggle-name\').click(function(){
+        if($(this).is(":checked")) {
+          siteName.show();
+        }
+        else{
+          siteName.hide();
+        }
+      });
+      var siteSlogan = $(\'#site-slogan-container\');
+      $(\'#edit-toggle-slogan\').click(function(){
+        if($(this).is(":checked")) {
+          siteSlogan.show();
+        }
+        else{
+          siteSlogan.hide();
+        }
+      });
     });
     </script>'
   );
 
+  /*
   $form['gwt_drupal_acc'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Accessibility settings'),
@@ -267,7 +308,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#description' => t(''), 
     '#field_prefix' => $base_url.'/',
   );
-
+*/
 /*
   $form['#validate'][] = 'gwt_drupal_settings_validate';
   $form['#submit'][] = 'gwt_drupal_settings_submit';
