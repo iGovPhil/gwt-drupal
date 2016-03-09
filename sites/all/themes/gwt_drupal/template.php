@@ -448,6 +448,8 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $variables['site_name'] = theme_get_setting('toggle_name') ? theme_get_setting('site_name') : '';
   $variables['site_slogan'] = theme_get_setting('site_slogan') ? theme_get_setting('site_slogan') : '';
 
+  $variables['fonts'] = '"Times New Roman", Times, serif';
+
   // $variables['path_to_theme'] = $base_url.'/'.path_to_theme();
   $js_variables = array(
     'theme_path' => $base_url.'/'.path_to_theme(),

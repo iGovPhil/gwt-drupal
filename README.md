@@ -25,7 +25,7 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
  - Support Images styles for banner slider
 
 ## CHANGE LOGS
-**03-03-2015**
+**03-03-2016**
 - Change Version Branding Pansit version 2.0
 - Revert default media query from Foundation
 - Improved background footer
@@ -33,3 +33,7 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 - transparency seal added alt and title text attribute
 - temporarily disable accessibility option (red button)
 - fix PDO error on using GWT-Mega menu feature
+
+**03-07-2016**
+- added new settings
+- added quick fix for jQuery compatibility issue

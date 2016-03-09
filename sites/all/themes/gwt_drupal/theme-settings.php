@@ -3,6 +3,9 @@
 drupal_add_js(drupal_get_path('theme', 'gwt_drupal') .'/js/spectrum/spectrum.js');
 drupal_add_css(drupal_get_path('theme', 'gwt_drupal') .'/js/spectrum/spectrum.css');
 
+define('GWT_DRUPAL_FONT_SANS_SERIF', 'Sans-serif');
+define('GWT_DRUPAL_FONT_SERIF', '"Times New Roman", Times, serif');
+
 /**
  * Implements hook_form_system_theme_settings_alter().
  *
@@ -181,6 +184,16 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#upload_validators' => array(
       'file_validate_extensions' => array('gif png jpg jpeg'),
     ),
+  );
+
+  $form['gwt_drupal_header']['font'] = array(
+    '#type' => 'radios',
+    '#title' => t('Font Select'),
+    '#options' => array(
+      GWT_DRUPAL_FONT_SANS_SERIF => 'Sans-serif',
+      GWT_DRUPAL_FONT_SERIF => 'Serif',
+    ),
+    '#default_value' => theme_get_setting('gwt_drupal_font'),
   );
 
   $form['gwt_drupal_header']['form_script'] = array(

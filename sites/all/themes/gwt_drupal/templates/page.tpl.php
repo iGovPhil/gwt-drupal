@@ -105,12 +105,18 @@ Press esc, or click the close the button to close this dialog box.
     <section class="header-section row">
       <div class="columns<?php print $name_slogan_class ?>">
         <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo-link">
-        <?php if ($logo): ?>
-          <div><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></div>
-        <?php endif; ?>
-        <?php if($site_name): ?>
-          <h4 id="republic-text">Republic of the Philippines</h4>
-        <?php endif; ?>
+          <?php if ($logo): ?>
+            <div><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></div>
+          <?php endif; ?>
+          <?php if($site_name): ?>
+            <h4 id="republic-text">Republic of the Philippines</h4>
+          <?php endif; ?>
+          <?php if($site_name): ?>
+            <h1 class="header__site-name" id="site-name"><span><?php print $site_name; ?></span></h1>
+          <?php endif; ?>
+          <?php if ($site_name && $site_slogan): ?>
+            <h2 class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></h2>
+          <?php endif; ?>
         </a>
         <?php /*if ($logo): ?>
           <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
