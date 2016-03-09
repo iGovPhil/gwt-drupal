@@ -34,6 +34,6 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 - temporarily disable accessibility option (red button)
 - fix PDO error on using GWT-Mega menu feature
 
-**03-07-2016**
+**03-09-2016**
 - added new settings
 - added quick fix for jQuery compatibility issue
