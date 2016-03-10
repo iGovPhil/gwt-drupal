@@ -661,30 +661,65 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     }
   }
 
-  if($gwt_drupal_masthead_font = theme_get_setting('gwt_drupal_masthead_font_color')){
-    $masthead_attr['style'][] = 'color: '.$gwt_drupal_masthead_font.'; ';
+  if($gwt_drupal_masthead_font_color = theme_get_setting('gwt_drupal_masthead_font_color')){
+    $masthead_attr['style'][] = 'color: '.$gwt_drupal_masthead_font_color.'; ';
+  }
+  if($gwt_drupal_logo_font = theme_get_setting('gwt_drupal_logo_font')){
+    $masthead_attr['class'][] = 'serif-font';
   }
   $variables['gwt_drupal_masthead_styles'] = drupal_attributes($masthead_attr);
-  // drupal_set_message(print_r($variables['gwt_drupal_masthead_styles'], 1));
 
-  $variables['gwt_drupal_banner_styles'] = 'style=" ';
+  $banner_attr = array(
+    'style' => array(),
+  );
   if($gwt_drupal_banner_bg_color = theme_get_setting('gwt_drupal_banner_bg_color')){
-    $variables['gwt_drupal_banner_styles'] .= 'background-color: '.$gwt_drupal_banner_bg_color.'; ';
+    $banner_attr['style'][] = 'background-color: '.$gwt_drupal_banner_bg_color.'; ';
   }
 
   $banner_fid = theme_get_setting('gwt_drupal_banner_bg_image');
   if($banner_fid){
     $file = file_load($banner_fid);
     if(isset($file->uri)){
-      $variables['gwt_drupal_banner_styles'] .= 'background-image: url('.file_create_url($file->uri).'); ';
+      $banner_attr['style'][] = 'background-image: url('.file_create_url($file->uri).'); ';
     }
   }
 
   if($gwt_drupal_banner_font = theme_get_setting('gwt_drupal_banner_font_color')){
-    $variables['gwt_drupal_banner_styles'] .= 'color: '.$gwt_drupal_banner_font.'; ';
+    $banner_attr['style'][] = 'color: '.$gwt_drupal_banner_font.'; ';
   }
-  $variables['gwt_drupal_banner_styles'] .= '" ';
+  $variables['gwt_drupal_banner_styles'] = drupal_attributes($banner_attr);
 
+  $style_settings = '';  
+  $style_settings .= '.content-style{';  
+  $content_border_position = theme_get_setting('gwt_drupal_content_border_position');
+  if($content_border_position > 0){
+    $style_settings .= 'border-style: solid !important; ';
+    $border_width = theme_get_setting('gwt_drupal_content_border');
+    $border_position = array(
+      0 => '',
+      1 => 'border-width: '.$border_width.'px !important; ',
+      2 => 'border-width: '.$border_width.'px 0 0 0 !important; ',
+      3 => 'border-width: 0 0 '.$border_width.'px 0 !important; ',
+    );
+    $style_settings .= $border_position[$content_border_position];
+    $radius = theme_get_setting('gwt_drupal_content_border_radius')*2;
+    $style_settings .= 'border-radius: '.$radius.'px !important;';
+    $style_settings .= 'border-color: '.theme_get_setting('gwt_drupal_content_border_color').' !important;';
+  }
+  $style_settings .= 'background-color: '.theme_get_setting('gwt_drupal_content_bg_color').' !important; ';
+  $style_settings .= '}';
+
+  $style_settings .= '#footer{';
+  $style_settings .= 'background-color: '.theme_get_setting('gwt_drupal_footer_bg_color').' !important;';
+  $style_settings .= '}';
+
+  $style_settings .= '.theme_settings{';
+  $style_settings .= 'background-color: '.theme_get_setting('gwt_drupal_footer_bg_color').' !important;';
+  $style_settings .= '}';
+  drupal_add_css($style_settings, 'inline');
+
+  // TODO: add inline css
+  // $variables['content_attr'] = drupal_attributes($content_attr);
 
   // TODO: check if the auxiliary_menu is available
   $variables['menu_auxiliary_menu'] = '';
@@ -995,7 +1030,7 @@ function gwt_drupal_preprocess_comment(&$variables, $hook) {
 function gwt_drupal_preprocess_region(&$variables, $hook) {
   // Sidebar regions get some extra classes and a common template suggestion.
   if (strpos($variables['region'], 'sidebar_') === 0) {
-    $variables['classes_array'][] = 'column';
+    // $variables['classes_array'][] = 'column';
     $variables['classes_array'][] = 'sidebar';
     // Allow a region-specific template to override gwt_drupal's region--sidebar.
     array_unshift($variables['theme_hook_suggestions'], 'region__sidebar');
@@ -1008,6 +1043,44 @@ function gwt_drupal_preprocess_region(&$variables, $hook) {
   // Add a SMACSS-style class for header region.
   elseif ($variables['region'] == 'header') {
     array_unshift($variables['classes_array'], 'header__region');
+  }
+
+  $heading_classes = array(
+    'heading-small',
+    'heading-normal',
+    'heading-large',
+  );
+  $heading_font = theme_get_setting('gwt_drupal_content_heading_font');
+  $heading_class = $heading_classes[$heading_font];
+
+  // TODO: move all class selection here
+  switch ($variables['region']) {
+    case 'panel_top':
+    case 'panel_top_2':
+    case 'panel_top_3':
+    case 'panel_top_4':
+      $variables['classes_array'][] = 'panel-top';
+      $variables['classes_array'][] = 'columns';
+    case 'banner':
+    case 'banner_2':
+    case 'banner_3':
+    case 'sidebar_first':
+    case 'sidebar_second':
+    case 'content':
+    case 'panel_bottom':
+    case 'panel_bottom_2':
+    case 'panel_bottom_3':
+    case 'panel_bottom_4':
+    case 'footer':
+    case 'footer_2':
+    case 'footer_3':
+    case 'footer_4':
+      $variables['classes_array'][] = $heading_class;
+      break;
+    
+    default:
+      # code...
+      break;
   }
 }
 
@@ -1037,6 +1110,20 @@ function gwt_drupal_preprocess_block(&$variables, $hook) {
 
   $variables['title_attributes_array']['class'][] = 'block__title';
   $variables['title_attributes_array']['class'][] = 'block-title';
+
+  // select things by region
+  switch ($variables['block']->region) {
+    case 'sidebar_first':
+    case 'sidebar_second':
+      $variables['classes_array'][] = 'content-style';
+      # code...
+      break;
+    
+    default:
+      # code...
+      break;
+  }
+  
 
   // Add Aria Roles via attributes.
   switch ($variables['block']->module) {

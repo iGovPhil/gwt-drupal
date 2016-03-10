@@ -106,16 +106,16 @@ Press esc, or click the close the button to close this dialog box.
       <div class="columns<?php print $name_slogan_class ?>">
         <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo-link">
           <?php if ($logo): ?>
-            <div><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></div>
+            <div id="logo-container"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></div>
           <?php endif; ?>
           <?php if($site_name): ?>
+            <div id="site-name-container">
             <h4 id="republic-text">Republic of the Philippines</h4>
-          <?php endif; ?>
-          <?php if($site_name): ?>
             <h1 class="header__site-name" id="site-name"><span><?php print $site_name; ?></span></h1>
-          <?php endif; ?>
-          <?php if ($site_name && $site_slogan): ?>
-            <h2 class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></h2>
+            <?php if ($site_slogan): ?>
+              <h2 class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></h2>
+            <?php endif; ?>
+            </div>
           <?php endif; ?>
         </a>
         <?php /*if ($logo): ?>
@@ -139,19 +139,21 @@ Press esc, or click the close the button to close this dialog box.
 
         <?php print render($page['header']); ?>
       </div>
-      <?php if($ear_content = render($page['ear_content'])): ?>
-        <div class="columns<?php print $ear_content_class ?>">
-          <div class="ear-content">
-          <?php print $ear_content; ?>
+      <?php if(!$site_name): ?>
+        <?php if($ear_content = render($page['ear_content'])): ?>
+          <div class="columns<?php print $ear_content_class ?>">
+            <div class="ear-content">
+            <?php print $ear_content; ?>
+            </div>
           </div>
-        </div>
-      <?php endif ?>
-      <?php if($ear_content_2 = render($page['ear_content_2'])): ?>
-      <div class="columns<?php print $ear_content_2_class ?>">
-        <div class="ear-content">
-        <?php print $ear_content_2; ?>
-        </div>
-      </div>
+        <?php endif ?>
+        <?php if($ear_content_2 = render($page['ear_content_2'])): ?>
+          <div class="columns<?php print $ear_content_2_class ?>">
+            <div class="ear-content">
+            <?php print $ear_content_2; ?>
+            </div>
+          </div>
+        <?php endif ?>
       <?php endif ?>
     </section>
   </header>
@@ -286,7 +288,7 @@ Press esc, or click the close the button to close this dialog box.
 
       <div id="content" class="columns column<?php print $content_class ?>" role="main">
         <?php print $messages; ?>
-        <div class="panel">
+        <div class="content-style">
         <?php print render($page['highlighted']); ?>
         <a id="main-content"></a>
         <?php print render($tabs); ?>

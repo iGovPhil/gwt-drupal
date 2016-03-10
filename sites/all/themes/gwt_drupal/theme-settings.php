@@ -97,6 +97,13 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
   // theme_get_setting('site_name')
   $display_site_name = (bool)$form['theme_settings']['toggle_name']['#default_value'] ? '' : 'display: none;';
   $display_site_slogan = (bool)$form['theme_settings']['toggle_slogan']['#default_value'] ? '' : 'display: none;';
+  $form['logo']['site_republic_text'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Republic Text',
+    '#default_value' => theme_get_setting('site_republic_text') ? theme_get_setting('site_republic_text') : 'REPUBLIC OF THE PHILIPPINES',
+    '#prefix' => '<div style="'.$display_site_slogan.'" id="site-republic-container">',
+    '#suffix' => '</div>',
+  );
   $form['logo']['site_name'] = array(
     '#type' => 'textfield',
     '#title' => 'Site Name',
@@ -186,14 +193,102 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     ),
   );
 
-  $form['gwt_drupal_header']['font'] = array(
+  $form['gwt_drupal_content'] = array(
+    '#type'          => 'fieldset',
+    '#title'         => t('Content settings'),
+  );
+  $form['gwt_drupal_content']['gwt_drupal_content_border_position'] = array(
+    '#type' => 'select',
+    '#title' => t('Content Border Position'),
+    '#default_value' => theme_get_setting('gwt_drupal_content_border_position'),
+    '#options' => array(
+      0 => 'No Border (Default)',
+      1 => 'Full Border',
+      2 => 'Border-top only',
+      3 => 'Bodder-bottom only',
+    ),
+    '#description' => 'Set to <strong>No Border</strong> to revert to original.',
+  );
+  $form['gwt_drupal_content']['gwt_drupal_content_border'] = array(
+    '#type' => 'select',
+    '#title' => t('Content Border Width'),
+    '#default_value' => theme_get_setting('gwt_drupal_content_border'),
+    '#options' => array(
+      1,
+      2,
+      3,
+      4,
+      5,
+    ),
+  );
+  $form['gwt_drupal_content']['gwt_drupal_content_border_radius'] = array(
+    '#type' => 'select',
+    '#title' => t('Content Border Radius'),
+    '#default_value' => theme_get_setting('gwt_drupal_content_border_radius'),
+    '#options' => array(
+      '0',
+      '2px',
+      '4px',
+      '6px',
+      '8px',
+      '10px',
+      '12px',
+      '14px',
+      '16px',
+      '18px',
+      '20px',
+    ),
+  );
+  $form['gwt_drupal_content']['gwt_drupal_content_border_color'] = array(
+    '#type' => 'textfield', 
+    '#title' => t('Content Border Color:'), 
+    '#default_value' => theme_get_setting('gwt_drupal_content_border_color'),
+    '#size' => 10, 
+    '#maxlength' => 30, 
+    '#description' => t('Select the border color of the content region. Select "X" to disable the color and use the default background color.'), 
+    '#field_prefix' => '<div class="colorpicker-container">',
+    '#field_suffix' => '</div>',
+  );
+  $form['gwt_drupal_content']['gwt_drupal_content_heading_font'] = array(
+    '#type' => 'select',
+    '#title' => t('Content Heading Size'),
+    '#default_value' => theme_get_setting('gwt_drupal_content_heading_font'),
+    '#options' => array(
+      t('Smaller'),
+      t('Normal'),
+      t('Larger'),
+    ),
+    '#description' => t('Size of headings font for content.'),
+  );
+  $form['gwt_drupal_content']['gwt_drupal_content_bg_color'] = array(
+    '#type' => 'textfield', 
+    '#title' => t('Content Background Color:'), 
+    '#default_value' => theme_get_setting('gwt_drupal_content_bg_color'),
+    '#size' => 10, 
+    '#maxlength' => 30, 
+    '#description' => t('Select the background color of the content region. Select "X" to disable the color and use the default background color.'), 
+    '#field_prefix' => '<div class="colorpicker-container">',
+    '#field_suffix' => '</div>',
+  );
+  $form['gwt_drupal_content']['gwt_drupal_footer_bg_color'] = array(
+    '#type' => 'textfield', 
+    '#title' => t('Agency Footer Background Color:'), 
+    '#default_value' => theme_get_setting('gwt_drupal_footer_bg_color'),
+    '#size' => 10, 
+    '#maxlength' => 30, 
+    '#description' => t('Select the background color of the footer region. Select "X" to disable the color and use the default background color.'), 
+    '#field_prefix' => '<div class="colorpicker-container">',
+    '#field_suffix' => '</div>',
+  );
+
+  $form['gwt_drupal_header']['gwt_drupal_logo_font'] = array(
     '#type' => 'radios',
     '#title' => t('Font Select'),
     '#options' => array(
       GWT_DRUPAL_FONT_SANS_SERIF => 'Sans-serif',
       GWT_DRUPAL_FONT_SERIF => 'Serif',
     ),
-    '#default_value' => theme_get_setting('gwt_drupal_font'),
+    '#default_value' => theme_get_setting('gwt_drupal_logo_font'),
   );
 
   $form['gwt_drupal_header']['form_script'] = array(
@@ -207,12 +302,15 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
           showButtons: false
       });
       var siteName = $(\'#site-name-container\');
+      var siteRepublic = $(\'#site-republic-container\');
       $(\'#edit-toggle-name\').click(function(){
         if($(this).is(":checked")) {
           siteName.show();
+          siteRepublic.show();
         }
         else{
           siteName.hide();
+          siteRepublic.hide();
         }
       });
       var siteSlogan = $(\'#site-slogan-container\');

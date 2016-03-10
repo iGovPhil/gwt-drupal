@@ -1,7 +1,7 @@
 screenshot  = screenshot.png
 name        = GWT Drupal
 description = Government Web Template theme
-version = 2.0.1
+version = 2.0.2
 core = 7.x
 
 engine      = phptemplate
@@ -107,6 +107,21 @@ settings[gwt_drupal_html5_respond_meta][] = meta
 settings[gwt_drupal_rebuild_registry]     = 1
 settings[gwt_drupal_wireframes]           = 0
 settings[gwt_drupal_acc_widget]           = 0
+
+settings[site_republic_text] = 'REPUBLIC OF THE PHILIPPINES'
+settings[gwt_drupal_masthead_bg_color] = 
+settings[gwt_drupal_masthead_font_color] = '#000000'
+settings[gwt_drupal_banner_bg_color] = 
+settings[gwt_drupal_banner_font_color] = '#666666'
+settings[gwt_drupal_banner_bg_image] = 0
+settings[gwt_drupal_content_border_position] = 0
+settings[gwt_drupal_content_border] = 1
+settings[gwt_drupal_content_border_radius] = 0
+settings[gwt_drupal_content_border_color] = '#000'
+settings[gwt_drupal_content_heading_font] = 'Normal'
+settings[gwt_drupal_content_bg_color] = '#f2f2f2'
+settings[gwt_drupal_footer_bg_color] = '#cccccc'
+settings[gwt_drupal_logo_font] = 'Sans-serif'
 
 ; To add a Panels layout (which can also be used by Display Suite), uncomment
 ; the line below and see the documentation at: https://drupal.org/node/495654

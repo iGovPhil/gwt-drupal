@@ -1,19 +1,17 @@
 # Goverment Website Template (GWT) for Drupal
 
 Notes:
-* See modulepositions.jpg in /images for this template's module positions.
-* Banner width should be 1250px
-* Any content in the masthead area should NOT EXCEED 100px.
-* For experienced Joomla users, please report any template issues to helpdesk@i.gov.ph.
+- See modulepositions.jpg in /images for this template's module positions.
+- Banner width should be 1250px
+- Any content in the masthead area should NOT EXCEED 100px.
+- For experienced Joomla users, please report any template issues to helpdesk@i.gov.ph.
 
 ## Known bugs and requests for enhancements (RFEs)
 For a list of known issues and RFEs, check the [issue tracking system](https://github.com/iGovPhil/gwt-drupal/issues).
 
-### Known Bugs
-- White screen error on certain installation (updates), no admin menu
-- Access key missing node error
-- some access keys not working properly (site map)
-- add dynamic settings for PST (add multiple version)
+- ~~White screen error on certain installation (updates), no admin menu~~
+- ~~Access key missing node error~~ accessibility features temporarily disabled
+- ~~some access keys not working properly (site map)~~ accessibility features temporarily disabled
 
 ## Future updates (v2.1)
  - Enhanced PST module
@@ -23,9 +21,12 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
  - Fix Front page list template
  - implement mega menu
  - Support Images styles for banner slider
+ - add dynamic settings for PST (add multiple version)
+ - minimize printing of elements, improve dynamic multi-region display
 
 ## CHANGE LOGS
 **03-03-2016**
+
 - Change Version Branding Pansit version 2.0
 - Revert default media query from Foundation
 - Improved background footer
@@ -35,5 +36,10 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 - fix PDO error on using GWT-Mega menu feature
 
 **03-09-2016**
-- added new settings
+
+- added new fields theme settings
+  - added content border settings
+  - header font selection
+  - header text logo
 - added quick fix for jQuery compatibility issue
+- improve rendering of element attributes for banner
