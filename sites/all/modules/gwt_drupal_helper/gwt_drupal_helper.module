@@ -135,7 +135,16 @@ function gwt_drupal_helper_block_view($delta = ''){
       $block['content'] = $trans_seal;
       break;
     case 'gwt_drupal_helper_pst':
-      $pst_content = '<iframe src="http://oras.pagasa.dost.gov.ph/time_display/time/" frameborder="0" width="100%" allowtransparency="true" scrolling="no"></iframe>';
+      // $pst_content = '<iframe src="http://oras.pagasa.dost.gov.ph/time_display/time/" frameborder="0" width="100%" allowtransparency="true" scrolling="no"></iframe>';
+      $pst_content = '<div id="gwt-pst"></div>
+      <script type="text/javascript">
+      (function(d, eId) {
+        var js, gjs = d.getElementById(eId);
+        js = d.createElement(\'script\'); js.id = \'gwt-pst-jsdk\';
+        js.src = "//gwhs.i.gov.ph/pst/gwtpst.js?"+new Date().getTime();
+        gjs.parentNode.insertBefore(js, gjs);
+      }(document, \'gwt-pst\'));
+      </script>';
       $block['subject'] = t('Philippine Standard Time');
       $block['content'] = $pst_content;
       break;

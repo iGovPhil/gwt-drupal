@@ -607,7 +607,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   }
   // create a dynamic column on agency panel_bottom
   $variables['panel_bottom_class'] = ' large-12';
-  if(!empty($variables['page']['panel_bottom_2'])){
+  if(!empty($variables['page']['panel_bottom_2'])){ // BUG encountered! still displaying or not empty
     $variables['panel_bottom_class'] = ' large-6';
     $variables['panel_bottom_2_class'] = ' large-6';
     $variables['panel_bottom_3_class'] = ' large-3';
