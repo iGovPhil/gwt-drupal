@@ -1050,8 +1050,11 @@ function gwt_drupal_preprocess_region(&$variables, $hook) {
     'heading-normal',
     'heading-large',
   );
+  $heading_class = '';
   $heading_font = theme_get_setting('gwt_drupal_content_heading_font');
-  $heading_class = $heading_classes[$heading_font];
+  if(isset($heading_classes[$heading_font])){
+    $heading_class = $heading_classes[$heading_font];
+  }
 
   // TODO: move all class selection here
   switch ($variables['region']) {
