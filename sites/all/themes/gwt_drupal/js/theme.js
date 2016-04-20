@@ -139,7 +139,7 @@ Drupal.behaviors.my_custom_behavior = {
     // TODO: add a function that gets the height of the body, then fullscreens the data tab link
 
     if(typeof Drupal.settings.gwt_drupal.theme_path === 'undefined'){
-        return; // a simple validation catch for undefined variable.
+        return false; // a simple validation catch for undefined variable.
     }
     var a11y_stylesheet_path = Drupal.settings.gwt_drupal.theme_path+'/accessibility/a11y-contrast.css';
     if (readCookie('a11y-high-contrast')) {
