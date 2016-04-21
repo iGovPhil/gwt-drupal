@@ -50,22 +50,22 @@ Drupal.behaviors.my_custom_behavior = {
     });
     */
 
-	$(document).foundation();
+    $(document).foundation();
     // add a place holder for the search text field
     $('#block-search-form input[name="search_block_form"]').attr('placeholder', 'Search...');
 
     $(".banner-rsslides").responsiveSlides({
         timeout: 10000,
-    	nav: true,
-    	pager: true
+        nav: true,
+        pager: true
     });
 
     // js nav hover fix
     $('.dropdown').mouseout(function(e){
-    	$(this).removeClass('hover');
+        $(this).removeClass('hover');
     });
     $('.has-dropdown').mouseout(function(e){
-    	$(this).removeClass('hover');
+        $(this).removeClass('hover');
     });
 
     var offset = 220;
@@ -138,7 +138,10 @@ Drupal.behaviors.my_custom_behavior = {
     });
     // TODO: add a function that gets the height of the body, then fullscreens the data tab link
 
-    if(typeof Drupal.settings.gwt_drupal.theme_path === 'undefined'){
+    if(!Drupal.settings.hasOwnProperty('gwt_drupal')){
+        return false;
+    }
+    if(!Drupal.settings.gwt_drupal.hasOwnProperty('theme_path')){
         return false; // a simple validation catch for undefined variable.
     }
     var a11y_stylesheet_path = Drupal.settings.gwt_drupal.theme_path+'/accessibility/a11y-contrast.css';
