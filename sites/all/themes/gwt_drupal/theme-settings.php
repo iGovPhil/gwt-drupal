@@ -283,7 +283,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
 
   $form['gwt_drupal_header']['gwt_drupal_logo_font'] = array(
     '#type' => 'radios',
-    '#title' => t('Font Select'),
+    '#title' => t('Font Family Selection'),
     '#options' => array(
       GWT_DRUPAL_FONT_SANS_SERIF => 'Sans-serif',
       GWT_DRUPAL_FONT_SERIF => 'Serif',

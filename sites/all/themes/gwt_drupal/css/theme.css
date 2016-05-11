@@ -375,9 +375,6 @@ html body.admin-menu{
 
 #logo-link{
     display: block;
-    overflow: auto;
-    height: auto;
-    width: auto;
 }
 #logo-container{
 	float: left;
@@ -421,6 +418,15 @@ html body.admin-menu{
 #header.serif-font #site-slogan{
 	font-family: "Times New Roman", Times, serif;
 	text-transform: none;
+}
+#header a{
+	color: inherit;
+}
+#header a h1,
+#header a h2,
+#header a h3,
+#header a h4{
+	color: inherit;
 }
 
 /** banner **/

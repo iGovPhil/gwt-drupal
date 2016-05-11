@@ -665,7 +665,11 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     $masthead_attr['style'][] = 'color: '.$gwt_drupal_masthead_font_color.'; ';
   }
   if($gwt_drupal_logo_font = theme_get_setting('gwt_drupal_logo_font')){
-    $masthead_attr['class'][] = 'serif-font';
+    $class = 'serif-font';
+    if($gwt_drupal_logo_font == 'Sans-serif'){
+      $class = 'sans-serif-font';
+    }
+    $masthead_attr['class'][] = $class;
   }
   $variables['gwt_drupal_masthead_styles'] = drupal_attributes($masthead_attr);
 

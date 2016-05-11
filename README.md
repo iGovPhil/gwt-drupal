@@ -47,3 +47,7 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 **04-21-2016**
 
 - fix for theme.js error which causes the TinyMCE page to be an error
+
+**05-11-2016**
+
+- fix for heading font and color
