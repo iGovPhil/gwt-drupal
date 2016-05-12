@@ -1,7 +1,7 @@
 screenshot  = screenshot.png
 name        = GWT Drupal P
 description = Government Web Template theme
-version = 2.0.5
+version = 2.0.6
 core = 7.x
 
 engine      = phptemplate

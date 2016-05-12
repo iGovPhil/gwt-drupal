@@ -51,3 +51,7 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 **05-11-2016**
 
 - fix for heading font and color
+
+**05-12-2016**
+
+- added right class for search block region
