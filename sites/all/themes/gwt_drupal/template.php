@@ -22,12 +22,48 @@ if (theme_get_setting('gwt_drupal_rebuild_registry') && !defined('MAINTENANCE_MO
  * theme override of link main menu
  */
 function gwt_drupal_links__system_main_menu($variables) {
-  //$links = $variables['links'];
-  //*
+  // $links = $variables['links'];
   $links = menu_tree_all_data('main-menu', null, 4);
-  // $test = '<pre>'.print_r($links, 1).'</pre>';
-  // return $test;
+  /*
+  $test = '<pre>'.print_r($links, 1).'</pre>';
+  return $test;
   // */
+
+  // heading not needed in main menu
+  $heading = $variables['heading'];
+  // global $language_url;
+  $output = '';
+
+  $output .= _gwt_drupal_link_render($links, 0, $variables);
+
+  return $output;
+}
+/**
+ * theme override of link main menu mobile version
+ */
+function gwt_drupal_links__system_main_menu_mobile($variables) {
+  $main_menu = menu_tree_all_data('main-menu', null, 4);
+  $menu_top_right = menu_tree_all_data('menu-top-right', null, 4);
+  if($menu_top_right){
+    $links = array_merge($main_menu, $menu_top_right);
+  }
+
+  // heading not needed in main menu
+  $heading = $variables['heading'];
+  // global $language_url;
+  $output = '';
+
+  $output .= _gwt_drupal_link_render($links, 0, $variables);
+
+  return $output;
+}
+
+/**
+ * theme override of link top right menu
+ * TODO: add auto creation of menu top_right
+ */
+function gwt_drupal_links__menu_top_right($variables) {
+  $links = menu_tree_all_data('menu-top-right', null, 4);
 
   // heading not needed in main menu
   $heading = $variables['heading'];
@@ -46,6 +82,44 @@ function gwt_drupal_links__system_main_menu($variables) {
 function gwt_drupal_links__menu_auxiliary_menu($variables){
   $links = menu_tree_all_data('menu-auxiliary-menu', null, 4);
   // print_r($links);
+
+  // heading not needed in main menu
+  $heading = $variables['heading'];
+  // global $language_url;
+  $output = '';
+
+  $output .= _gwt_drupal_link_render($links, 0, $variables);
+
+  return $output;
+}
+
+/**
+ * theme override of link auxiliary_menu
+ * TODO: create automatically an auxiliary_menu machine_name: menu-auxiliary-menu
+ */
+function gwt_drupal_links__menu_auxiliary_right_menu($variables){
+  $links = menu_tree_all_data('menu-auxiliary-right-menu', null, 4);
+  // print_r($links);
+
+  // heading not needed in main menu
+  $heading = $variables['heading'];
+  // global $language_url;
+  $output = '';
+
+  $output .= _gwt_drupal_link_render($links, 0, $variables);
+
+  return $output;
+}
+
+/**
+ * theme override of link main menu mobile version
+ */
+function gwt_drupal_links__menu_auxiliary_mobile($variables) {
+  $auxiliary_menu = menu_tree_all_data('menu-auxiliary-menu', null, 4);
+  $auxiliary_right_menu = menu_tree_all_data('menu-auxiliary-right-menu', null, 4);
+  if($auxiliary_right_menu){
+    $links = array_merge($auxiliary_menu, $auxiliary_right_menu);
+  }
 
   // heading not needed in main menu
   $heading = $variables['heading'];
@@ -79,7 +153,6 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
   }
 
   $attributes = $variables['attributes'];
-
   // check if the attrib of menu is hidden, if hidden, hide menu
   foreach ($links as $key => $link_full) {
     // if link is hidden, remove from node
@@ -90,16 +163,21 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
 
   $output = '';
   if (count($links) > 0) {
-
+    if($levels_deep == 0){
+      // $attributes['class'][] = 'left';
+      // parent attributes only
+      // drupal_set_message($attributes['class']);
+      if(isset($variables['parent_attr'])){
+        $attributes = array_merge($attributes, $variables['parent_attr']);
+        unset($variables['parent_attr']);
+      }
+    }
     // reset classes
     // $attributes['class'] = array();
     $attributes['class'][] = 'level-'.$levels_deep;
 
-    if($levels_deep == 0){
-      $attributes['class'][] = 'left';
-    }
     if($levels_deep > 0){
-      $attributes['class'][] = 'dropdown';
+      // $attributes['class'][] = 'nested';
     }
     $output .= '<ul' . drupal_attributes($attributes) . '>';
 
@@ -126,7 +204,7 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
         $has_sub_menu = true;
         // only show has-dropdown if below items is not hidden
         if(_gwt_drupal_has_sub_menu($link_full['below'])){
-          $class[] = 'has-dropdown';
+          // $class[] = 'has-dropdown';
         }
         $class[] = 'not-click';
       }
@@ -532,7 +610,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     $variables['ear_content_class'] = ' large-3';
     $variables['ear_content_2_class'] = ' large-3';
   }
-  elseif(!empty($variables['page']['ear_content']) && !empty($variables['page']['ear_content_2'])){
+  elseif(!empty($variables['page']['ear_content']) && empty($variables['page']['ear_content_2'])){
     $variables['name_slogan_class'] = ' large-9';
     $variables['ear_content_class'] = ' large-3';
     //$variables['ear_content_2_class'] = '';
@@ -643,10 +721,10 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     'class' => array('header'),
   );
   if($variables['site_name']){
-    $masthead_attr['class'][] = 'has_site_name';
+    $masthead_attr['class'][] = 'has-site-name';
   }
   if($variables['site_slogan']){
-    $masthead_attr['class'][] = 'has_site_slogan';
+    $masthead_attr['class'][] = 'has-site-slogan';
   }
 
   if($gwt_drupal_masthead_bg_color = theme_get_setting('gwt_drupal_masthead_bg_color')){
@@ -726,9 +804,25 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   // $variables['content_attr'] = drupal_attributes($content_attr);
 
   // TODO: check if the auxiliary_menu is available
+  $variables['menu_top_right'] = '';
+  if($menu_top_right = menu_load_links('menu-top-right')) {
+    $variables['menu_top_right'] = $menu_top_right;
+  }
+  $variables['main_menu_mobile'] = $variables['main_menu'];
+  if(isset($variables['main_menu']) && $menu_top_right){
+    $variables['main_menu_mobile'] = array_merge($variables['main_menu'], $menu_top_right);
+  }
   $variables['menu_auxiliary_menu'] = '';
-  if(menu_load_links('menu-auxiliary-menu')) {
-    $variables['menu_auxiliary_menu'] = menu_load_links('menu-auxiliary-menu');
+  if($menu_auxiliary_menu = menu_load_links('menu-auxiliary-menu')) {
+    $variables['menu_auxiliary_menu'] = $menu_auxiliary_menu;
+  }
+  $variables['menu_auxiliary_right_menu'] = '';
+  if($menu_auxiliary_right_menu = menu_load_links('menu-auxiliary-right-menu')) {
+    $variables['menu_auxiliary_right_menu'] = $menu_auxiliary_right_menu;
+  }
+  $variables['menu_auxiliary_mobile'] = $menu_auxiliary_menu;
+  if($menu_auxiliary_menu && $menu_auxiliary_right_menu){
+    $variables['menu_auxiliary_mobile'] = array_merge($menu_auxiliary_menu, $menu_auxiliary_right_menu);
   }
   
   $accessibility = array();
@@ -1423,4 +1517,87 @@ function gwt_drupal_mark($variables) {
  */
 function gwt_drupal_panels_default_style_render_region($variables) {
   return implode('', $variables['panes']);
+}
+
+/**
+ * overrides search block
+ * implements hook_form_alter
+ */
+/*function gwt_drupal_form_search_block_form_alter(&$form, &$form_state, $form_id) {
+    $form['search_block_form']['#title'] = t('Search'); // Change the text on the label element
+    $form['search_block_form']['#title_display'] = 'invisible'; // Toggle label visibilty
+    // $form['search_block_form']['#size'] = 40;  // define size of the textfield
+    // $form['search_block_form']['#default_value'] = t('Search'); // Set a default value for the textfield
+    // $form['actions']['submit']['#value'] = t('GO!'); // Change the text on the submit button
+    $form['actions']['submit'] = array(
+      '#type' => 'button',
+      '#executes_submit_callback' => TRUE,
+      '#value' => t('Search'),
+    );
+
+    // Add extra attributes to the text box
+    // $form['search_block_form']['#attributes']['onblur'] = "if (this.value == '') {this.value = 'Search';}";
+    // $form['search_block_form']['#attributes']['onfocus'] = "if (this.value == 'Search') {this.value = '';}";
+    // // Prevent user from searching the default text
+    // $form['#attributes']['onsubmit'] = "if(this.search_block_form.value=='Search'){ alert('Please enter a search'); return false; }";
+
+    // Alternative (HTML5) placeholder attribute instead of using the javascript
+    $form['search_block_form']['#attributes']['placeholder'] = t('Search');
+}*/
+
+function gwt_drupal_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'search_block_form') {
+    $form['search_block_form']['#attributes']['placeholder'] = t('Search');
+    $form['button'] = array(
+      '#type' => 'markup',
+      '#markup' => '<button type="submit" id="edit-submit-btn" name="op" class="form-submit">
+        <span class="show-for-sr">Search</span>
+        <span aria-hidden="true"><i class="fa fa-search" aria-hidden="true"></i></span>
+      </button>',
+      // '#weight' => 1000,
+    );
+    $form['actions']['submit']['#attributes'] = array(
+      'style' => 'display: none;',
+    );
+
+    /*
+<button class="button" type="button">
+  <!-- Screen readers will see "close" -->
+  <span class="show-for-sr">Close</span>
+  <!-- Visual users will see the X, but not the "Close" text -->
+  <span aria-hidden="true"><i class="fi-magnifying-glass"></i></span>
+</button>
+    */
+  }
+}
+
+function gwt_drupal_form_user_login_alter(&$form, &$form_state, $form_id) {
+  $form['name']['#attributes']['autocomplete'] = 'off';
+  $form['pass']['#attributes']['autocomplete'] = 'off';
+}
+function gwt_drupal_form_user_login_block_alter(&$form, &$form_state, $form_id) {
+  $form['name']['#attributes']['autocomplete'] = 'off';
+  $form['pass']['#attributes']['autocomplete'] = 'off';
+}
+
+/**
+ * override views of system generated menu
+ */
+function gwt_drupal_block_view($delta = ''){
+  $block = array();
+  drupal_set_message('<pre>'.print_r($delta, 1).'</pre>');
+
+  switch ($delta) {
+    case 'gwt_drupal_helper_slides':
+      // check if there are already a gwt slides content types
+      
+      // load gwt slides content types
+      // print slides into foundation based slider
+      $block['subject'] = '';
+
+      $gwt_slides_content = _gwt_drupal_helper_get_gwt_slides();
+      $block['content'] = $gwt_slides_content;
+      break;
+  }
+  return $block;
 }

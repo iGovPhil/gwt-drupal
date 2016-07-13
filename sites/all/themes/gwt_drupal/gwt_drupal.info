@@ -12,29 +12,11 @@ stylesheets[all][] = system.theme.css
 
 ; Then we add our own stylesheet.
 stylesheets[all][] = css/styles.css
-stylesheets[all][] = css/responsiveslides.css
 
 ; Optionally add some JavaScripts to your theme.
 
-scripts[] = js/jquery-1.8/jquery.min.js
-scripts[] = js/responsiveslides.min.js
-scripts[] = js/foundation.min.js
-scripts[] = js/foundation/foundation.abide.js
-scripts[] = js/foundation/foundation.accordion.js
-scripts[] = js/foundation/foundation.alert.js
-scripts[] = js/foundation/foundation.clearing.js
-scripts[] = js/foundation/foundation.dropdown.js
-scripts[] = js/foundation/foundation.equalizer.js
-scripts[] = js/foundation/foundation.interchange.js
-scripts[] = js/foundation/foundation.joyride.js
-scripts[] = js/foundation/foundation.magellan.js
-scripts[] = js/foundation/foundation.offcanvas.js
-;scripts[] = js/foundation/foundation.orbit.js
-scripts[] = js/foundation/foundation.reveal.js
-scripts[] = js/foundation/foundation.tab.js
-scripts[] = js/foundation/foundation.tooltip.js
-scripts[] = js/foundation/foundation.topbar.js
-scripts[] = js/foundation/jquery.cookie.js
+scripts[] = js/jquery.min.js
+scripts[] = js/foundation.js
 scripts[] = js/theme.js
 
 regions[navigation]     = 'Top bar Left'

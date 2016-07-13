@@ -136,15 +136,27 @@ function gwt_drupal_helper_block_view($delta = ''){
       break;
     case 'gwt_drupal_helper_pst':
       // $pst_content = '<iframe src="http://oras.pagasa.dost.gov.ph/time_display/time/" frameborder="0" width="100%" allowtransparency="true" scrolling="no"></iframe>';
-      $pst_content = '<div id="gwt-pst"></div>
-      <script type="text/javascript">
-      (function(d, eId) {
-        var js, gjs = d.getElementById(eId);
-        js = d.createElement(\'script\'); js.id = \'gwt-pst-jsdk\';
-        js.src = "//gwhs.i.gov.ph/pst/gwtpst.js?"+new Date().getTime();
-        gjs.parentNode.insertBefore(js, gjs);
-      }(document, \'gwt-pst\'));
-      </script>';
+      $pst_content = '<div id="pst-container">
+  <div>Philippine Standard Time:</div>
+  <div id="pst-time"></div>
+  <div id="pst-date"></div>
+  <div><a href="https://gwhs.i.gov.ph/pst/" id="pst-source" target="_blank">PST Source</a></div>
+</div>
+
+<script type="text/javascript">
+(function(d, eId) {
+  var js, gjs = d.getElementById(eId);
+  js = d.createElement("script"); js.id = "gwt-pst-jsdk";
+  js.src = "//gwhs.i.gov.ph/pst/gwtpst.js?"+new Date().getTime();
+  gjs.parentNode.insertBefore(js, gjs);
+}(document, "pst-container"));
+
+var gwtpstReady = function(){
+  new gwtpstTime("pst-time", {
+    format: "dddd, mmmm dd, yyyy h:mm:ss TT",
+  });
+}
+</script>';
       $block['subject'] = t('Philippine Standard Time');
       $block['content'] = $pst_content;
       break;
@@ -163,7 +175,7 @@ function _gwt_drupal_helper_get_gwt_slides(){
   // TODO: optimize the query, if needed.
   $query = new EntityFieldQuery();
   $query->entityCondition('entity_type', 'node')
-    ->propertyCondition('status', 1)
+    ->propertyCondition('status', 1) // is enabled
     ->propertyCondition('type', $type)
     ->fieldOrderBy('field_gwt_weight', 'value', 'ASC')
     ;
@@ -177,7 +189,40 @@ function _gwt_drupal_helper_get_gwt_slides(){
   // $nodes = node_load_multiple(array(), array('type' => $type)); 
 
   $output = '';
-  $output .= '<ul class="banner-rsslides">';
+  /*
+<div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit>
+  <ul class="orbit-container">
+    <button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>
+    <button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>
+    <li class="is-active orbit-slide">
+      <img class="orbit-image" src="assets/img/orbit/01.jpg" alt="Space">
+      <figcaption class="orbit-caption">Space, the final frontier.</figcaption>
+    </li>
+    <li class="orbit-slide">
+      <img class="orbit-image" src="assets/img/orbit/02.jpg" alt="Space">
+      <figcaption class="orbit-caption">Lets Rocket!</figcaption>
+    </li>
+    <li class="orbit-slide">
+      <img class="orbit-image" src="assets/img/orbit/03.jpg" alt="Space">
+      <figcaption class="orbit-caption">Encapsulating</figcaption>
+    </li>
+    <li class="orbit-slide">
+      <img class="orbit-image" src="assets/img/orbit/04.jpg" alt="Space">
+      <figcaption class="orbit-caption">Outta This World</figcaption>
+    </li>
+  </ul>
+  <nav class="orbit-bullets">
+    <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
+    <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
+    <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
+    <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
+  </nav>
+</div>
+  */
+  $output .= '<div class="orbit" role="region" aria-label="Featured Slider" data-orbit>';
+  $output .= '<button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>';
+  $output .= '<button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>';
+  $output .= '<ul class="orbit-container">';
   foreach($nodes as $node){
     // $output .= '<pre>'.print_r($node, 1).'</pre>';
     //return $output;
@@ -188,7 +233,7 @@ function _gwt_drupal_helper_get_gwt_slides(){
       'path' => $slides,
     ));
     */
-    $output .= '<li>';
+    $output .= '<li class="orbit-slide">';
 
     // add link to the image and the caption.
 
@@ -196,16 +241,18 @@ function _gwt_drupal_helper_get_gwt_slides(){
     // TODO: how to add image style here
     $field_gwt_slide_image = field_get_items('node', $node, 'field_gwt_slide_image');
     $field_gwt_slide_image_output = field_view_value('node', $node, 'field_gwt_slide_image', $field_gwt_slide_image[0]);
-    
+    $field_gwt_slide_image_output['#image_style'] = 'gwt_slides_banner_normal';
+    // $output .= '<pre>'.print_r($field_gwt_slide_image_output, 1).'</pre>';
+
     $render_gwt_slide = render($field_gwt_slide_image_output);
 
     $field_gwt_image_caption = field_get_items('node', $node, 'field_gwt_image_caption');
     $field_gwt_image_caption_output = field_view_value('node', $node, 'field_gwt_image_caption', $field_gwt_image_caption[0]);
     $render_gwt_image_caption = render($field_gwt_image_caption_output);
 
-    $gwt_image_caption_output = '<div class="rs-caption">';
+    $gwt_image_caption_output = '<figcaption class="orbit-caption">';
     $gwt_image_caption_output .= $render_gwt_image_caption;
-    $gwt_image_caption_output .= '</div>';
+    $gwt_image_caption_output .= '</figcaption>';
 
     $field_gwt_slide_link = field_get_items('node', $node, 'field_gwt_image_link');
     $field_gwt_slide_link_output = field_view_value('node', $node, 'field_gwt_image_link', $field_gwt_slide_link[0]);
@@ -249,6 +296,7 @@ function _gwt_drupal_helper_get_gwt_slides(){
   }
 
   $output .= '</ul>';
+  $output .= '</div>';
   return $output;
 }
 

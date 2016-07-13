@@ -7,28 +7,8 @@
  * @see https://drupal.org/node/1728148
  */
 ?>
-<?php /*
-// temporarily disable as per version 2.0.
-<div id="accessibility-links">
-<?php print $accesibility; ?>
-</div>
-<div id="accessibility-shortcuts">
-<?php print $accesibility_shortcut; ?>
-</div>
-<?php if($accessibility_widget): ?>
-<div id="accessibility-widget">
-  <ul>
-    <li><a href="#" id="accessibility-mode" title="Accessibility Menu"><span class="offscreen">Toggle Accessibility Menu</span></a></li>
-    <li><a href="#" id="accessibility-statement" title="Accessibility Statement" class="toggle-statement" title="Toggle Accessibility Statement"><span class="offscreen">Toggle Accessibility Statement</span></a></li>
-    <li><a href="#" id="accessibility-contrast" class="toggle-contrast" title="Toggle High Contrast"><span class="offscreen">Toggle High Contrast</span></a></li>
-    <li><a href="#" id="accessibility-grayscale" class="toggle-grayscale" title="Toggle Grey Scale"><span class="offscreen">Toggle Grayscale</span></a></li>
-    <!-- <li><a href="#" id="accessibility-fontsize" class="toggle-fontsize" title="Toggle Font Size"><span class="offscreen">Toggle Font size</span></a></li> -->
-  </ul>
-</div>
-<?php endif; ?>
-
-<div id="accessibility-statement-content" title="Accessibility Statement" role="dialog">
-  <textarea class="statement-textarea" readonly>
+<div class="reveal large" id="a11y-modal" data-reveal>
+  <textarea class="statement-textarea" readonly rows="20">
 Shortcut Keys Combination Activation
 
 Combination keys used for each browser.
@@ -49,97 +29,194 @@ Site Map (Combination + M): Shortcut for site map (footer agency) section of the
 Search (Combination + S): Shortcut for search page.
 Press esc, or click the close the button to close this dialog box.
   </textarea>
-  <input type="button" value="close" class="toggle-statement"/>
+  <button class="close-button" data-close aria-label="Close modal" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </div>
-*/
-?>
-<div id="navigation">
-  <div class="row">
-    <?php
-    /**
-     * mandatory region
-     */
-    ?>
-    <div class="small-12 large-12 columns toplayer">
-      <nav id="top-bar" role="navigation" class="top-bar nomargin" tabindex="-1" data-topbar>
-        <ul id="main-static-link" class="links inline clearfix">
-          <li id="static-link-gov"><h3><a href="http://www.gov.ph">GOVPH</a></h3></li>
-          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-        </ul>
-        <section class="top-bar-section">
-          <?php if ($page['top_bar_search']): ?>
-           <?php print render($page['top_bar_search']); ?>
-          <?php endif; ?>
-          <?php if ($main_menu): ?>
+<div class="off-canvas-wrapper">
+  <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+    <div class="off-canvas position-right hide-for-large" id="offCanvas" data-off-canvas data-position="right">
+      <div id="a11y-container-mobile" class="float-right" data-dropdown>
+        <button class="button float-right a11y-dropdown-button" type="button" data-toggle="a11y-dropdown-mobile">
+          <span class="show-for-sr">Accessibility Button</span>
+          <i class="fa fa-universal-access"></i>
+        </button>
+        <div class="dropdown-pane bottom" id="a11y-dropdown-mobile" data-dropdown data-hover-pane="true">
+          <ul class="menu vertical" id="a11y-buttons-mobile">
+            <li><a class="button" type="button" data-toggle="a11y-modal">
+              <span class="show-for-sr">Accessibility Statement</span>
+              <i class="fa fa-file-text-o fa-2x"></i>
+            </a></li>
+            <li><a class="button a11y-skip-to-content" href="#main">
+              <span class="show-for-sr">Skip to content</span>
+              <i class="fa fa-chevron-down fa-2x"></i>
+            </a></li>
+            <li><a class="button a11y-toggle-contrast">
+              <span class="show-for-sr">High Contrast</span>
+              <i class="fa fa-low-vision fa-2x"></i>
+            </a></li>
+            <li><a class="a11y-skip-to-content" href="#main">
+              <span class="show-for-sr">Skip to content</span>
+              <i class="fa fa-angle-down fa-2x"></i>
+            </a></li>
+            <li><a class="a11y-skip-to-footer" href="#footer">
+              <span class="show-for-sr">Skip to footer</span>
+              <i class="fa fa-angle-double-down fa-2x"></i>
+            </a></li>
+            <!-- <li><a class="button a11y-toggle-grayscale">
+              <span class="show-for-sr">Grayscale</span>
+              <i class="fa fa-adjust fa-2x"></i>
+            </a></li> -->
+          </ul>
+        </div>
+      </div>
+      <?php if ($page['top_bar_search']): ?>
+        <?php $topbar_search = render($page['top_bar_search']); ?>
+        <?php print $topbar_search; ?>
+      <?php endif; ?>
+        <?php if ($main_menu_mobile): ?>
+          <h6 class="menu-title">Main Menu</h6>
+          <?php
+          print theme('links__system_main_menu_mobile', array(
+            'links' => $main_menu_mobile,
+            'attributes' => array(
+              'id' => 'main-nav-mobile',
+              'class' => array('menu'),
+            ),
+            'parent_attr' => array(
+              'class' => array('vertical menu'),
+              'data-drilldown' => '',
+              'data-parent-link' => 'true'
+            ),
+          )); ?>
+        <?php endif; ?>
+        <?php if ($menu_auxiliary_mobile): ?>
+          <h6 class="menu-title">Auxiliary Menu</h6>
             <?php
-            print theme('links__system_main_menu', array(
-              'links' => $main_menu,
+            print theme('links__menu_auxiliary_mobile', array(
+              'links' => $menu_auxiliary_mobile,
               'attributes' => array(
-                // 'id' => 'main-nav',
-                'class' => array('links', 'clearfix'),
+                'id' => 'auxiliary-nav-mobile',
+                'class' => array('menu'),
               ),
-              'heading' => array(
-                'text' => t('Main menu'),
-                'level' => 'h2',
-                'class' => array('element-invisible'),
+              'parent_attr' => array(
+                'class' => array('vertical menu'),
+                'data-drilldown' => '',
+                'data-parent-link' => 'true'
               ),
             )); ?>
-          <?php endif; ?>
-          <?php if ($page['top_bar_right']): ?>
-           <?php print render($page['top_bar_right']); ?>
-          <?php endif; ?>
-        </section>
-      </nav>
+        <?php endif; ?>
+    </div>
+
+    <div class="off-canvas-content" data-off-canvas-content>
+      <div class="title-bar hide-for-large" id="mobile-top-bar">
+        <div class="title-bar-left">
+          <a href="http://www.gov.ph" class="title-bar-title" target="_blank">GOVPH</a>
+        </div>
+        <div class="title-bar-right">
+          <span class="title-bar-title">Menu</span>
+          <button class="menu-icon" type="button" data-open="offCanvas"><span class="button-inner"></span></button>
+        </div>
+      </div>
+
+<nav id="top-bar" class="show-for-large top-bar nomargin" role="navigation"  tabindex="-1" data-topbar>
+  <div data-sticky-container>
+    <div class="sticky" data-sticky data-margin-top="0">
+      <div class="row">
+      <div class="columns large-12"></div>
+      <?php
+      /**
+       * mandatory region
+       */
+      ?>
+      <div id="a11y-container" class="top-bar-right">
+        <button class="button float-right a11y-dropdown-button" type="button" data-toggle="a11y-dropdown">
+          <span class="show-for-sr">Accessibility Button</span>
+          <i class="fa fa-universal-access fa-2x"></i>
+        </button>
+        <div class="dropdown-pane" id="a11y-dropdown" data-dropdown>
+          <ul class="menu vertical" id="a11y-buttons">
+            <li><a data-toggle="a11y-modal">
+              <span class="show-for-sr">Accessibility Statement</span>
+              <i class="fa fa-file-text-o fa-2x"></i>
+            </a></li>
+            <li><a class="a11y-toggle-contrast">
+              <span class="show-for-sr">High Contrast</span>
+              <i class="fa fa-low-vision fa-2x"></i>
+            </a></li>
+            <!-- <li><a class="a11y-toggle-grayscale">
+              <span class="show-for-sr">Grayscale</span>
+              <i class="fa fa-adjust fa-2x"></i>
+            </a></li> -->
+            <li><a class="a11y-skip-to-content" href="#main">
+              <span class="show-for-sr">Skip to content</span>
+              <i class="fa fa-angle-down fa-2x"></i>
+            </a></li>
+            <li><a class="a11y-skip-to-footer" href="#footer">
+              <span class="show-for-sr">Skip to footer</span>
+              <i class="fa fa-angle-double-down fa-2x"></i>
+            </a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <?php if ($page['top_bar_search']): ?>
+          <?php print $topbar_search; ?>
+        <?php endif; ?>
+      </div>
+      <?php if ($main_menu): ?>
+        <ul class="menu gov-ph" class="top-bar-left"><li><a class="title-bar-title" href="http://www.gov.ph" target="_blank">GOVPH</a></li></ul>
+        <?php
+        print theme('links__system_main_menu', array(
+          'links' => $main_menu,
+          'attributes' => array(
+            'id' => 'main-nav',
+            'class' => array('dropdown menu top-bar-left'),
+            'data-dropdown-menu' => '',
+          ),
+        )); ?>
+      <?php endif; ?>
+      <?php if ($page['top_bar_right'] || $menu_top_right): ?>
+        <?php if ($menu_top_right): ?>
+          <?php
+          print theme('links__menu_top_right', array(
+            'links' => $menu_top_right,
+            'attributes' => array(
+              'id' => array('menu-top-right'),
+              'class' => array('dropdown menu top-bar-right'),
+              'data-dropdown-menu' => '',
+            ),
+          )); ?>
+        <?php endif; ?>
+        <?php if($page['top_bar_right']): ?>
+          <?php print render($page['top_bar_right']); ?>
+        <?php endif; ?>
+      <?php endif; ?>
+      </div>
     </div>
   </div>
-</div>
-<div id="nav-megamenu">
-<?php if(isset($gwt_mega_menu)): ?>
-<?php echo $gwt_mega_menu; ?>
-<?php endif; ?>
-</div>
-<div id="page">
+</nav>
 
+<div id="page">
   <?php if ($logo || $site_name || $site_slogan): ?>
   <header id="header" <?php print $gwt_drupal_masthead_styles; ?>>
     <section class="header-section row">
-      <div class="columns<?php print $name_slogan_class ?>">
-        <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo-link">
-          <?php if ($logo): ?>
-            <div id="logo-container"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></div>
-          <?php endif; ?>
-          <?php if($site_name): ?>
-            <div id="site-name-container">
-            <h4 id="republic-text">Republic of the Philippines</h4>
-            <h1 class="header__site-name" id="site-name"><span><?php print $site_name; ?></span></h1>
-            <?php if ($site_slogan): ?>
-              <h2 class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></h2>
-            <?php endif; ?>
-            </div>
-          <?php endif; ?>
-        </a>
-        <?php /*if ($logo): ?>
-          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" class="header__logo" id="logo"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" class="header__logo-image" /></a>
+      <a class="columns<?php print $name_slogan_class; ?>" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo-link">
+        <?php if ($logo): ?>
+          <div id="logo-container"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" /></div>
         <?php endif; ?>
-
-        <?php if ($site_name || $site_slogan): ?>
-          <div class="header__name-and-slogan" id="name-and-slogan">
-            <?php if ($site_name): ?>
-              <div class=""></div>
-              <h1 class="header__site-name" id="site-name">
-                <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" class="header__site-link" rel="home"><span><?php print $site_name; ?></span></a>
-              </h1>
-              <?php if ($site_slogan): ?>
-                <div class="header__site-slogan" id="site-slogan"><?php print $site_slogan; ?></div>
-              <?php endif; ?>
-            <?php endif; ?>
-
+        <?php if($site_name): ?>
+          <div id="site-name-container">
+          <h4 id="republic-text">Republic of the Philippines</h4>
+          <h1 id="site-name"><span><?php print $site_name; ?></span></h1>
+          <?php if ($site_slogan): ?>
+            <h2 id="site-slogan"><?php print $site_slogan; ?></h2>
+          <?php endif; ?>
           </div>
-        <?php endif;*/ ?>
-
+        <?php endif; ?>
+      </a>
         <?php print render($page['header']); ?>
-      </div>
-      <?php if(!$site_name): ?>
+      <?php //if(!$site_name): ?>
         <?php if($ear_content = render($page['ear_content'])): ?>
           <div class="columns<?php print $ear_content_class ?>">
             <div class="ear-content">
@@ -154,7 +231,7 @@ Press esc, or click the close the button to close this dialog box.
             </div>
           </div>
         <?php endif ?>
-      <?php endif ?>
+      <?php //endif ?>
     </section>
   </header>
   <?php endif ?>
@@ -163,9 +240,9 @@ Press esc, or click the close the button to close this dialog box.
   if($page['banner'] ||
     $page['banner_2'] ||
     $page['banner_3']):
-?>
-  <div id="banner" <?php print $gwt_drupal_banner_styles; ?> class="show-for-medium-up">
-    <div class="row collapse<?php print $banner_container_class ?>">
+  ?>
+  <div id="banner" <?php print $gwt_drupal_banner_styles; ?> class="show-for-large">
+    <div class="row">
       <?php if($banner = render($page['banner'])): ?>
       <div class="columns<?php print $banner_class ?>">
         <?php print $banner; ?>
@@ -189,43 +266,40 @@ Press esc, or click the close the button to close this dialog box.
   </div>
   <?php endif; ?>
 
-  <div id="auxiliary">
-    <div class="row">
-      <div class="large-12 columns">
-          <?php if ($menu_auxiliary_menu): ?>
-        <div class="aux-nav-btn-container hide-for-medium-up" >
-          <button id="aux-nav-btn" data-dropdown="aux-nav">Auxiliary Menu</button>
-        </div>
-          <?php endif; ?>
-        <div id="aux-nav" class="show-for-medium-up" data-dropdown-content>
-          <section>
-          <?php if ($menu_auxiliary_menu): ?>
-            <?php
-            print theme('links__menu_auxiliary_menu', array(
-              'links' => $menu_auxiliary_menu,
-              'attributes' => array(
-                'class' => array('links', 'clearfix'),
-                // 'id' => array('aux-nav'),
-                // 'data-dropdown-content' => '',
-              ),
-              'heading' => array(
-                'text' => t('Auxiliary Menu'),
-                'level' => 'h2',
-                'class' => array('element-invisible'),
-              ),
-            )); ?>
-          <?php endif; ?>
-          <?php if (isset($page['auxiliary_left'])): ?>
-          <?php print render($page['auxiliary_left']); ?>
-          <?php endif; ?>
-          <?php if (isset($page['auxiliary_right'])): ?>
-          <?php print render($page['auxiliary_right']); ?>
-          <?php endif; ?>
-          </section>
-        </div>
-      </div>
-    </div>
-  </div>
+<div id="auxiliary-menu" class="show-for-large">
+<div class="row">
+  <?php if ($menu_auxiliary_menu || $menu_auxiliary_right_menu): ?>
+    <?php if ($menu_auxiliary_menu): ?>
+      <?php
+      print theme('links__menu_auxiliary_menu', array(
+        'links' => $menu_auxiliary_menu,
+        'attributes' => array(
+          'id' => array('menu-auxiliary-menu'),
+          'class' => array('dropdown menu top-bar-left'),
+          'data-dropdown-menu' => '',
+        ),
+      )); ?>
+    <?php endif; ?>
+    <?php if ($menu_auxiliary_right_menu): ?>
+      <?php
+      print theme('links__menu_auxiliary_right_menu', array(
+        'links' => $menu_auxiliary_right_menu,
+        'attributes' => array(
+          'id' => array('menu-auxiliary-right-menu'),
+          'class' => array('dropdown menu top-bar-right'),
+          'data-dropdown-menu' => '',
+        ),
+      )); ?>
+    <?php endif; ?>
+    <?php if (isset($page['auxiliary_left'])): ?>
+    <?php print render($page['auxiliary_left']); ?>
+    <?php endif; ?>
+    <?php if (isset($page['auxiliary_right'])): ?>
+    <?php print render($page['auxiliary_right']); ?>
+    <?php endif; ?>
+  <?php endif; ?>
+</div>
+</div>
   <?php
   if($breadcrumb || $page['breadcrumbs']):
     ?>
@@ -288,7 +362,7 @@ Press esc, or click the close the button to close this dialog box.
 
       <div id="content" class="columns column<?php print $content_class ?>" role="main">
         <?php print $messages; ?>
-        <div class="content-style">
+        <div id="content-inner" class="content-style">
         <?php print render($page['highlighted']); ?>
         <a id="main-content"></a>
         <?php print render($tabs); ?>
@@ -393,7 +467,14 @@ Press esc, or click the close the button to close this dialog box.
       gjs.parentNode.insertBefore(js, gjs);
   }(document, 'script', 'gwt-footer-jsdk'));
   </script>
-  <div><a href="#page" id="back-to-top">Back to Top</a></div>
+  <div><a href="#page" id="back-to-top">
+      <span class="show-for-sr">Back to Top</span>
+      <i class="fa fa-arrow-circle-up fa-2x"></i>
+  </a></div>
 </div>
-<div id="darklight"></div>
+
+    </div><!-- /off-canvas  -->
+  </div>
+</div>
+
 <?php print render($page['bottom']); ?>

@@ -11,10 +11,10 @@ function gwt_drupal_helper_install(){
 	// $gwt_drupal_helper_slides = 'public://gwt_drupal_helper_slides'; 
 	// file_prepare_directory($gwt_drupal_helper_slides, FILE_CREATE_DIRECTORY);
 
+  _gwt_drupal_helper_install_content_slides();
   _gwt_drupal_helper_install_style_slides();
 
   // TODO: check if the content type gwt_slides is already installed
-  _gwt_drupal_helper_install_content_slides();
 }
 
 /**
@@ -28,10 +28,10 @@ function _gwt_drupal_helper_install_style_slides(){
   $effect = array(
     'name' => 'image_scale_and_crop',
     'data' => array(
-      'width' => 1160,
-      'height' => 400,
+      'width' => 1280,
+      'height' => 500,
     ),
-    'ieid' => 1,
+    // 'ieid' => 1,
     'isid' => $banner_normal['isid'],
   );
   image_effect_save($effect);
@@ -46,7 +46,7 @@ function _gwt_drupal_helper_install_style_slides(){
       'width' => 775,
       'height' => 270,
     ),
-    'ieid' => 1,
+    // 'ieid' => 1,
     'isid' => $banner_normal['isid'],
   );
   image_effect_save($effect);
