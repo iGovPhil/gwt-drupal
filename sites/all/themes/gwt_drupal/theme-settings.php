@@ -1,10 +1,10 @@
 <?php
 // add template js and css for the inputs
+drupal_add_js(drupal_get_path('theme', 'gwt_drupal') .'/js/jquery.min.js');
+drupal_add_js(drupal_get_path('theme', 'gwt_drupal') .'/js/foundation.js');
+drupal_add_css(drupal_get_path('theme', 'gwt_drupal') .'/css/foundation.min.css');
 drupal_add_js(drupal_get_path('theme', 'gwt_drupal') .'/js/spectrum/spectrum.js');
 drupal_add_css(drupal_get_path('theme', 'gwt_drupal') .'/js/spectrum/spectrum.css');
-drupal_add_js(drupal_get_path('theme', 'gwt_drupal') .'/dist/foundation/js/vendor/jquery.min.js');
-drupal_add_js(drupal_get_path('theme', 'gwt_drupal') .'/dist/foundation/js/vendor/foundation.js');
-drupal_add_css(drupal_get_path('theme', 'gwt_drupal') .'/dist/foundation/css/foundation.min.css');
 
 // TODO: add foundation script and css here
 /*
