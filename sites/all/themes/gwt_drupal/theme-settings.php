@@ -261,6 +261,18 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#field_prefix' => '<div class="colorpicker-container">',
     '#field_suffix' => '</div>',
   );
+  $form['gwt_drupal_content']['gwt_drupal_content_heading_transform'] = array(
+    '#type' => 'select',
+    '#title' => t('Content Heading Transform'),
+    '#default_value' => theme_get_setting('gwt_drupal_content_heading_transform'),
+    '#options' => array(
+      'normal' => t('Normal (The heading text will depends on how the title encoded.)'),
+      'uppercase' => t('UPPERCASE'),
+      'lowercase' => t('lowercase'),
+      'Capitalize' => t('Capitalize'),
+    ),
+    '#description' => t('Select the rendering of the heading.'),
+  );
   $form['gwt_drupal_content']['gwt_drupal_content_heading_font'] = array(
     '#type' => 'select',
     '#title' => t('Content Heading Size'),
@@ -282,16 +294,6 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#field_prefix' => '<div class="colorpicker-container">',
     '#field_suffix' => '</div>',
   );
-  $form['gwt_drupal_content']['gwt_drupal_footer_bg_color'] = array(
-    '#type' => 'textfield', 
-    '#title' => t('Agency Footer Background Color:'), 
-    '#default_value' => theme_get_setting('gwt_drupal_footer_bg_color'),
-    '#size' => 10, 
-    '#maxlength' => 30, 
-    '#description' => t('Select the background color of the footer region. Select "X" to disable the color and use the default background color.'), 
-    '#field_prefix' => '<div class="colorpicker-container">',
-    '#field_suffix' => '</div>',
-  );
 
   $form['gwt_drupal_header']['gwt_drupal_logo_font'] = array(
     '#type' => 'radios',
@@ -301,6 +303,36 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
       GWT_DRUPAL_FONT_SERIF => 'Serif',
     ),
     '#default_value' => theme_get_setting('gwt_drupal_logo_font'),
+  );
+  $form['gwt_drupal_content']['gwt_drupal_panel_top'] = array(
+    '#type' => 'textfield', 
+    '#title' => t('Panel-top Background Color:'), 
+    '#default_value' => theme_get_setting('gwt_drupal_panel_top'),
+    '#size' => 10, 
+    '#maxlength' => 30, 
+    '#description' => t('Select the background color of the panel-top region. Select "X" to disable the color and use the default background color.'), 
+    '#field_prefix' => '<div class="colorpicker-container">',
+    '#field_suffix' => '</div>',
+  );
+  $form['gwt_drupal_content']['gwt_drupal_panel_bottom'] = array(
+    '#type' => 'textfield', 
+    '#title' => t('Panel-bottom Background Color:'), 
+    '#default_value' => theme_get_setting('gwt_drupal_panel_bottom'),
+    '#size' => 10, 
+    '#maxlength' => 30, 
+    '#description' => t('Select the background color of the panel-bottom region. Select "X" to disable the color and use the default background color.'), 
+    '#field_prefix' => '<div class="colorpicker-container">',
+    '#field_suffix' => '</div>',
+  );
+  $form['gwt_drupal_content']['gwt_drupal_footer_bg_color'] = array(
+    '#type' => 'textfield', 
+    '#title' => t('Agency Footer Background Color:'), 
+    '#default_value' => theme_get_setting('gwt_drupal_footer_bg_color'),
+    '#size' => 10, 
+    '#maxlength' => 30, 
+    '#description' => t('Select the background color of the footer region. Select "X" to disable the color and use the default background color.'), 
+    '#field_prefix' => '<div class="colorpicker-container">',
+    '#field_suffix' => '</div>',
   );
 
   $form['gwt_drupal_header']['form_script'] = array(
@@ -339,6 +371,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     });
     </script>'
   );
+
 
   $form['foundation_tabs_button'] = array(
     '#markup' => '<ul class="tabs" data-tabs id="gwt-settings-tabs">

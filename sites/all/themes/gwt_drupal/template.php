@@ -798,6 +798,18 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $style_settings .= '.theme_settings{';
   $style_settings .= 'background-color: '.theme_get_setting('gwt_drupal_footer_bg_color').' !important;';
   $style_settings .= '}';
+
+  $style_settings .= '.node__title{';
+  $style_settings .= 'text-transform: '.theme_get_setting('gwt_drupal_content_heading_transform').' !important;';
+  $style_settings .= '}';
+
+  $style_settings .= '#panel-top{';
+  $style_settings .= 'background-color: '.theme_get_setting('gwt_drupal_panel_top').' !important;';
+  $style_settings .= '}';
+
+  $style_settings .= '#panel-bottom{';
+  $style_settings .= 'background-color: '.theme_get_setting('gwt_drupal_panel_bottom').' !important;';
+  $style_settings .= '}';
   drupal_add_css($style_settings, 'inline');
 
   // TODO: add inline css

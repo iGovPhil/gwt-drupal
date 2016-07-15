@@ -194,6 +194,7 @@ a:visited{
 #top-bar .sticky{
   background: #f7f7f7;
   z-index: 11;
+  width: 100%;
 }
 .region-top-bar-search{
 }
@@ -413,9 +414,18 @@ a:visited{
  * banner
  */
 #banner{
+  padding: 15px 0;
 }
 #banner .block{
   margin-bottom: 0;
+}
+.orbit-bullets{
+  margin: 0;
+  padding-top: 5px;
+}
+.orbit-bullets button{
+  width: 1vw;
+  height: 1vw;
 }
 
 /** 
@@ -435,6 +445,14 @@ a:visited{
   margin-bottom: 0.9375rem;
   border-bottom: 1px solid #ccc;
 }
+
+/**
+ * panel top
+ */
+#panel-top{
+  padding: 15px 0;
+}
+
 /**
  * sidebars
  */
@@ -446,6 +464,12 @@ a:visited{
   padding: 0.9375rem;
 }
 
+/**
+ * panel bottom
+ */
+#panel-bottom{
+  padding: 15px 0;
+}
 
 /**
  * footer
