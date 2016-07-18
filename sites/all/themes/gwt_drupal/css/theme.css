@@ -196,6 +196,15 @@ a:visited{
   z-index: 11;
   width: 100%;
 }
+.admin-menu #top-bar .sticky.is-stuck{
+  top: 28px !important;
+}
+.toolbar #top-bar .sticky.is-stuck{
+  top: 30px !important;
+}
+.toolbar.toolbar-drawer #top-bar .sticky.is-stuck{
+  top: 64px !important;
+}
 .region-top-bar-search{
 }
 .region-top-bar-search #block-search-form{
@@ -291,6 +300,9 @@ a:visited{
   /*overflow: auto;
   height: 100vh;
   background: #f7f7f7;*/
+}
+#offCanvas .is-drilldown{
+  max-width: 250px !important;
 }
 .off-canvas-wrapper{
   background: #f7f7f7;
