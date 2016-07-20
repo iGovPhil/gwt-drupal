@@ -88,7 +88,7 @@ function gwt_drupal_helper_block_save($delta, $edit=array()){
       variable_set('gwt_drupal_helper_alt_text_attr', $edit['alt_text']);
       variable_set('gwt_drupal_helper_title_text_attr', $edit['title_text']);
       break;
-	}
+  }
 }
 
 /**
@@ -139,22 +139,19 @@ function gwt_drupal_helper_block_view($delta = ''){
       $pst_content = '<div id="pst-container">
   <div>Philippine Standard Time:</div>
   <div id="pst-time"></div>
-  <div id="pst-date"></div>
   <div><a href="https://gwhs.i.gov.ph/pst/" id="pst-source" target="_blank">PST Source</a></div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript" id="gwt-pst">
 (function(d, eId) {
   var js, gjs = d.getElementById(eId);
   js = d.createElement("script"); js.id = "gwt-pst-jsdk";
   js.src = "//gwhs.i.gov.ph/pst/gwtpst.js?"+new Date().getTime();
   gjs.parentNode.insertBefore(js, gjs);
-}(document, "pst-container"));
+}(document, "gwt-pst"));
 
 var gwtpstReady = function(){
-  new gwtpstTime("pst-time", {
-    format: "dddd, mmmm dd, yyyy h:mm:ss TT",
-  });
+  new gwtpstTime("pst-time");
 }
 </script>';
       $block['subject'] = t('Philippine Standard Time');
@@ -223,6 +220,9 @@ function _gwt_drupal_helper_get_gwt_slides(){
   $output .= '<button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>';
   $output .= '<button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>';
   $output .= '<ul class="orbit-container">';
+
+  $orbit_bullets = '<nav class="orbit-bullets">';
+  $slider_counter = 0;
   foreach($nodes as $node){
     // $output .= '<pre>'.print_r($node, 1).'</pre>';
     //return $output;
@@ -292,10 +292,13 @@ function _gwt_drupal_helper_get_gwt_slides(){
     return  render($image_field);
     */
     $output .= '</li>';
+    $orbit_bullets .= '<button class="" data-slide="'.$slider_counter.'"></button>';
+    $slider_counter++;
     //return $image_field;
   }
 
   $output .= '</ul>';
+  $output .= $orbit_bullets;
   $output .= '</div>';
   return $output;
 }
