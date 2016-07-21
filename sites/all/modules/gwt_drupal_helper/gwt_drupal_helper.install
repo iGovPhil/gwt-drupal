@@ -8,8 +8,8 @@
  * implementation of hook_install
  */
 function gwt_drupal_helper_install(){
-	// $gwt_drupal_helper_slides = 'public://gwt_drupal_helper_slides'; 
-	// file_prepare_directory($gwt_drupal_helper_slides, FILE_CREATE_DIRECTORY);
+  // $gwt_drupal_helper_slides = 'public://gwt_drupal_helper_slides'; 
+  // file_prepare_directory($gwt_drupal_helper_slides, FILE_CREATE_DIRECTORY);
 
   _gwt_drupal_helper_install_content_slides();
   _gwt_drupal_helper_install_style_slides();
@@ -113,7 +113,7 @@ function _gwt_drupal_helper_install_content_slides(){
       'bundle' => $entity_name,
       'label' => st('Caption'),
       'description' => st('Caption of the image.'),
-      'required' => TRUE,
+      'required' => FALSE,
     );
     field_create_instance($instance);
   }
