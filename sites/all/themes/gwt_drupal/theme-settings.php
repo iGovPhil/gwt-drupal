@@ -58,29 +58,10 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
       ),
     ),
   );
-  $form['breadcrumb']['breadcrumb_options']['gwt_drupal_breadcrumb_separator'] = array(
-    '#type'          => 'textfield',
-    '#title'         => t('Breadcrumb separator'),
-    '#description'   => t('Text only. Don’t forget to include spaces.'),
-    '#default_value' => theme_get_setting('gwt_drupal_breadcrumb_separator'),
-    '#size'          => 5,
-    '#maxlength'     => 10,
-  );
   $form['breadcrumb']['breadcrumb_options']['gwt_drupal_breadcrumb_home'] = array(
     '#type'          => 'checkbox',
     '#title'         => t('Show home page link in breadcrumb'),
     '#default_value' => theme_get_setting('gwt_drupal_breadcrumb_home'),
-  );
-  $form['breadcrumb']['breadcrumb_options']['gwt_drupal_breadcrumb_trailing'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Append a separator to the end of the breadcrumb'),
-    '#default_value' => theme_get_setting('gwt_drupal_breadcrumb_trailing'),
-    '#description'   => t('Useful when the breadcrumb is placed just before the title.'),
-    '#states' => array(
-      'disabled' => array(
-        ':input[name="gwt_drupal_breadcrumb_title"]' => array('checked' => TRUE),
-      ),
-    ),
   );
   $form['breadcrumb']['breadcrumb_options']['gwt_drupal_breadcrumb_title'] = array(
     '#type'          => 'checkbox',
@@ -88,22 +69,6 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#default_value' => theme_get_setting('gwt_drupal_breadcrumb_title'),
     '#description'   => t('Useful when the breadcrumb is not placed just before the title.'),
   );
-
-  // Create the form using Forms API: http://api.drupal.org/api/7
-
-  /* -- Delete this line if you want to use this setting
-  $form['gwt_drupal_example'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('gwt_drupal sample setting'),
-    '#default_value' => theme_get_setting('gwt_drupal_example'),
-    '#description'   => t("This option doesn't do anything; it's just an example."),
-  );
-  // */
-
-  // Remove some of the base theme's settings.
-  /* -- Delete this line if you want to turn off this setting.
-  unset($form['themedev']['gwt_drupal_wireframes']); // We don't need to toggle wireframes on this site.
-  // */
 
   // TODO: on enable of site name or by default, display the field
   // theme_get_setting('site_name')
@@ -121,6 +86,13 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#title' => 'Site Name',
     '#default_value' => theme_get_setting('site_name'),
     '#prefix' => '<div style="'.$display_site_name.'" id="site-name-container">',
+    '#suffix' => '</div>',
+  );
+  $form['logo']['site_name_alt_text'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Logo alt text',
+    '#default_value' => theme_get_setting('site_name_alt_text') ? theme_get_setting('site_name_alt_text') : theme_get_setting('site_name'),
+    '#prefix' => '<div style="'.$display_site_slogan.'" id="site-republic-container">',
     '#suffix' => '</div>',
   );
   // TODO: on enable of site name or by default, display the field
@@ -173,7 +145,6 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#type' => 'select',
     '#title' => t('Masthead background image repeat'),
     '#default_value' => theme_get_setting('gwt_drupal_masthead_bg_image_repeat'),
-    //'#element_validate' => array('_gwt_drupal_banner_background_image_validate'),
     '#description' => t('Background repeat option'),
     '#options' => array(
       0 => 'No Repeat',
@@ -185,7 +156,6 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#type' => 'select',
     '#title' => t('Masthead background image position'),
     '#default_value' => theme_get_setting('gwt_drupal_masthead_bg_image_position'),
-    //'#element_validate' => array('_gwt_drupal_banner_background_image_validate'),
     '#description' => t('Background repeat option'),
     '#options' => array(
       0 => 'Left',
@@ -203,6 +173,16 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#description' => t('Select the background color of the Masthead region. Select "X" to disable the color and use the default background color.'), 
     '#field_prefix' => '<div class="colorpicker-container">',
     '#field_suffix' => '</div>',
+  );
+  $form['gwt_drupal_header']['gwt_drupal_banner_option'] = array(
+    '#type' => 'select',
+    '#title' => t('Banner Option'),
+    '#default_value' => theme_get_setting('gwt_drupal_banner_option'),
+    '#description' => t(''),
+    '#options' => array(
+      0 => 'Normal',
+      1 => 'Full Width',
+    ),
   );
 
   $banner_font = theme_get_setting('gwt_drupal_banner_font_color');
@@ -232,7 +212,6 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#type' => 'select',
     '#title' => t('Banner background image repeat'),
     '#default_value' => theme_get_setting('gwt_drupal_banner_bg_image_repeat'),
-    //'#element_validate' => array('_gwt_drupal_banner_background_image_validate'),
     '#description' => t('Background repeat option'),
     '#options' => array(
       0 => 'No Repeat',
@@ -244,8 +223,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#type' => 'select',
     '#title' => t('Banner background image position'),
     '#default_value' => theme_get_setting('gwt_drupal_banner_bg_image_repeat'),
-    //'#element_validate' => array('_gwt_drupal_banner_background_image_validate'),
-    '#description' => t('Background repeat option'),
+    '#description' => t('Background image position option'),
     '#options' => array(
       0 => 'Left',
       1 => 'Center',

@@ -201,7 +201,7 @@ Press esc, or click the close the button to close this dialog box.
   <?php if ($logo || $site_name || $site_slogan): ?>
   <header id="header" <?php print $gwt_drupal_masthead_styles; ?>>
     <section class="header-section row">
-      <a class="columns<?php print $name_slogan_class; ?>" href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo-link">
+      <a class="columns<?php print $name_slogan_class; ?>" href="<?php print $front_page; ?>" title="<?php print $name_alt_text; ?>" alt="<?php print $name_alt_text; ?>" rel="<?php print $name_alt_text; ?>" id="logo-link">
         <?php if ($logo): ?>
           <div id="logo-container"><img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" /></div>
         <?php endif; ?>
@@ -237,30 +237,33 @@ Press esc, or click the close the button to close this dialog box.
   <?php endif ?>
 
   <?php
-  if($page['banner'] ||
-    $page['banner_2'] ||
-    $page['banner_3']):
+  // show banner area only if banner exists or feature banner_2 and 3 exists but banner is not in full width
+  if(($page['banner']) ||
+    (($page['banner_2'] || $page['banner_3']) && !$banner_is_full_width)
+    ):
   ?>
-  <div id="banner" <?php print $gwt_drupal_banner_styles; ?> class="show-for-large">
-    <div class="row">
+  <div id="banner" <?php print $gwt_drupal_banner_styles; ?>>
+    <div<?php print !$banner_is_full_width ? ' class="row"' : '' ?>>
       <?php if($banner = render($page['banner'])): ?>
-      <div class="columns<?php print $banner_class ?>">
+      <div class="<?php print $banner_class ?>">
         <?php print $banner; ?>
       </div>
       <?php endif ?>
-      <?php if($banner_2 = render($page['banner_2'])): ?>
-        <div class="columns<?php print $banner_2_class ?>">
+      <?php if(!$banner_is_full_width): ?>
+        <?php if($banner_2 = render($page['banner_2'])): ?>
+          <div class="<?php print $banner_2_class ?>">
+            <div class="banner-content">
+            <?php print $banner_2; ?>
+            </div>
+          </div>
+        <?php endif ?>
+        <?php if($banner_3 = render($page['banner_3'])): ?>
+        <div class="<?php print $banner_3_class ?>">
           <div class="banner-content">
-          <?php print $banner_2; ?>
+          <?php print $banner_3; ?>
           </div>
         </div>
-      <?php endif ?>
-      <?php if($banner_3 = render($page['banner_3'])): ?>
-      <div class="columns<?php print $banner_3_class ?>">
-        <div class="banner-content">
-        <?php print $banner_3; ?>
-        </div>
-      </div>
+        <?php endif ?>
       <?php endif ?>
     </div>
   </div>
