@@ -169,6 +169,30 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     ),
     '#description' => t('Background of the masthead, allowed extensions: jpg, jpeg, png, gif<br/><strong>Note:</strong> The masthead background is different from the Logo.'),
   );
+  $form['gwt_drupal_header']['gwt_drupal_masthead_bg_image_repeat'] = array(
+    '#type' => 'select',
+    '#title' => t('Masthead background image repeat'),
+    '#default_value' => theme_get_setting('gwt_drupal_masthead_bg_image_repeat'),
+    //'#element_validate' => array('_gwt_drupal_banner_background_image_validate'),
+    '#description' => t('Background repeat option'),
+    '#options' => array(
+      0 => 'No Repeat',
+      1 => 'Repeat',
+      2 => 'Full Canvas',
+    ),
+  );
+  $form['gwt_drupal_header']['gwt_drupal_masthead_bg_image_position'] = array(
+    '#type' => 'select',
+    '#title' => t('Masthead background image position'),
+    '#default_value' => theme_get_setting('gwt_drupal_masthead_bg_image_position'),
+    //'#element_validate' => array('_gwt_drupal_banner_background_image_validate'),
+    '#description' => t('Background repeat option'),
+    '#options' => array(
+      0 => 'Left',
+      1 => 'Center',
+      2 => 'Right',
+    ),
+  );
 
   $form['gwt_drupal_header']['gwt_drupal_banner_bg_color'] = array(
     '#type' => 'textfield', 
@@ -202,6 +226,30 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#upload_location' => 'public://theme/',
     '#upload_validators' => array(
       'file_validate_extensions' => array('gif png jpg jpeg'),
+    ),
+  );
+  $form['gwt_drupal_header']['gwt_drupal_banner_bg_image_repeat'] = array(
+    '#type' => 'select',
+    '#title' => t('Banner background image repeat'),
+    '#default_value' => theme_get_setting('gwt_drupal_banner_bg_image_repeat'),
+    //'#element_validate' => array('_gwt_drupal_banner_background_image_validate'),
+    '#description' => t('Background repeat option'),
+    '#options' => array(
+      0 => 'No Repeat',
+      1 => 'Repeat',
+      2 => 'Full Canvas',
+    ),
+  );
+  $form['gwt_drupal_header']['gwt_drupal_banner_bg_image_position'] = array(
+    '#type' => 'select',
+    '#title' => t('Banner background image position'),
+    '#default_value' => theme_get_setting('gwt_drupal_banner_bg_image_repeat'),
+    //'#element_validate' => array('_gwt_drupal_banner_background_image_validate'),
+    '#description' => t('Background repeat option'),
+    '#options' => array(
+      0 => 'Left',
+      1 => 'Center',
+      2 => 'Right',
     ),
   );
 

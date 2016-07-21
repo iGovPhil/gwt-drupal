@@ -749,6 +749,30 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     }
     $masthead_attr['class'][] = $class;
   }
+  $masthead_bg_image_repeat = array(
+    0 => 'background-repeat: no-repeat;',
+    1 => 'background-repeat: repeat;',
+    2 => 'background-attachment: fixed;
+background-position: center center;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;',
+  );
+  $gwt_drupal_masthead_bg_image_repeat = theme_get_setting('gwt_drupal_masthead_bg_image_repeat');
+  if(isset($masthead_bg_image_repeat[$gwt_drupal_masthead_bg_image_repeat])){
+    $masthead_attr['style'][] = $masthead_bg_image_repeat[$gwt_drupal_masthead_bg_image_repeat];
+  }
+  // ignore background position if the repeat is 2 == "Full Canvas"
+  $masthead_bg_image_position = array(
+    0 => 'background-position: left;',
+    1 => 'background-position: center;',
+    2 => 'background-position: right;',
+  );
+  $gwt_drupal_masthead_bg_image_position = theme_get_setting('gwt_drupal_masthead_bg_image_position');
+  if($gwt_drupal_masthead_bg_image_repeat != 2 && isset($masthead_bg_image_position[$gwt_drupal_masthead_bg_image_position])){
+    $masthead_attr['style'][] = $masthead_bg_image_position[$gwt_drupal_masthead_bg_image_position];
+  }
   $variables['gwt_drupal_masthead_styles'] = drupal_attributes($masthead_attr);
 
   $banner_attr = array(
@@ -768,6 +792,30 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
 
   if($gwt_drupal_banner_font = theme_get_setting('gwt_drupal_banner_font_color')){
     $banner_attr['style'][] = 'color: '.$gwt_drupal_banner_font.'; ';
+  }
+  $banner_bg_image_repeat = array(
+    0 => 'background-repeat: no-repeat;',
+    1 => 'background-repeat: repeat;',
+    2 => 'background-attachment: fixed;
+background-position: center center;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;',
+  );
+  $gwt_drupal_banner_bg_image_repeat = theme_get_setting('gwt_drupal_banner_bg_image_repeat');
+  if(isset($banner_bg_image_repeat[$gwt_drupal_banner_bg_image_repeat])){
+    $banner_attr['style'][] = $banner_bg_image_repeat[$gwt_drupal_banner_bg_image_repeat];
+  }
+  // ignore background position if the repeat is 2 == "Full Canvas"
+  $banner_bg_image_position = array(
+    0 => 'background-position: left;',
+    1 => 'background-position: center;',
+    2 => 'background-position: right;',
+  );
+  $gwt_drupal_banner_bg_image_position = theme_get_setting('gwt_drupal_banner_bg_image_position');
+  if($gwt_drupal_banner_bg_image_repeat != 2 && isset($banner_bg_image_position[$gwt_drupal_banner_bg_image_position])){
+    $banner_attr['style'][] = $banner_bg_image_position[$gwt_drupal_banner_bg_image_position];
   }
   $variables['gwt_drupal_banner_styles'] = drupal_attributes($banner_attr);
 

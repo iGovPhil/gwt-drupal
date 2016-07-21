@@ -68,13 +68,14 @@ a:visited{
 }
 #top-bar ul li{
 }
-#top-bar ul li a{
-
-}
 #top-bar ul li a,
 #top-bar ul li.active.is-dropdown-submenu-parent ul li a{
   color: #000;
   background: #f7f7f7;
+}
+#top-bar ul li a:hover,
+#top-bar ul li.active.is-dropdown-submenu-parent ul li a:hover{
+  background: #e4e4e4;
 }
 #top-bar ul li a{
   color: #000;
