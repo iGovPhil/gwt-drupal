@@ -178,7 +178,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#type' => 'select',
     '#title' => t('Banner Option'),
     '#default_value' => theme_get_setting('gwt_drupal_banner_option'),
-    '#description' => t(''),
+    '#description' => t('The width of the banner. Set the width to full-width to make it full screen.'),
     '#options' => array(
       0 => 'Normal',
       1 => 'Full Width',
