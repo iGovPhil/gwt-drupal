@@ -211,8 +211,6 @@ function _gwt_drupal_helper_get_gwt_slides(){
     // only display if there is a caption available
     if($field_gwt_image_caption_output['#markup']){
       $render_gwt_image_caption = render($field_gwt_image_caption_output);
-
-      drupal_set_message('<pre>'.print_r($field_gwt_image_caption_output, 1).'</pre>');
       $gwt_image_caption_output = '<figcaption class="orbit-caption">';
       $gwt_image_caption_output .= $render_gwt_image_caption;
       $gwt_image_caption_output .= '</figcaption>';
