@@ -186,82 +186,134 @@ function _gwt_drupal_helper_get_gwt_slides(){
   // $nodes = node_load_multiple(array(), array('type' => $type)); 
 
   $output = '';
-  $output .= '<div class="orbit" role="region" aria-label="Featured Slider" data-orbit>';
-  $output .= '<button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>';
-  $output .= '<button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>';
-  $output .= '<ul class="orbit-container">';
-
-  $orbit_bullets = '<nav class="orbit-bullets">';
   $slider_counter = 0;
-  foreach($nodes as $node){
-    $output .= '<li class="orbit-slide">';
-    // add link to the image and the caption.
+  if(count($nodes) > 1){
+    $output .= '<div class="orbit" role="region" aria-label="Featured Slider" data-orbit data-show-status="1" data-status-text="%currentSlide/%totalSlide">';
+    $output .= '<button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>';
+    $output .= '<button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>';
+    $output .= '<ul class="orbit-container">';
 
-    // output the slide_image
-    // TODO: how to add image style here
-    $field_gwt_slide_image = field_get_items('node', $node, 'field_gwt_slide_image');
-    $field_gwt_slide_image_output = field_view_value('node', $node, 'field_gwt_slide_image', $field_gwt_slide_image[0]);
-    $field_gwt_slide_image_output['#image_style'] = 'gwt_slides_banner_normal';
+    $orbit_bullets = '<nav class="orbit-bullets">';
+    foreach($nodes as $node){
+      $output .= '<li class="orbit-slide">';
+      // add link to the image and the caption.
 
-    $render_gwt_slide = render($field_gwt_slide_image_output);
+      // output the slide_image
+      // TODO: how to add image style here
+      $field_gwt_slide_image = field_get_items('node', $node, 'field_gwt_slide_image');
+      $field_gwt_slide_image_output = field_view_value('node', $node, 'field_gwt_slide_image', $field_gwt_slide_image[0]);
+      $field_gwt_slide_image_output['#image_style'] = 'gwt_slides_banner_normal';
 
-    $field_gwt_image_caption = field_get_items('node', $node, 'field_gwt_image_caption');
-    $field_gwt_image_caption_output = field_view_value('node', $node, 'field_gwt_image_caption', $field_gwt_image_caption[0]);
-    $gwt_image_caption_output = '';
-    // only display if there is a caption available
-    if($field_gwt_image_caption_output['#markup']){
-      $render_gwt_image_caption = render($field_gwt_image_caption_output);
-      $gwt_image_caption_output = '<figcaption class="orbit-caption">';
-      $gwt_image_caption_output .= $render_gwt_image_caption;
-      $gwt_image_caption_output .= '</figcaption>';
+      $render_gwt_slide = render($field_gwt_slide_image_output);
+
+      $field_gwt_image_caption = field_get_items('node', $node, 'field_gwt_image_caption');
+      $field_gwt_image_caption_output = field_view_value('node', $node, 'field_gwt_image_caption', $field_gwt_image_caption[0]);
+      $gwt_image_caption_output = '';
+      // only display if there is a caption available
+      if($field_gwt_image_caption_output['#markup']){
+        $render_gwt_image_caption = render($field_gwt_image_caption_output);
+        $gwt_image_caption_output = '<figcaption class="orbit-caption">';
+        $gwt_image_caption_output .= $render_gwt_image_caption;
+        $gwt_image_caption_output .= '</figcaption>';
+      }
+
+      $field_gwt_slide_link = field_get_items('node', $node, 'field_gwt_image_link');
+      $field_gwt_slide_link_output = field_view_value('node', $node, 'field_gwt_image_link', $field_gwt_slide_link[0]);
+      $is_external = url_is_external($field_gwt_slide_link_output['#markup']);
+
+      // check if theres a URL link
+      if($field_gwt_slide_link_output['#access'] && $field_gwt_slide_link_output['#markup']){
+        $render_gwt_slide = l($render_gwt_slide, $field_gwt_slide_link_output['#markup'], array(
+          'html' => TRUE,
+          'external' => $is_external,
+          'attributes' => array(
+            'title' => $render_gwt_image_caption,
+            'target' => $is_external ? '_blank' : '',
+          ),
+        ));
+        $gwt_image_caption_output = l($gwt_image_caption_output, $field_gwt_slide_link_output['#markup'], array(
+          'html' => TRUE,
+          'external' => $is_external,
+          'attributes' => array(
+            'title' => $render_gwt_image_caption,
+            'target' => $is_external ? '_blank' : '',
+          ),
+        ));
+      }
+      $output .= $render_gwt_slide;
+      $output .= $gwt_image_caption_output;
+
+      // TODO: add a image_style for the image field, remove the label
+      /*
+      $image_field = field_view_field('node', $node, 'field_gwt_slide_image', array(
+        'label' => 'hidden',
+        'settings' => array(
+          ),
+        // TODO: connect the weight to the weight field of the node of gwt_slides
+        'weight' => 0,
+        ));
+      return  render($image_field);
+      */
+      $output .= '</li>';
+      $orbit_bullets .= '<button class="" data-slide="'.$slider_counter.'"></button>';
+      $slider_counter++;
+      //return $image_field;
     }
+    $output .= '</ul>';
+    $output .= $orbit_bullets;
+    $output .= '</div>';
+  }
+  else{
+    $output .= '<div class="single-slide">';
+    $output .= '<ul class="orbit-container">';
+    foreach($nodes as $node){
+      $output .= '<li class="orbit-slide">';
+      $field_gwt_slide_image = field_get_items('node', $node, 'field_gwt_slide_image');
+      $field_gwt_slide_image_output = field_view_value('node', $node, 'field_gwt_slide_image', $field_gwt_slide_image[0]);
+      $field_gwt_slide_image_output['#image_style'] = 'gwt_slides_banner_normal';
 
-    $field_gwt_slide_link = field_get_items('node', $node, 'field_gwt_image_link');
-    $field_gwt_slide_link_output = field_view_value('node', $node, 'field_gwt_image_link', $field_gwt_slide_link[0]);
-    $is_external = url_is_external($field_gwt_slide_link_output['#markup']);
+      $render_gwt_slide = render($field_gwt_slide_image_output);
 
-    // check if theres a URL link
-    if($field_gwt_slide_link_output['#access'] && $field_gwt_slide_link_output['#markup']){
-      $render_gwt_slide = l($render_gwt_slide, $field_gwt_slide_link_output['#markup'], array(
-        'html' => TRUE,
-        'external' => $is_external,
-        'attributes' => array(
-          'title' => $render_gwt_image_caption,
-          'target' => $is_external ? '_blank' : '',
-        ),
-      ));
-      $gwt_image_caption_output = l($gwt_image_caption_output, $field_gwt_slide_link_output['#markup'], array(
-        'html' => TRUE,
-        'external' => $is_external,
-        'attributes' => array(
-          'title' => $render_gwt_image_caption,
-          'target' => $is_external ? '_blank' : '',
-        ),
-      ));
+      $field_gwt_image_caption = field_get_items('node', $node, 'field_gwt_image_caption');
+      $field_gwt_image_caption_output = field_view_value('node', $node, 'field_gwt_image_caption', $field_gwt_image_caption[0]);
+      $gwt_image_caption_output = '';
+
+      // only display if there is a caption available
+      if($field_gwt_image_caption_output['#markup']){
+        $render_gwt_image_caption = render($field_gwt_image_caption_output);
+        $gwt_image_caption_output = '<figcaption class="orbit-caption">';
+        $gwt_image_caption_output .= $render_gwt_image_caption;
+        $gwt_image_caption_output .= '</figcaption>';
+      }
+
+      $field_gwt_slide_link = field_get_items('node', $node, 'field_gwt_image_link');
+      $field_gwt_slide_link_output = field_view_value('node', $node, 'field_gwt_image_link', $field_gwt_slide_link[0]);
+      $is_external = url_is_external($field_gwt_slide_link_output['#markup']);
+
+      if($field_gwt_slide_link_output['#access'] && $field_gwt_slide_link_output['#markup']){
+        $render_gwt_slide = l($render_gwt_slide, $field_gwt_slide_link_output['#markup'], array(
+          'html' => TRUE,
+          'external' => $is_external,
+          'attributes' => array(
+            'title' => $render_gwt_image_caption,
+            'target' => $is_external ? '_blank' : '',
+          ),
+        ));
+        $gwt_image_caption_output = l($gwt_image_caption_output, $field_gwt_slide_link_output['#markup'], array(
+          'html' => TRUE,
+          'external' => $is_external,
+          'attributes' => array(
+            'title' => $render_gwt_image_caption,
+            'target' => $is_external ? '_blank' : '',
+          ),
+        ));
+      }
+      $output .= $render_gwt_slide;
+      $output .= $gwt_image_caption_output;
+      $output .= '</li>';
     }
-    $output .= $render_gwt_slide;
-    $output .= $gwt_image_caption_output;
-
-    // TODO: add a image_style for the image field, remove the label
-    /*
-    $image_field = field_view_field('node', $node, 'field_gwt_slide_image', array(
-      'label' => 'hidden',
-      'settings' => array(
-        ),
-      // TODO: connect the weight to the weight field of the node of gwt_slides
-      'weight' => 0,
-      ));
-    return  render($image_field);
-    */
-    $output .= '</li>';
-    $orbit_bullets .= '<button class="" data-slide="'.$slider_counter.'"></button>';
-    $slider_counter++;
-    //return $image_field;
   }
 
-  $output .= '</ul>';
-  $output .= $orbit_bullets;
-  $output .= '</div>';
   return $output;
 }
 
