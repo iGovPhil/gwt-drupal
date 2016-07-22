@@ -25,6 +25,39 @@ a:hover{
 a:active,
 a:visited{
 }
+
+/**
+ * accessibility settings
+ */
+/** accessibility-links **/
+#a11y-links{
+}
+#a11y-links ul,
+#a11y-shortcuts ul{
+  margin: 0;
+  overflow: hidden;
+  height: auto;
+  width: auto;
+}
+#a11y-links ul li,
+#a11y-shortcuts ul li{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#a11y-links ul li a,
+#a11y-shortcuts ul li a{
+  display: block;
+  padding: 0 20px;
+}
+#a11y-links ul li a,
+#a11y-shortcuts ul li a{
+  font-size: 0;
+}
+#a11y-links ul li.access-focus a,
+#a11y-shortcuts ul li.access-focus a{
+  font-size: inherit;
+}
 /** 
  * foundation overrides
  */

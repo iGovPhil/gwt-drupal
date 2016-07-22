@@ -34,7 +34,6 @@ function eraseCookie(name) {
 Drupal.behaviors.my_custom_behavior = {
   attach: function(context, settings) {
     $(document).foundation();
-
     // add a place holder for the search text field
     $('#block-search-form input[name="search_block_form"]').attr('placeholder', 'Search...');
 
@@ -72,6 +71,13 @@ Drupal.behaviors.my_custom_behavior = {
         $('#offCanvas').foundation('close');
         $('html, body').animate({scrollTop: footerPosition.top-menuHeight}, duration);
         return false;
+    });
+
+    $('#a11y-links ul li a').focus(function(){
+        $(this).parent().addClass('access-focus');
+    });
+    $('#a11y-links ul li a').blur(function(){
+        $(this).parent().removeClass('access-focus');
     });
 
     if(!Drupal.settings.hasOwnProperty('gwt_drupal')){
@@ -114,22 +120,6 @@ Drupal.behaviors.my_custom_behavior = {
         $('head').append($("<link href='" + a11y_desaturate_path + "' id='desaturateStylesheet' rel='stylesheet' type='text/css' />"));
         $('.a11y-toggle-grayscale').attr('aria-checked', true).addClass('active');
     };
-    
-    /*$('.a11y-toggle-grayscale').on('click', function(){
-        if(!$(this).hasClass('active')){
-            $('head').append($("<link href='" + a11y_desaturate_path + "' id='desaturateStylesheet' rel='stylesheet' type='text/css' />"));
-            $('body').addClass('desaturated');
-            $(this).attr('aria-checked', true).addClass('active');
-            createCookie('a11y-desaturated', '1');
-            return false;
-        } else {
-            $('#desaturateStylesheet').remove();
-            $('body').removeClass('desaturated');
-            $(this).removeAttr('aria-checked').removeClass('active');
-            eraseCookie('a11y-desaturated');
-            return false;
-        }
-    });*/
   }
 };
 })($gwt, Drupal, this, this.document);

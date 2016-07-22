@@ -358,8 +358,8 @@ function gwt_drupal_breadcrumb($variables) {
       $output = '<nav role="navigation">';
       $output .= '<ol class="breadcrumbs">'.
         '<li'.drupal_attributes($variables['title_attributes_array']) . '>' . $variables['title'] . ':</li>'.
-        '<li>' . implode('<span class="breadcrumb-separator">' . $breadcrumb_separator . '</span>' . '</li>'.
-        '<li>', $breadcrumb) . '<span class="breadcrumb-separator">' . $trailing_separator . '</span></li>'.
+        '<li>' . implode('</li>'.
+        '<li>', $breadcrumb) . '</li>'.
       '</ol>';
       $output .= '</nav>';
     }
@@ -563,40 +563,41 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     $variables['content_class'] .= ' large-12';
   }
 
-  // create a dynamic column on banner
-  $variables['banner_class'] = ' large-12';
-  $variables['banner_2_class'] = '';
-  $variables['banner_3_class'] = '';
-  $variables['banner_container_class'] = ' has-border';
-
-//  TODO: bug! banner slider and container should not show (if no content on other content) if the banner is medium size media
-  if(!empty($variables['page']['banner'])){
-    if(!empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
-      $variables['banner_class'] = ' large-6';
-      $variables['banner_2_class'] = ' large-3';
-      $variables['banner_3_class'] = ' large-3';
+  //  TODO: bug! banner slider and container should not show (if no content on other content) if the banner is medium size media
+  $variables['banner_class'] = '';
+  if(theme_get_setting('gwt_drupal_banner_option') != 1){
+    $variables['banner_class'] = 'columns large-12';
+    $variables['banner_2_class'] = '';
+    $variables['banner_3_class'] = '';
+    $variables['banner_container_class'] = ' has-border';
+    if(!empty($variables['page']['banner'])){
+      if(!empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
+        $variables['banner_class'] = 'columns large-6';
+        $variables['banner_2_class'] = 'columns large-3';
+        $variables['banner_3_class'] = 'columns large-3';
+      }
+      elseif(!empty($variables['page']['banner_2']) && empty($variables['page']['banner_3'])){
+        $variables['banner_class'] = 'columns large-8';
+        $variables['banner_2_class'] = 'columns large-4';
+      }
+      elseif(empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
+        $variables['banner_class'] = 'columns large-9';
+        $variables['banner_3_class'] = 'columns large-3';
+      }
     }
-    elseif(!empty($variables['page']['banner_2']) && empty($variables['page']['banner_3'])){
-      $variables['banner_class'] = ' large-8';
-      $variables['banner_2_class'] = ' large-4';
-    }
-    elseif(empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
-      $variables['banner_class'] = ' large-9';
-      $variables['banner_3_class'] = ' large-3';
-    }
-  }
-  elseif(empty($variables['page']['banner'])){
-    $variables['banner_class'] = '';
-    $variables['banner_container_class'] = '';
-    if(!empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
-      $variables['banner_2_class'] = ' large-6';
-      $variables['banner_3_class'] = ' large-6';
-    }
-    elseif(!empty($variables['page']['banner_2']) && empty($variables['page']['banner_3'])){
-      $variables['banner_2_class'] = ' large-12';
-    }
-    elseif(empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
-      $variables['banner_3_class'] = ' large-12';
+    elseif(empty($variables['page']['banner'])){
+      $variables['banner_class'] = '';
+      $variables['banner_container_class'] = '';
+      if(!empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
+        $variables['banner_2_class'] = 'columns large-6';
+        $variables['banner_3_class'] = 'columns large-6';
+      }
+      elseif(!empty($variables['page']['banner_2']) && empty($variables['page']['banner_3'])){
+        $variables['banner_2_class'] = 'columns large-12';
+      }
+      elseif(empty($variables['page']['banner_2']) && !empty($variables['page']['banner_3'])){
+        $variables['banner_3_class'] = 'columns large-12';
+      }
     }
   }
 
@@ -620,6 +621,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     //$variables['ear_content_class'] = '';
     $variables['ear_content_2_class'] = ' large-3';
   }
+  $variables['name_alt_text'] = theme_get_setting('site_name_alt_text') ? theme_get_setting('site_name_alt_text') : theme_get_setting('site_name');
 
   // TODO: make a function that parse multiple region columns
   // create a dynamic column on agency footer
@@ -777,6 +779,7 @@ background-size: cover;',
 
   $banner_attr = array(
     'style' => array(),
+    'class' => array(),
   );
   if($gwt_drupal_banner_bg_color = theme_get_setting('gwt_drupal_banner_bg_color')){
     $banner_attr['style'][] = 'background-color: '.$gwt_drupal_banner_bg_color.'; ';
@@ -790,6 +793,13 @@ background-size: cover;',
     }
   }
 
+  $banner_attr['class'][] = 'show-for-large';
+  $variables['banner_is_full_width'] = false;
+  if($gwt_drupal_banner_option = theme_get_setting('gwt_drupal_banner_option') && theme_get_setting('gwt_drupal_banner_option') == 1){
+    $banner_attr['class'][] = 'full-width';
+    $variables['banner_is_full_width'] = true;
+  }
+  $variables['gwt_drupal_banner_styles'] = drupal_attributes($banner_attr);
   if($gwt_drupal_banner_font = theme_get_setting('gwt_drupal_banner_font_color')){
     $banner_attr['style'][] = 'color: '.$gwt_drupal_banner_font.'; ';
   }
@@ -962,7 +972,7 @@ background-size: cover;',
   drupal_set_message('<pre>'.print_r($test, 1).'</pre>');*/
 
   $variables['accesibility_shortcut'] = '<ul>';
-  $variables['accesibility_shortcut'] .= '<li><a href="#" class="skips toggle-statement" title="Toggle Accessibility Statement" accesskey="0">Toggle Accessibility Statement</a></li>';
+  $variables['accesibility_shortcut'] .= '<li><a href="#" class="skips toggle-statement" title="Toggle Accessibility Statement" accesskey="0" data-toggle="a11y-modal">Toggle Accessibility Statement</a></li>';
   foreach($accessibility as $access_key => $data){
     $data['class'] = isset($data['class']) && is_array($data['class']) ? $data['class'] : array();
     $variables['accesibility_shortcut'] .= '<li>';

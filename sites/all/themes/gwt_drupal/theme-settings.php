@@ -385,6 +385,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     </ul>
     "
   );
+  /*
   $form['gwt_drupal_acc']['gwt_drupal_acc_statement'] = array(
     '#type' => 'textfield', 
     '#title' => t('Accessibility Statement (Combination + 0):'), 
@@ -392,10 +393,11 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#field_prefix' => $base_url.'/',
     '#description' => t(''), 
   );
+  */
 
   $form['gwt_drupal_acc']['gwt_drupal_acc_home'] = array(
     '#type' => 'textfield', 
-    '#title' => t('Home Page (Combination + 1):'), 
+    '#title' => t('Home Page (Combination + h):'), 
     '#default_value' => theme_get_setting('gwt_drupal_acc_home') ? theme_get_setting('gwt_drupal_acc_home') : '',
     '#field_prefix' => $base_url.'/',
     '#description' => t('<strong>Default value</strong>: home'), 
@@ -516,8 +518,8 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
   $form['gwt_drupal_header']['#suffix'] = '</div>';
   $form['gwt_drupal_content']['#prefix'] = '<div class="tabs-panel" id="tabs6">';
   $form['gwt_drupal_content']['#suffix'] = '</div>';
-  $form['gwt_drupal_content']['#prefix'] = '<div class="tabs-panel" id="tabs7">';
-  $form['gwt_drupal_content']['#suffix'] = '</div>';
+  $form['gwt_drupal_acc']['#prefix'] = '<div class="tabs-panel" id="tabs7">';
+  $form['gwt_drupal_acc']['#suffix'] = '</div>';
 
   $form['foundation_tabs_content'] = array(
     '#markup' => '<div class="tabs-content" data-tabs-content="gwt-settings-tabs">',
