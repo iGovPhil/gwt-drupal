@@ -361,90 +361,6 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#field_suffix' => '</div>',
   );
 
-  $form['gwt_drupal_header']['form_script'] = array(
-    '#markup' => '<script type="text/javascript">
-    $gwt(document).ready(function($){
-      $(document).foundation();
-
-      $(\'.colorpicker-container input[type="text"]\').spectrum({
-          showInput: true,
-          allowEmpty:true,
-          preferredFormat: "hex",
-          clickoutFiresChange: true,
-          showButtons: false
-      });
-      var siteName = $(\'#site-name-container\');
-      var siteRepublic = $(\'#site-republic-container\');
-      $(\'#edit-toggle-name\').click(function(){
-        if($(this).is(":checked")) {
-          siteName.show();
-          siteRepublic.show();
-        }
-        else{
-          siteName.hide();
-          siteRepublic.hide();
-        }
-      });
-      var siteSlogan = $(\'#site-slogan-container\');
-      $(\'#edit-toggle-slogan\').click(function(){
-        if($(this).is(":checked")) {
-          siteSlogan.show();
-        }
-        else{
-          siteSlogan.hide();
-        }
-      });
-    });
-    </script>'
-  );
-
-
-  $form['foundation_tabs_button'] = array(
-    '#markup' => '<ul class="tabs" data-tabs id="gwt-settings-tabs">
-  <li class="tabs-title is-active"><a href="#tabs1" aria-selected="true">General Settings</a></li>
-  <li class="tabs-title"><a href="#tabs2">Logo</a></li>
-  <li class="tabs-title"><a href="#tabs3">Shortcut Icon</a></li>
-  <li class="tabs-title"><a href="#tabs4">Breadcrumbs</a></li>
-  <li class="tabs-title"><a href="#tabs5">Header and Banner Settings</a></li>
-  <li class="tabs-title"><a href="#tabs6">Content Settings</a></li>
-</ul>',
-    '#weight' => '-2',
-  );
-  $form['theme_settings']['#prefix'] = '<div class="tabs-panel is-active" id="tabs1">';
-  $form['theme_settings']['#suffix'] = '</div>';
-  $form['logo']['#prefix'] = '<div class="tabs-panel" id="tabs2">';
-  $form['logo']['#suffix'] = '</div>';
-  $form['favicon']['#prefix'] = '<div class="tabs-panel" id="tabs3">';
-  $form['favicon']['#suffix'] = '</div>';
-  $form['breadcrumb']['#prefix'] = '<div class="tabs-panel" id="tabs4">';
-  $form['breadcrumb']['#suffix'] = '</div>';
-  $form['gwt_drupal_header']['#prefix'] = '<div class="tabs-panel" id="tabs5">';
-  $form['gwt_drupal_header']['#suffix'] = '</div>';
-  $form['gwt_drupal_content']['#prefix'] = '<div class="tabs-panel" id="tabs6">';
-  $form['gwt_drupal_content']['#suffix'] = '</div>';
-
-  $form['foundation_tabs_content'] = array(
-    '#markup' => '<div class="tabs-content" data-tabs-content="gwt-settings-tabs">',
-    '#weight' => '-1',
-  );
-  $form['foundation_tabs_content_end'] = array(
-    '#markup' => '</div>',
-    '#weight' => '100',
-  );
-  $form['foundation_tabs_override_css'] = array(
-    '#markup' => '<style>
-.tabs{
-  margin: 0 !important;
-  list-style-type: none !important;
-  background: #fefefe !important;
-  border: 1px solid #e6e6e6 !important;
-}
-</style>',
-    '#weight' => '101',
-  );
-  $form['actions']['#weight'] = '102';
-
-  /*
   $form['gwt_drupal_acc'] = array(
     '#type'          => 'fieldset',
     '#title'         => t('Accessibility settings'),
@@ -537,7 +453,93 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     '#description' => t(''), 
     '#field_prefix' => $base_url.'/',
   );
-*/
+
+  $form['gwt_drupal_header']['form_script'] = array(
+    '#markup' => '<script type="text/javascript">
+    $gwt(document).ready(function($){
+      $(document).foundation();
+
+      $(\'.colorpicker-container input[type="text"]\').spectrum({
+          showInput: true,
+          allowEmpty:true,
+          preferredFormat: "hex",
+          clickoutFiresChange: true,
+          showButtons: false
+      });
+      var siteName = $(\'#site-name-container\');
+      var siteRepublic = $(\'#site-republic-container\');
+      $(\'#edit-toggle-name\').click(function(){
+        if($(this).is(":checked")) {
+          siteName.show();
+          siteRepublic.show();
+        }
+        else{
+          siteName.hide();
+          siteRepublic.hide();
+        }
+      });
+      var siteSlogan = $(\'#site-slogan-container\');
+      $(\'#edit-toggle-slogan\').click(function(){
+        if($(this).is(":checked")) {
+          siteSlogan.show();
+        }
+        else{
+          siteSlogan.hide();
+        }
+      });
+    });
+    </script>'
+  );
+
+
+  $form['foundation_tabs_button'] = array(
+    '#markup' => '<ul class="tabs" data-tabs id="gwt-settings-tabs">
+  <li class="tabs-title is-active"><a href="#tabs1" aria-selected="true">General Settings</a></li>
+  <li class="tabs-title"><a href="#tabs2">Logo</a></li>
+  <li class="tabs-title"><a href="#tabs3">Shortcut Icon</a></li>
+  <li class="tabs-title"><a href="#tabs4">Breadcrumbs</a></li>
+  <li class="tabs-title"><a href="#tabs5">Header and Banner Settings</a></li>
+  <li class="tabs-title"><a href="#tabs6">Content Settings</a></li>
+  <li class="tabs-title"><a href="#tabs7">Accessibility Settings</a></li>
+</ul>',
+    '#weight' => '-2',
+  );
+  $form['theme_settings']['#prefix'] = '<div class="tabs-panel is-active" id="tabs1">';
+  $form['theme_settings']['#suffix'] = '</div>';
+  $form['logo']['#prefix'] = '<div class="tabs-panel" id="tabs2">';
+  $form['logo']['#suffix'] = '</div>';
+  $form['favicon']['#prefix'] = '<div class="tabs-panel" id="tabs3">';
+  $form['favicon']['#suffix'] = '</div>';
+  $form['breadcrumb']['#prefix'] = '<div class="tabs-panel" id="tabs4">';
+  $form['breadcrumb']['#suffix'] = '</div>';
+  $form['gwt_drupal_header']['#prefix'] = '<div class="tabs-panel" id="tabs5">';
+  $form['gwt_drupal_header']['#suffix'] = '</div>';
+  $form['gwt_drupal_content']['#prefix'] = '<div class="tabs-panel" id="tabs6">';
+  $form['gwt_drupal_content']['#suffix'] = '</div>';
+  $form['gwt_drupal_content']['#prefix'] = '<div class="tabs-panel" id="tabs7">';
+  $form['gwt_drupal_content']['#suffix'] = '</div>';
+
+  $form['foundation_tabs_content'] = array(
+    '#markup' => '<div class="tabs-content" data-tabs-content="gwt-settings-tabs">',
+    '#weight' => '-1',
+  );
+  $form['foundation_tabs_content_end'] = array(
+    '#markup' => '</div>',
+    '#weight' => '100',
+  );
+  $form['foundation_tabs_override_css'] = array(
+    '#markup' => '<style>
+.tabs{
+  margin: 0 !important;
+  list-style-type: none !important;
+  background: #fefefe !important;
+  border: 1px solid #e6e6e6 !important;
+}
+</style>',
+    '#weight' => '101',
+  );
+  $form['actions']['#weight'] = '102';
+
 /*
   $form['#validate'][] = 'gwt_drupal_settings_validate';
   $form['#submit'][] = 'gwt_drupal_settings_submit';
