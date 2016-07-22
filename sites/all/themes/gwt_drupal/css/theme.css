@@ -498,6 +498,9 @@ a:visited{
   width: 1vw;
   height: 1vw;
 }
+#banner #block-gwt-drupal-helper-gwt-drupal-helper-slides .single-slide{
+  padding-bottom: 15px;
+}
 #banner.full-width #block-gwt-drupal-helper-gwt-drupal-helper-slides .orbit-container{
   height: auto;
   width: 100%;
