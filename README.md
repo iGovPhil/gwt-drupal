@@ -1,6 +1,7 @@
 # Goverment Website Template (GWT) for Drupal
 
 Notes:
+
 - See modulepositions.jpg in /images for this template's module positions.
 - Banner width should be 1250px
 - Any content in the masthead area should NOT EXCEED 100px.
@@ -12,17 +13,6 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 - ~~White screen error on certain installation (updates), no admin menu~~
 - ~~Access key missing node error~~ accessibility features temporarily disabled
 - ~~some access keys not working properly (site map)~~ accessibility features temporarily disabled
-
-## Future updates (v2.1)
- - Enhanced PST module
- - Foundation 6 framework
- - Enhanced accessibility features
- - Est. release date: April 20, 2016
- - Fix Front page list template
- - implement mega menu
- - Support Images styles for banner slider
- - add dynamic settings for PST (add multiple version)
- - minimize printing of elements, improve dynamic multi-region display
 
 ## CHANGE LOGS
 **03-03-2016**
@@ -55,3 +45,20 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 **05-12-2016**
 
 - added right class for search block region
+
+**07-26-2016**
+
+- Used Foundation 6.0 theme framework
+- improved accessibility feature
+- used font-awesome as default icon pack
+- improve slider
+- added theme options
+	- Used tabbing
+	- more CSS customizations
+	- more header,banner and banner settings
+- improve menu system
+	- used off-canvas menu for mobile devices
+	- used sticky menu for header
+- default transparency seal (gwt\_helper\_module) block
+- default PST (Philippine Standard Time) block
+
