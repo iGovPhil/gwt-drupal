@@ -7,4 +7,4 @@ dependencies[] = field
 dependencies[] = block
 configure = node/add/gwt-slides
 
-version = "7.x-2.1"
+version = "7.x-2.5"

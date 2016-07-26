@@ -1,7 +1,7 @@
 screenshot  = screenshot.png
-name        = GWT Drupal P
+name        = GWT Drupal P2
 description = Government Web Template theme
-version = 2.0.6
+version = 2.5.0
 core = 7.x
 
 engine      = phptemplate
@@ -77,7 +77,7 @@ features[] = secondary_menu
 ; Set the default values of settings on the theme-settings.php form.
 
 settings[gwt_drupal_breadcrumb]           = yes
-settings[gwt_drupal_breadcrumb_separator] = ' › '
+settings[gwt_drupal_breadcrumb_separator] = ''
 settings[gwt_drupal_breadcrumb_home]      = 1
 settings[gwt_drupal_breadcrumb_trailing]  = 0
 settings[gwt_drupal_breadcrumb_title]     = 0
