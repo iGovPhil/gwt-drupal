@@ -94,8 +94,10 @@ Drupal.behaviors.my_custom_behavior = {
             _this.options.pauseOnHover = false;
             if(_this.options.autoPlay){
                 _this.controlPause();
+                _this.options.autoPlay = false;
             }
             else{
+                _this.options.autoPlay = true;
                 _this.controlPlay();
             }
         });
@@ -105,22 +107,20 @@ Drupal.behaviors.my_custom_behavior = {
         this.$buttonText = this.$element.find('.' + this.options.controlClass + ' .orbit-button-text');
         this.$srText = this.$element.find('.' + this.options.controlClass + ' .show-for-sr');
         if(this.options.accessible){
-            $(this.$srText).text(this.options.controlPauseText);
+            $(this.$srText).text(this.options.controlPlayText);
         }
         this.timer.pause();
-        this.options.autoPlay = false;
-        $(this.$buttonText).html("&#10073;&#10073;&nbsp;");
+        $(this.$buttonText).html("&#x25B6");
     }
     Foundation.Orbit.prototype.controlPlay = function(){
         this.$wrapper = this.$element.find('.' + this.options.controlClass);
         this.$buttonText = this.$element.find('.' + this.options.controlClass + ' .orbit-button-text');
         this.$srText = this.$element.find('.' + this.options.controlClass + ' .show-for-sr');
         if(this.options.accessible){
-            $(this.$srText).text(this.options.controlPlayText);
+            $(this.$srText).text(this.options.controlPauseText);
         }
         this.timer.start();
-        this.options.autoPlay = true;
-        $(this.$buttonText).html("&#x25B6");
+        $(this.$buttonText).html("&#10073;&#10073;&nbsp;");
     }
     $('[data-orbit]').on('init.zf.orbit', function(e){
         $(e.target).foundation('initControls');
