@@ -17,16 +17,22 @@ function gwt_drupal_helper_block_info(){
   $blocks['gwt_drupal_helper_slides'] = array(
     'info' => t('GWT: Banner Image Slider'),
     'region' => 'banner',
+    'status' => TRUE,
+    'visibility' => 'BLOCK_VISIBILITY_LISTED',
+    'pages' => '',
   );
   $blocks['gwt_drupal_helper_trans_seal'] =  array(
     'info' => t('GWT: Transparency Seal'),
     'region' => 'sidebar_first',
+    'status' => TRUE,
     'visibility' => 'BLOCK_VISIBILITY_LISTED',
     'pages' => '',
   );
   $blocks['gwt_drupal_helper_pst'] =  array(
+    'title' => '<none>',
     'info' => t('GWT: Philippine Standard Time'),
-    'region' => 'sidebar_first',
+    'region' => 'ear_content_2',
+    'status' => TRUE,
     'visibility' => 'BLOCK_VISIBILITY_LISTED',
     'pages' => '',
   );
@@ -139,7 +145,6 @@ function gwt_drupal_helper_block_view($delta = ''){
       $pst_content = '<div id="pst-container">
   <div>Philippine Standard Time:</div>
   <div id="pst-time"></div>
-  <div><a href="https://gwhs.i.gov.ph/pst/" id="pst-source" target="_blank">PST Source</a></div>
 </div>
 
 <script type="text/javascript" id="gwt-pst">
