@@ -188,7 +188,8 @@ function _gwt_drupal_helper_get_gwt_slides(){
   $output = '';
   $slider_counter = 0;
   if(count($nodes) > 1){
-    $output .= '<div class="orbit" role="region" aria-label="Featured Slider" data-orbit data-show-status="1" data-status-text="%currentSlide/%totalSlide">';
+    $output .= '<div class="orbit" role="region" aria-label="Featured Slider" data-orbit data-show-status="1" data-status-text="%currentSlide of %totalSlide" 
+data-pause-on-hover="1">';
     $output .= '<button class="orbit-previous"><span class="show-for-sr">Previous Slide</span>&#9664;&#xFE0E;</button>';
     $output .= '<button class="orbit-next"><span class="show-for-sr">Next Slide</span>&#9654;&#xFE0E;</button>';
     $output .= '<ul class="orbit-container">';

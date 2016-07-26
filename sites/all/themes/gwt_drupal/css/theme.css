@@ -516,6 +516,21 @@ a:visited{
 #banner.full-width #block-gwt-drupal-helper-gwt-drupal-helper-slides .orbit-bullets{
   display: none;
 }
+#banner .orbit .orbit-slide-status{
+  position: absolute;
+  top: 0;
+  z-index: 9;
+  color: #fff;
+  padding: 10px 20px;
+}
+#banner .orbit .orbit-button-controls{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  color: #fff;
+  padding: 10px 20px;
+}
 
 /** 
  * content area

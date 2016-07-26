@@ -7,6 +7,12 @@
  * @see https://drupal.org/node/1728148
  */
 ?>
+<div id="a11y-links"> 
+<?php print $accesibility; ?> 
+</div> 
+<div id="a11y-shortcuts"> 
+<?php print $accesibility_shortcut; ?> 
+</div> 
 <div class="reveal large" id="a11y-modal" data-reveal>
   <textarea class="statement-textarea" readonly rows="20">
 Shortcut Keys Combination Activation
@@ -20,9 +26,9 @@ For Internet Explorer press (Alt+Shift+shortcut_key) then press (enter)
  
 
 Accessibility Statement (Combination + 0): Statement page that will show the available accessibility keys.
-Home Page (Combination + 1): Accessibility key for redirecting to homepage.
+Home Page (Combination + H): Accessibility key for redirecting to homepage.
 Main Content (Combination + R): Shortcut for viewing the content section of the current page.
-FAQ (Combination + 5): Shortcut for FAQ page.
+FAQ (Combination + Q): Shortcut for FAQ page.
 Contact (Combination + C): Shortcut for contact page or form inquiries.
 Feedback (Combination + K): Shortcut for feedback page.
 Site Map (Combination + M): Shortcut for site map (footer agency) section of the page.
@@ -43,7 +49,7 @@ Press esc, or click the close the button to close this dialog box.
         </button>
         <div class="dropdown-pane bottom" id="a11y-dropdown-mobile" data-dropdown data-hover-pane="true">
           <ul class="menu vertical" id="a11y-buttons-mobile">
-            <li><a class="button" type="button" data-toggle="a11y-modal">
+            <li><a class="button" type="button" data-toggle="a11y-modal" accesskey="0">
               <span class="show-for-sr">Accessibility Statement</span>
               <i class="fa fa-file-text-o fa-2x"></i>
             </a></li>

@@ -33,7 +33,105 @@ function eraseCookie(name) {
 (function ($, Drupal, window, document, undefined) {
 Drupal.behaviors.my_custom_behavior = {
   attach: function(context, settings) {
+    
+    /**
+     * foundation override
+     */
+    Foundation.Orbit.defaults.showStatus = false;
+    Foundation.Orbit.defaults.statusText = "%currentSlide of %totalSlide";
+    Foundation.Orbit.defaults.statusClass = 'orbit-slide-status';
+    Foundation.Orbit.defaults.currentSlide = 1;
+    Foundation.Orbit.defaults.totalSlides = 0;
+    Foundation.Orbit.prototype.refreshStatus = function(e){
+        this.$wrapper = this.$element.find('.' + this.options.containerClass);
+        this.$slides = this.$element.find('.' + this.options.slideClass);
+        this.$status = this.$element.find('.' + this.options.statusClass);
+        var statusText = this.options.statusText;
+        var currentSlide = this.$slides.index(this.$slides.filter('.is-active')) + 1;
+        this.options.totalSlides = this.$slides.length;
+        this.options.currentSlide = currentSlide;
+        this.$status.text(statusText.replace('%totalSlide', this.options.totalSlides).replace('%currentSlide', this.options.currentSlide));
+    }
+    $('[data-orbit]').on('init.zf.orbit', function(e){
+        // TODO: learn how to attach to foundation hook
+        var statusText = e.target.dataset.statusText;
+        // show the status of the banner
+        if((typeof e.target.dataset.showStatus === 'undefined' && Foundation.Orbit.defaults.showStatus) || e.target.dataset.showStatus){
+            var statusElement = document.createElement("div");
+            statusClass = (typeof e.target.dataset.statusClass === 'undefined') ? Foundation.Orbit.defaults.statusClass : e.target.dataset.statusClass;
+            $(statusElement).addClass(statusClass).prepend(statusText);
+            $(this).prepend(statusElement);
+            element = $(e.target).foundation('refreshStatus');
+        }
+    });
+    $('[data-orbit]').on('slidechange.zf.orbit', function(e){
+        element = $(e.target).foundation('refreshStatus');
+    });
+
+    Foundation.Orbit.defaults.controls = true;
+    Foundation.Orbit.defaults.controlClass = 'orbit-button-controls';
+    Foundation.Orbit.defaults.controlPauseText = 'Pause';
+    Foundation.Orbit.defaults.controlPlayText = 'Play';
+    Foundation.Orbit.prototype.initControls = function(){
+        var _this = this;
+        var statusElement = document.createElement("button");
+        var buttonControl = document.createElement("span");
+        if(this.options.accessible){
+            var srText = document.createElement("span");
+            $(srText).addClass('show-for-sr').text(this.options.controlPauseText);
+            $(statusElement).append(srText);
+        }
+        $(buttonControl).addClass('orbit-button-text').html("&#10073;&#10073;");
+        $(statusElement).addClass(this.options.controlClass).append(buttonControl).attr('title', this.options.controlPlayText);
+        $(this.$element).prepend(statusElement);
+        if(this.options.autoPlay){
+            this.controlPlay();
+        }
+
+        this.$button = this.$element.find('.' + this.options.controlClass);
+
+        this.$button.on('click.zf.orbit', function () {
+            _this.options.pauseOnHover = false;
+            if(_this.options.autoPlay){
+                _this.controlPause();
+            }
+            else{
+                _this.controlPlay();
+            }
+        });
+    }
+    Foundation.Orbit.prototype.controlPause = function(){
+        this.$wrapper = this.$element.find('.' + this.options.controlClass);
+        this.$buttonText = this.$element.find('.' + this.options.controlClass + ' .orbit-button-text');
+        this.$srText = this.$element.find('.' + this.options.controlClass + ' .show-for-sr');
+        if(this.options.accessible){
+            $(this.$srText).text(this.options.controlPauseText);
+        }
+        this.timer.pause();
+        this.options.autoPlay = false;
+        $(this.$buttonText).html("&#10073;&#10073;&nbsp;");
+    }
+    Foundation.Orbit.prototype.controlPlay = function(){
+        this.$wrapper = this.$element.find('.' + this.options.controlClass);
+        this.$buttonText = this.$element.find('.' + this.options.controlClass + ' .orbit-button-text');
+        this.$srText = this.$element.find('.' + this.options.controlClass + ' .show-for-sr');
+        if(this.options.accessible){
+            $(this.$srText).text(this.options.controlPlayText);
+        }
+        this.timer.start();
+        this.options.autoPlay = true;
+        $(this.$buttonText).html("&#x25B6");
+    }
+    $('[data-orbit]').on('init.zf.orbit', function(e){
+        $(e.target).foundation('initControls');
+    });
+
     $(document).foundation();
+
+    // TODO: add counter for all orbit sliders
+    // $('.orbit').each(function(e){
+    // });
+
     // add a place holder for the search text field
     $('#block-search-form input[name="search_block_form"]').attr('placeholder', 'Search...');
 
