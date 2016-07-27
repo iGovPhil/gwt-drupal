@@ -562,7 +562,7 @@ h6{font-size: 16px}
   z-index: 9;
   color: #fff;
   padding: 0.625rem 1.25rem;
-  height: 36px;
+  height: 36px !important;
   text-shadow: 1px 1px 3px #000;
 }
 
