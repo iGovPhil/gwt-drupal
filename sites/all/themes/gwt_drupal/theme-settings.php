@@ -410,6 +410,8 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
     <ul>
     <li>Chrome for Linux press (Alt+Shift+shortcut_key)</li>
     <li>Chrome for Windows press (Alt+shortcut_key)</li>
+    <li>Chrome for MAC OS press (Ctrl+opt+shortcut_key)</li>
+    <li>Safari for MAC OS press (Ctrl+opt+shortcut_key)</li>
     <li>For Firefox press (Alt+Shift+shortcut_key)</li>
     <li>For Internet Explorer press (Alt+Shift+shortcut_key) then press (enter)</li>
     </ul>

@@ -21,6 +21,8 @@ Combination keys used for each browser.
 
 Chrome for Linux press (Alt+Shift+shortcut_key)
 Chrome for Windows press (Alt+shortcut_key)
+Chrome for MAC OS press (ctrl+opt+shortcut_key)
+Safari for MAC OS press (ctrl+opt+shortcut_key)
 For Firefox press (Alt+Shift+shortcut_key)
 For Internet Explorer press (Alt+Shift+shortcut_key) then press (enter)
  
