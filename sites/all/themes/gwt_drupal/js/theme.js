@@ -80,7 +80,7 @@ Drupal.behaviors.my_custom_behavior = {
             $(srText).addClass('show-for-sr').text(this.options.controlPauseText);
             $(statusElement).append(srText);
         }
-        $(buttonControl).addClass('orbit-button-text').html("&#10073;&#10073;");
+        $(buttonControl).addClass('orbit-button-text').html("<i aria-hidden='true' class='fa fa-pause'></i>");
         $(statusElement).addClass(this.options.controlClass).append(buttonControl).attr('title', this.options.controlPlayText);
         $(this.$element).prepend(statusElement);
         if(this.options.autoPlay){
@@ -113,7 +113,7 @@ Drupal.behaviors.my_custom_behavior = {
         if(this.options.accessible){
             $(this.$srText).text(this.options.controlPlayText);
         }
-        $(this.$buttonText).html("▶︎");
+        $(this.$buttonText).html("<i aria-hidden='true' class='fa fa-play'></i>");
     }
     Foundation.Orbit.prototype.controlPlay = function(){
         this.timer.restart();
@@ -125,7 +125,7 @@ Drupal.behaviors.my_custom_behavior = {
         if(this.options.accessible){
             $(this.$srText).text(this.options.controlPauseText);
         }
-        $(this.$buttonText).html("&#10073;&#10073;&nbsp;");
+        $(this.$buttonText).html("<i aria-hidden='true' class='fa fa-pause'></i>");
     }
     $('[data-orbit]').on('init.zf.orbit', function(e){
         $(e.target).foundation('initControls');
