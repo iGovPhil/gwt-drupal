@@ -176,7 +176,7 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
   );
   $form['gwt_drupal_header']['gwt_drupal_banner_option'] = array(
     '#type' => 'select',
-    '#title' => t('Banner Option'),
+    '#title' => t('Banner Width'),
     '#default_value' => theme_get_setting('gwt_drupal_banner_option'),
     '#description' => t('The width of the banner. Set the width to full-width to make it full screen.'),
     '#options' => array(
@@ -309,6 +309,36 @@ function gwt_drupal_form_system_theme_settings_alter(&$form, &$form_state, $form
       t('Larger'),
     ),
     '#description' => t('Size of headings font for content.'),
+  );
+  $form['gwt_drupal_content']['gwt_drupal_content_heading_color'] = array(
+    '#type' => 'textfield', 
+    '#title' => t('Content Heading color:'), 
+    '#default_value' => theme_get_setting('gwt_drupal_content_heading_color'),
+    '#size' => 10, 
+    '#maxlength' => 30, 
+    '#description' => t('Select the font color of all the headings inside the content. Select "X" to disable the color and use the default background color.'), 
+    '#field_prefix' => '<div class="colorpicker-container">',
+    '#field_suffix' => '</div>',
+  );
+  $form['gwt_drupal_content']['gwt_drupal_content_link_color'] = array(
+    '#type' => 'textfield', 
+    '#title' => t('Content Link color:'), 
+    '#default_value' => theme_get_setting('gwt_drupal_content_link_color'),
+    '#size' => 10, 
+    '#maxlength' => 30, 
+    '#description' => t('Select the font color of all the links inside the content. Select "X" to disable the color and use the default background color.'), 
+    '#field_prefix' => '<div class="colorpicker-container">',
+    '#field_suffix' => '</div>',
+  );
+  $form['gwt_drupal_content']['gwt_drupal_content_link_color_hover'] = array(
+    '#type' => 'textfield', 
+    '#title' => t('Content Link color (Hover):'), 
+    '#default_value' => theme_get_setting('gwt_drupal_content_link_color_hover'),
+    '#size' => 10, 
+    '#maxlength' => 30, 
+    '#description' => t('Select the font color of all the links that is hovered inside the content. Select "X" to disable the color and use the default background color.'), 
+    '#field_prefix' => '<div class="colorpicker-container">',
+    '#field_suffix' => '</div>',
   );
   $form['gwt_drupal_content']['gwt_drupal_content_bg_color'] = array(
     '#type' => 'textfield', 

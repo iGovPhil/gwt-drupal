@@ -521,7 +521,8 @@ a:visited{
   top: 0;
   z-index: 9;
   color: #fff;
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
+  text-shadow: 1px 1px 3px #000;
 }
 #banner .orbit .orbit-button-controls{
   position: absolute;
@@ -529,7 +530,9 @@ a:visited{
   right: 0;
   z-index: 9;
   color: #fff;
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;
+  height: 36px;
+  text-shadow: 1px 1px 3px #000;
 }
 
 /** 
@@ -589,7 +592,6 @@ a:visited{
   font-size: 0.8rem;
   line-height: 0.85rem;
   text-align: right;
-  margin: 1rem;
 }
 #pst-time{
 }
@@ -614,6 +616,10 @@ a:visited{
   background: #f7f7f7;
   color: #000;
   border-bottom: 1px solid #e9e9e9;
+}
+#main-nav-mobile.menu .is-submenu-parent-item a,
+#auxiliary-nav-mobile.menu .is-submenu-parent-item a{
+  font-weight: bold;
 }
 #main-nav-mobile.menu .active>a,
 #auxiliary-nav-mobile .active>a{

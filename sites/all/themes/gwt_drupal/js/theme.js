@@ -33,7 +33,6 @@ function eraseCookie(name) {
 (function ($, Drupal, window, document, undefined) {
 Drupal.behaviors.my_custom_behavior = {
   attach: function(context, settings) {
-    
     /**
      * foundation override
      */
@@ -92,9 +91,11 @@ Drupal.behaviors.my_custom_behavior = {
 
         this.$button.on('click.zf.orbit', function () {
             _this.options.pauseOnHover = false;
+            _this.$element.off('mouseenter.zf.orbit');
+            _this.$element.off('mouseleave.zf.orbit');
             if(_this.options.autoPlay){
-                _this.controlPause();
                 _this.options.autoPlay = false;
+                _this.controlPause();
             }
             else{
                 _this.options.autoPlay = true;
@@ -103,23 +104,27 @@ Drupal.behaviors.my_custom_behavior = {
         });
     }
     Foundation.Orbit.prototype.controlPause = function(){
+        this.timer.restart();
+        this.timer.pause();
         this.$wrapper = this.$element.find('.' + this.options.controlClass);
+        this.$wrapper.attr('title', this.options.controlPlayText);
         this.$buttonText = this.$element.find('.' + this.options.controlClass + ' .orbit-button-text');
         this.$srText = this.$element.find('.' + this.options.controlClass + ' .show-for-sr');
         if(this.options.accessible){
             $(this.$srText).text(this.options.controlPlayText);
         }
-        this.timer.pause();
-        $(this.$buttonText).html("&#x25B6");
+        $(this.$buttonText).html("▶︎");
     }
     Foundation.Orbit.prototype.controlPlay = function(){
+        this.timer.restart();
+        this.timer.start();
         this.$wrapper = this.$element.find('.' + this.options.controlClass);
+        this.$wrapper.attr('title', this.options.controlPauseText);
         this.$buttonText = this.$element.find('.' + this.options.controlClass + ' .orbit-button-text');
         this.$srText = this.$element.find('.' + this.options.controlClass + ' .show-for-sr');
         if(this.options.accessible){
             $(this.$srText).text(this.options.controlPauseText);
         }
-        this.timer.start();
         $(this.$buttonText).html("&#10073;&#10073;&nbsp;");
     }
     $('[data-orbit]').on('init.zf.orbit', function(e){
@@ -220,4 +225,4 @@ Drupal.behaviors.my_custom_behavior = {
     };
   }
 };
-})($gwt, Drupal, this, this.document);
+})($gwt, Drupal, this, document);

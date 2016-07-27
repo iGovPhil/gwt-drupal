@@ -42,7 +42,7 @@ Press esc, or click the close the button to close this dialog box.
 <div class="off-canvas-wrapper">
   <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
     <div class="off-canvas position-right hide-for-large" id="offCanvas" data-off-canvas data-position="right">
-      <div id="a11y-container-mobile" class="float-right" data-dropdown>
+      <div id="a11y-container-mobile" class="float-right">
         <button class="button float-right a11y-dropdown-button" type="button" data-toggle="a11y-dropdown-mobile">
           <span class="show-for-sr">Accessibility Button</span>
           <i class="fa fa-universal-access"></i>
@@ -57,7 +57,7 @@ Press esc, or click the close the button to close this dialog box.
               <span class="show-for-sr">Skip to content</span>
               <i class="fa fa-chevron-down fa-2x"></i>
             </a></li>
-            <li><a class="button a11y-toggle-contrast">
+            <li><a class="button a11y-toggle-contrast" href="#">
               <span class="show-for-sr">High Contrast</span>
               <i class="fa fa-low-vision fa-2x"></i>
             </a></li>
@@ -146,7 +146,7 @@ Press esc, or click the close the button to close this dialog box.
               <span class="show-for-sr">Accessibility Statement</span>
               <i class="fa fa-file-text-o fa-2x"></i>
             </a></li>
-            <li><a class="a11y-toggle-contrast">
+            <li><a class="button a11y-toggle-contrast" href="#">
               <span class="show-for-sr">High Contrast</span>
               <i class="fa fa-low-vision fa-2x"></i>
             </a></li>
@@ -225,14 +225,14 @@ Press esc, or click the close the button to close this dialog box.
       <?php //if(!$site_name): ?>
         <?php if($ear_content = render($page['ear_content'])): ?>
           <div class="columns<?php print $ear_content_class ?>">
-            <div class="ear-content">
+            <div class="ear-content content-container">
             <?php print $ear_content; ?>
             </div>
           </div>
         <?php endif ?>
         <?php if($ear_content_2 = render($page['ear_content_2'])): ?>
           <div class="columns<?php print $ear_content_2_class ?>">
-            <div class="ear-content">
+            <div class="ear-content content-container">
             <?php print $ear_content_2; ?>
             </div>
           </div>
@@ -257,14 +257,14 @@ Press esc, or click the close the button to close this dialog box.
       <?php endif ?>
       <?php if(!$banner_is_full_width): ?>
         <?php if($banner_2 = render($page['banner_2'])): ?>
-          <div class="<?php print $banner_2_class ?>">
+          <div class="<?php print $banner_2_class ?> content-container">
             <div class="banner-content">
             <?php print $banner_2; ?>
             </div>
           </div>
         <?php endif ?>
         <?php if($banner_3 = render($page['banner_3'])): ?>
-        <div class="<?php print $banner_3_class ?>">
+        <div class="<?php print $banner_3_class ?> content-container">
           <div class="banner-content">
           <?php print $banner_3; ?>
           </div>
@@ -312,7 +312,7 @@ Press esc, or click the close the button to close this dialog box.
   <?php
   if($breadcrumb || $page['breadcrumbs']):
     ?>
-  <div id="breadcrumbs">
+  <div id="breadcrumbs" class="content-container">
     <div class="row">
       <div class="large-12 columns">
       <?php if (isset($breadcrumb)): ?>
@@ -328,7 +328,7 @@ Press esc, or click the close the button to close this dialog box.
     endif;
     ?>
 
-  <div id="panel-top">
+  <div id="panel-top" class="content-container">
     <div class="row">
       <?php if($panel_top = render($page['panel_top'])): ?>
         <div class="columns<?php print $panel_top_class ?>">
@@ -361,7 +361,7 @@ Press esc, or click the close the button to close this dialog box.
     </div>
   </div>
   
-  <div id="main" role="document">
+  <div id="main" role="document" class="content-container">
     <div class="row">
       <?php
         // Render the sidebars to see if there's anything in them.
@@ -402,7 +402,7 @@ Press esc, or click the close the button to close this dialog box.
     </div>
   </div>
 
-  <div id="panel-bottom">
+  <div id="panel-bottom" class="content-container">
     <div class="row">
       <?php if($panel_bottom = render($page['panel_bottom'])): ?>
         <div class="columns<?php print $panel_bottom_class ?>">
@@ -441,7 +441,7 @@ Press esc, or click the close the button to close this dialog box.
     !empty($page['footer_3']) ||
     !empty($page['footer_4'])):
     ?>
-  <footer id="footer">
+  <footer id="footer" class="content-container">
     <div class="row">
       <?php if($footer_1 = render($page['footer'])): ?>
       <div class="columns<?php print $footer_class ?>">

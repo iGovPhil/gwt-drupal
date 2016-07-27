@@ -794,6 +794,7 @@ background-size: cover;',
   }
 
   $banner_attr['class'][] = 'show-for-large';
+  $banner_attr['class'][] = 'show-for-medium';
   $variables['banner_is_full_width'] = false;
   if($gwt_drupal_banner_option = theme_get_setting('gwt_drupal_banner_option') && theme_get_setting('gwt_drupal_banner_option') == 1){
     $banner_attr['class'][] = 'full-width';
@@ -867,6 +868,22 @@ background-size: cover;',
 
   $style_settings .= '#panel-bottom{';
   $style_settings .= 'background-color: '.theme_get_setting('gwt_drupal_panel_bottom').' !important;';
+  $style_settings .= '}';
+
+  $default_link_color = theme_get_setting('gwt_drupal_content_link_color') ? theme_get_setting('gwt_drupal_content_link_color') : '#2ba6cb';
+  $default_link_hover_color = theme_get_setting('gwt_drupal_content_link_color_hover') ? theme_get_setting('gwt_drupal_content_link_color_hover') : '#258faf';
+  $heading_color = theme_get_setting('gwt_drupal_content_heading_color') ? theme_get_setting('gwt_drupal_content_heading_color') : '#000000';
+  $style_settings .= '.content-container a, .content-container a:active, .content-container a:visited{';
+  $style_settings .= 'color: '.$default_link_color.' !important;';
+  $style_settings .= '}';
+  $style_settings .= '.content-container a:focus, .content-container a:hover{';
+  $style_settings .= 'color: '.$default_link_hover_color.' !important;';
+  $style_settings .= '}';
+  $style_settings .= '.content-container h1, .content-container h2, .content-container h3, .content-container h4, .content-container h5, .content-container h6{';
+  $style_settings .= 'color: '.$heading_color.' !important;';
+  $style_settings .= '}';
+  $style_settings .= '.content-container h1 a, .content-container h2 a, .content-container h3 a, .content-container h4 a, .content-container h5 a, .content-container h6 a{';
+  $style_settings .= 'color: '.$heading_color.' !important;';
   $style_settings .= '}';
   drupal_add_css($style_settings, 'inline');
 
@@ -972,7 +989,6 @@ background-size: cover;',
   drupal_set_message('<pre>'.print_r($test, 1).'</pre>');*/
 
   $variables['accesibility_shortcut'] = '<ul>';
-  $variables['accesibility_shortcut'] .= '<li><a href="#" class="skips toggle-statement" title="Toggle Accessibility Statement" accesskey="0" data-toggle="a11y-modal">Toggle Accessibility Statement</a></li>';
   foreach($accessibility as $access_key => $data){
     $data['class'] = isset($data['class']) && is_array($data['class']) ? $data['class'] : array();
     $variables['accesibility_shortcut'] .= '<li>';

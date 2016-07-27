@@ -104,6 +104,9 @@ settings[gwt_drupal_content_heading_font] = 'Normal'
 settings[gwt_drupal_content_bg_color] = '#f2f2f2'
 settings[gwt_drupal_footer_bg_color] = '#cccccc'
 settings[gwt_drupal_logo_font] = 'Sans-serif'
+settings[gwt_drupal_content_heading_color] = '#000000'
+settings[gwt_drupal_content_link_color] = '#2ba6cb'
+settings[gwt_drupal_content_link_color_hover] = '#258faf'
 
 ; To add a Panels layout (which can also be used by Display Suite), uncomment
 ; the line below and see the documentation at: https://drupal.org/node/495654
