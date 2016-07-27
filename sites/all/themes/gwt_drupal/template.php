@@ -937,19 +937,19 @@ background-size: cover;',
   }
   */
   $gwt_drupal_acc_home = theme_get_setting('gwt_drupal_acc_home') ? theme_get_setting('gwt_drupal_acc_home') : '';
-  if($gwt_drupal_acc_home){
+  // if($gwt_drupal_acc_home){
     $accessibility[] = array(
       'url' => $gwt_drupal_acc_home,
       'text' => t('Home'),
-      'key' => '1',
+      'key' => 'h',
       );
-  }
+  // }
   $gwt_drupal_acc_faq = theme_get_setting('gwt_drupal_acc_faq') ? theme_get_setting('gwt_drupal_acc_faq') : '';
   if($gwt_drupal_acc_faq){
     $accessibility[] = array(
       'url' => $gwt_drupal_acc_faq,
       'text' => t('Faqs'),
-      'key' => '5',
+      'key' => 'q',
       );
   }
   $gwt_drupal_acc_contact = theme_get_setting('gwt_drupal_acc_contact') ? theme_get_setting('gwt_drupal_acc_contact') : '';
