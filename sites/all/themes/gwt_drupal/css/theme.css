@@ -27,6 +27,37 @@ a:visited{
 }
 
 /**
+ * heading overrides
+ */
+h1{font-size: 48px}
+h2{font-size: 40px}
+h3{font-size: 31px}
+h4{font-size: 25px}
+h5{font-size: 20px}
+h6{font-size: 16px}
+
+.heading-large h1{font-size: 48px}
+.heading-large h2{font-size: 40px}
+.heading-large h3{font-size: 31px}
+.heading-large h4{font-size: 25px}
+.heading-large h5{font-size: 20px}
+.heading-large h6{font-size: 16px}
+
+.heading-normal h1{font-size: 44px}
+.heading-normal h2{font-size: 36px}
+.heading-normal h3{font-size: 27px}
+.heading-normal h4{font-size: 21px}
+.heading-normal h5{font-size: 16px}
+.heading-normal h6{font-size: 12px}
+
+.heading-small h1{font-size: 40px}
+.heading-small h2{font-size: 32px}
+.heading-small h3{font-size: 23px}
+.heading-small h4{font-size: 17px}
+.heading-small h5{font-size: 12px}
+.heading-small h6{font-size: 8px}
+
+/**
  * accessibility settings
  */
 /** accessibility-links **/

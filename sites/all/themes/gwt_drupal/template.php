@@ -562,6 +562,18 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   else{
     $variables['content_class'] .= ' large-12';
   }
+  // content heading size
+  $heading_classes = array(
+    'heading-small',
+    'heading-normal',
+    'heading-large',
+  );
+  $heading_class = '';
+  $heading_font = theme_get_setting('gwt_drupal_content_heading_font');
+  if(isset($heading_classes[$heading_font])){
+    $heading_class = $heading_classes[$heading_font];
+  }
+  $variables['content_class'] .= ' '.$heading_class;
 
   //  TODO: bug! banner slider and container should not show (if no content on other content) if the banner is medium size media
   $variables['banner_class'] = '';
@@ -1262,6 +1274,8 @@ function gwt_drupal_preprocess_region(&$variables, $hook) {
     case 'footer_2':
     case 'footer_3':
     case 'footer_4':
+    case 'ear_content':
+    case 'ear_content_2':
       $variables['classes_array'][] = $heading_class;
       break;
     

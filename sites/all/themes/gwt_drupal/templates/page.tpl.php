@@ -377,7 +377,7 @@ Press esc, or click the close the button to close this dialog box.
         <?php print render($tabs); ?>
         <?php print render($title_prefix); ?>
         <?php if ($title): ?>
-          <h1 class="page__title title" id="page-title"><?php print $title; ?></h1>
+          <h2 class="page__title title" id="page-title"><?php print $title; ?></h2>
         <?php endif; ?>
         <?php print render($title_suffix); ?>
         <?php print render($page['help']); ?>
