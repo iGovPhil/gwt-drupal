@@ -8,6 +8,7 @@
  * implementation of hook_install
  */
 function gwt_drupal_helper_install(){
+  // TODO: add existing search bar to specific region
   // $gwt_drupal_helper_slides = 'public://gwt_drupal_helper_slides'; 
   // file_prepare_directory($gwt_drupal_helper_slides, FILE_CREATE_DIRECTORY);
 
