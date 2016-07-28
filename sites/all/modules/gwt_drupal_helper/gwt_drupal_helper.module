@@ -36,7 +36,6 @@ function gwt_drupal_helper_block_info(){
     'visibility' => 'BLOCK_VISIBILITY_LISTED',
     'pages' => '',
   );
-
   return $blocks;
 }
 
