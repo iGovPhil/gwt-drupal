@@ -43,10 +43,11 @@ function gwt_drupal_links__system_main_menu($variables) {
  */
 function gwt_drupal_links__system_main_menu_mobile($variables) {
   $main_menu = menu_tree_all_data('main-menu', null, 4);
-  $menu_top_right = menu_tree_all_data('menu-top-right', null, 4);
   $links = $main_menu;
+
+  $menu_top_right = menu_tree_all_data('menu-top-right', null, 4);
   if($menu_top_right){
-    $links = array_merge($main_menu, $menu_top_right);
+    $links = array_merge($links, $menu_top_right);
   }
 
   // heading not needed in main menu
@@ -118,6 +119,7 @@ function gwt_drupal_links__menu_auxiliary_right_menu($variables){
 function gwt_drupal_links__menu_auxiliary_mobile($variables) {
   $auxiliary_menu = menu_tree_all_data('menu-auxiliary-menu', null, 4);
   $auxiliary_right_menu = menu_tree_all_data('menu-auxiliary-right-menu', null, 4);
+  $links = $auxiliary_menu;
   if($auxiliary_right_menu){
     $links = array_merge($auxiliary_menu, $auxiliary_right_menu);
   }
@@ -180,7 +182,15 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
     if($levels_deep > 0){
       // $attributes['class'][] = 'nested';
     }
-    $output .= '<ul' . drupal_attributes($attributes) . '>';
+
+    if($levels_deep > 0){
+      $output .= '<ul' . drupal_attributes($attributes) . '>';
+    }
+    else{
+      if((isset($variables['no_container']) && !$variables['no_container']) || !isset($variables['no_container'])){
+        $output .= '<ul' . drupal_attributes($attributes) . '>';
+      }
+    }
 
     $num_links = count($links);
 
@@ -270,7 +280,14 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
     // add custom divider for the links
     // $output .= '<li class="divider"></li>';
 
-    $output .= '</ul>';
+    if($levels_deep > 0){
+      $output .= '</ul>';
+    }
+    else{
+      if((isset($variables['no_container']) && !$variables['no_container']) || !isset($variables['no_container'])){
+        $output .= '</ul>';
+      }
+    }
   }
 
   return $output;

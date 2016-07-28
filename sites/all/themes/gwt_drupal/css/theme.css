@@ -384,6 +384,7 @@ h6{font-size: 16px}
   /*overflow: auto;
   height: 100vh;
   background: #f7f7f7;*/
+  height: 100%;
 }
 #offCanvas .is-drilldown{
   max-width: 250px !important;
@@ -639,29 +640,27 @@ h6{font-size: 16px}
  * mobile overrides
  */
 /** mobile navigation **/
-#main-nav-mobile,
-#auxiliary-nav-mobile{
+#offCanvas .is-drilldown{
+  height: 95%;
 }
-#main-nav-mobile.menu a,
-#auxiliary-nav-mobile.menu a{
+#main-nav-mobile{
+  height: 100%;
+}
+#main-nav-mobile.menu a{
   background: #f7f7f7;
   color: #000;
   border-bottom: 1px solid #e9e9e9;
 }
-#main-nav-mobile.menu .is-submenu-parent-item a,
-#auxiliary-nav-mobile.menu .is-submenu-parent-item a{
+#main-nav-mobile.menu .is-submenu-parent-item a{
   font-weight: bold;
 }
-#main-nav-mobile.menu .active>a,
-#auxiliary-nav-mobile .active>a{
+#main-nav-mobile.menu .active>a{
   background: #8a8a8a;
 }
-#main-nav-mobile.menu .is-drilldown-submenu-parent>a:after,
-#auxiliary-nav-mobile .is-drilldown-submenu-parent>a:after{
+#main-nav-mobile.menu .is-drilldown-submenu-parent>a:after{
   border-color: transparent transparent transparent #8a8a8a;
 }
-#main-nav-mobile.menu .js-drilldown-back > a::before,
-#auxiliary-nav-mobile .js-drilldown-back > a::before{
+#main-nav-mobile.menu .js-drilldown-back > a::before{
   border-color: transparent #8a8a8a transparent transparent;
 }
 

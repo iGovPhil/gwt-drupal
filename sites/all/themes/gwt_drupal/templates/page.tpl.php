@@ -37,6 +37,13 @@ Site Map (Combination + M): Shortcut for site map (footer agency) section of the
 Search (Combination + S): Shortcut for search page.
 Press esc, or click the close the button to close this dialog box.
   </textarea>
+  <a href="http://www.w3.org/WAI/WCAG2AA-Conformance"
+      title="Explanation of WCAG 2.0 Level Double-A Conformance">
+      70% - 
+  <img height="32" width="88" 
+          src="http://www.w3.org/WAI/wcag2AA-blue"
+          alt="Level Double-A conformance, 
+          W3C WAI Web Content Accessibility Guidelines 2.0"></a>
   <button class="close-button" data-close aria-label="Close modal" type="button">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -83,7 +90,8 @@ Press esc, or click the close the button to close this dialog box.
         <?php print $topbar_search; ?>
       <?php endif; ?>
         <?php if ($main_menu_mobile): ?>
-          <h6 class="menu-title">Main Menu</h6>
+          <ul id="main-nav-mobile" class="vertical menu" data-drilldown data-parent-link="true">
+          <li><h6 class="menu-title">Main Menu</h6></li>
           <?php
           print theme('links__system_main_menu_mobile', array(
             'links' => $main_menu_mobile,
@@ -91,14 +99,35 @@ Press esc, or click the close the button to close this dialog box.
               'id' => 'main-nav-mobile',
               'class' => array('menu'),
             ),
-            'parent_attr' => array(
-              'class' => array('vertical menu'),
-              'data-drilldown' => '',
-              'data-parent-link' => 'true'
-            ),
+            // 'parent_attr' => array(
+            //   'class' => array('vertical menu'),
+            //   'data-drilldown' => '',
+            //   'data-parent-link' => 'true',
+            // ),
+            // disable the first ul to allow dynamically merge multiple menus
+            'no_container' => true,
           )); ?>
+          <?php if ($menu_auxiliary_mobile): ?>
+          <li><h6 class="menu-title">Auxiliary Menu</h6></li>
+          <?php
+          print theme('links__menu_auxiliary_mobile', array(
+            'links' => $menu_auxiliary_mobile,
+            'attributes' => array(
+              // 'id' => 'main-nav-mobile',
+              'class' => array('menu'),
+            ),
+            // 'parent_attr' => array(
+            //   'class' => array('vertical menu'),
+            //   'data-drilldown' => '',
+            //   'data-parent-link' => 'true',
+            // ),
+            // disable the first ul to allow dynamically merge multiple menus
+            'no_container' => true,
+          )); ?>
+          <?php endif; ?>
+          </ul>
         <?php endif; ?>
-        <?php if ($menu_auxiliary_mobile): ?>
+        <?php /* if ($menu_auxiliary_mobile): ?>
           <h6 class="menu-title">Auxiliary Menu</h6>
             <?php
             print theme('links__menu_auxiliary_mobile', array(
@@ -113,7 +142,7 @@ Press esc, or click the close the button to close this dialog box.
                 'data-parent-link' => 'true'
               ),
             )); ?>
-        <?php endif; ?>
+        <?php endif; */ ?>
     </div>
 
     <div class="off-canvas-content" data-off-canvas-content>
