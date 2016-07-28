@@ -44,6 +44,7 @@ function gwt_drupal_links__system_main_menu($variables) {
 function gwt_drupal_links__system_main_menu_mobile($variables) {
   $main_menu = menu_tree_all_data('main-menu', null, 4);
   $menu_top_right = menu_tree_all_data('menu-top-right', null, 4);
+  $links = $main_menu;
   if($menu_top_right){
     $links = array_merge($main_menu, $menu_top_right);
   }
