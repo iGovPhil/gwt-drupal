@@ -706,6 +706,28 @@ h6{font-size: 16px}
 .reveal-overlay{
   z-index: 15;
 }
+
 /**
  * media query overrides
  */
+/** medium screen enhancements **/
+@media only screen and (max-width: 64em) {
+  #header .ear-content{
+    padding: 20px;
+  }
+}
+/** small screen enhancements **/
+@media only screen and (max-width: 40em) {
+  #header{
+    padding: 20px;
+  }
+  #logo-container {
+    float: none;
+    text-align: center;
+    padding: 0;
+    padding-bottom: 20px;
+  }
+  #site-name-container {
+    text-align: center; width: 100%;
+  }
+}
