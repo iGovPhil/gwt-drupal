@@ -1,4 +1,4 @@
-*
+/*
  * Theme Name:         Government Web template
  * Theme URI:          
  * Description:        Custom Drupal Zen sub-theme template
@@ -245,28 +245,7 @@ h6{font-size: 16px}
 #a11y-modal{
   padding-top: 50px;
 }
-/*
-.a11y-right{
-  float: right;
-}
-.a11y-button{
-  padding: 4px;
-  margin: 0px 3px;
-  font-size: 30px;
-}
-.a11y-button:hover{
-  color: #ccc;
-}
-.top-bar-right.a11y-container li.is-dropdown-submenu-parent>a:after{
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
-#top-bar .top-bar-right.a11y-container li a{
-  padding: 15px 10px;
-  font-size: 1.7rem;
-  line-height: 1rem;
-}*/
+
 #top-bar .sticky{
   background: #f7f7f7;
   z-index: 11;
