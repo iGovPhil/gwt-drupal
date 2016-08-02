@@ -29,7 +29,7 @@ function _gwt_drupal_helper_install_style_slides(){
   $effect = array(
     'name' => 'image_scale_and_crop',
     'data' => array(
-      'width' => 1280,
+      'width' => 1250,
       'height' => 500,
     ),
     // 'ieid' => 1,
@@ -39,6 +39,7 @@ function _gwt_drupal_helper_install_style_slides(){
 
   // TODO: create an image style for full screen slider(1190x400)
   // create an image style for half slider(775x270)
+  // note: this is only useful if the banner has featured content banner(2)
   $banner_normal = image_style_save(array('name' => 'gwt_slides_banner_half'));
 
   $effect = array(

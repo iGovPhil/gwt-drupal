@@ -823,8 +823,7 @@ background-size: cover;',
     }
   }
 
-  $banner_attr['class'][] = 'show-for-large';
-  $banner_attr['class'][] = 'show-for-medium';
+  $banner_attr['class'][] = 'hide-for-small';
   $variables['banner_is_full_width'] = false;
   if($gwt_drupal_banner_option = theme_get_setting('gwt_drupal_banner_option') && theme_get_setting('gwt_drupal_banner_option') == 1){
     $banner_attr['class'][] = 'full-width';
