@@ -15,6 +15,13 @@
 </div> 
 <div class="reveal large" id="a11y-modal" data-reveal>
   <textarea class="statement-textarea" readonly rows="20">
+
+The iGovPhil Project officially adopts the Web Content Accessibility Guidelines (WCAG 2.0) as the accessibility standard for all its related web development and services. WCAG 2.0 is also an international standard, ISO 40500. This certifies it as a stable and referenceable technical standard. 
+
+WCAG 2.0 contains 12 guidelines organized under 4 principles: Perceivable, Operable, Understandable, and Robust (POUR for short). There are testable success criteria for each guideline. Compliance to these criteria is measured in three levels: A, AA, or AAA. A guide to understanding and implementing Web Content Accessibility Guidelines 2.0 is available at: https://www.w3.org/TR/UNDERSTANDING-WCAG20/
+
+All iGovPhil Project services and content are currently moving towards WCAG Level A compliance. Work is being done to make the system fully compliant with this level. 
+
 Shortcut Keys Combination Activation
 
 Combination keys used for each browser.
@@ -37,13 +44,6 @@ Site Map (Combination + M): Shortcut for site map (footer agency) section of the
 Search (Combination + S): Shortcut for search page.
 Press esc, or click the close the button to close this dialog box.
   </textarea>
-  <a href="http://www.w3.org/WAI/WCAG2AA-Conformance"
-      title="Explanation of WCAG 2.0 Level Double-A Conformance">
-      70% - 
-  <img height="32" width="88" 
-          src="http://www.w3.org/WAI/wcag2AA-blue"
-          alt="Level Double-A conformance, 
-          W3C WAI Web Content Accessibility Guidelines 2.0"></a>
   <button class="close-button" data-close aria-label="Close modal" type="button">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -72,11 +72,11 @@ Press esc, or click the close the button to close this dialog box.
             </a></li>
             <li><a class="a11y-skip-to-content" href="#main">
               <span class="show-for-sr">Skip to content</span>
-              <i class="fa fa-angle-down fa-2x"></i>
+              <i class="fa fa-arrow-circle-o-down fa-2x"></i>
             </a></li>
             <li><a class="a11y-skip-to-footer" href="#footer">
               <span class="show-for-sr">Skip to footer</span>
-              <i class="fa fa-angle-double-down fa-2x"></i>
+              <i class="fa fa-angle-down fa-2x"></i>
             </a></li>
             <!-- <li><a class="button a11y-toggle-grayscale">
               <span class="show-for-sr">Grayscale</span>
@@ -187,11 +187,11 @@ Press esc, or click the close the button to close this dialog box.
             </a></li> -->
             <li><a class="a11y-skip-to-content" href="#main">
               <span class="show-for-sr">Skip to content</span>
-              <i class="fa fa-angle-down fa-2x"></i>
+              <i class="fa fa-arrow-circle-o-down fa-2x"></i>
             </a></li>
             <li><a class="a11y-skip-to-footer" href="#footer">
               <span class="show-for-sr">Skip to footer</span>
-              <i class="fa fa-angle-double-down fa-2x"></i>
+              <i class="fa fa-angle-down fa-2x"></i>
             </a></li>
           </ul>
         </div>
