@@ -1,10 +1,10 @@
 /*
- * Theme Name:         Government Web template
- * Theme URI:          
+ * Theme Name:         GWT-Drupal P2
+ * Theme URI:          https://github.com/iGovPhil/gwt-drupal/
  * Description:        Custom Drupal Zen sub-theme template
- * Version:            2.5
+ * Version:            25.0
  * Author:             Voltz Jeturian
- * Author URI:         
+ * Author URI:         https://github.com/v0j
  *
  * License:            GPL License
  * License URI:        http://www.gnu.org/copyleft/gpl.html
@@ -513,15 +513,15 @@ h6{font-size: 16px}
   padding-bottom: 15px;
 }
 #banner.full-width #block-gwt-drupal-helper-gwt-drupal-helper-slides .orbit-container{
-  height: auto;
+  height: auto !important;
   width: 100%;
 }
 #banner.full-width #block-gwt-drupal-helper-gwt-drupal-helper-slides .orbit-container li{
-  height: auto;
+  height: auto !important;
   width: 100%;
 }
 #banner.full-width #block-gwt-drupal-helper-gwt-drupal-helper-slides .orbit-container li img{
-  height: auto;
+  height: auto !important;
   width: 100%;
 }
 #banner.full-width #block-gwt-drupal-helper-gwt-drupal-helper-slides .orbit-bullets{
