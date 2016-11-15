@@ -214,6 +214,8 @@ data-pause-on-hover="1">';
       $field_gwt_image_caption = field_get_items('node', $node, 'field_gwt_image_caption');
       $field_gwt_image_caption_output = field_view_value('node', $node, 'field_gwt_image_caption', $field_gwt_image_caption[0]);
       $gwt_image_caption_output = '';
+
+      $render_gwt_image_caption = '';
       // only display if there is a caption available
       if($field_gwt_image_caption_output['#markup']){
         $render_gwt_image_caption = render($field_gwt_image_caption_output);
