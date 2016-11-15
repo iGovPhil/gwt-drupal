@@ -62,3 +62,7 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 - default transparency seal (gwt\_helper\_module) block
 - default PST (Philippine Standard Time) block
 
+**11-15-2016**
+
+- Removed undefined variable error
+- Fixed other region menu display

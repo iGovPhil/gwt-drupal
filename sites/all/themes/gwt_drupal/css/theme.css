@@ -2,7 +2,7 @@
  * Theme Name:         GWT-Drupal P2
  * Theme URI:          https://github.com/iGovPhil/gwt-drupal/
  * Description:        Custom Drupal Zen sub-theme template
- * Version:            25.0
+ * Version:            2.5.0
  * Author:             Voltz Jeturian
  * Author URI:         https://github.com/v0j
  *
@@ -581,6 +581,23 @@ h6{font-size: 16px}
 #sidebar-second .block{
   padding: 0.9375rem;
 }
+
+#sidebar-first .block .block-menu,
+#sidebar-second .block .block-menu{
+}
+
+#sidebar-first .block .block-menu ul.menu,
+#sidebar-second .block .block-menu ul.menu{
+}
+
+#panel-top ul.menu li.menu__item,
+#panel-bottom ul.menu li.menu__item,
+#footer ul.menu li.menu__item,
+#sidebar-first ul.menu li.menu__item,
+#sidebar-second ul.menu li.menu__item{
+  display: block;
+}
+
 
 /**
  * panel bottom
