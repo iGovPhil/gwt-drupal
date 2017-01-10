@@ -5,7 +5,7 @@ Notes:
 - See modulepositions.jpg in /images for this template's module positions.
 - Banner width should be 1250px
 - Any content in the masthead area should NOT EXCEED 100px.
-- For experienced Joomla users, please report any template issues to helpdesk@i.gov.ph.
+- For experienced Drupal themers, please report any template issues to helpdesk@i.gov.ph.
 
 ## Known bugs and requests for enhancements (RFEs)
 For a list of known issues and RFEs, check the [issue tracking system](https://github.com/iGovPhil/gwt-drupal/issues).
