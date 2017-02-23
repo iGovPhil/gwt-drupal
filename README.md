@@ -15,15 +15,41 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 - ~~some access keys not working properly (site map)~~ accessibility features temporarily disabled
 
 ## CHANGE LOGS
-**03-03-2016**
+**02-23-2017**
+- changed banner transition to fade
 
-- Change Version Branding Pansit version 2.0
-- Revert default media query from Foundation
-- Improved background footer
-- transparency seal image resized into 225px square
-- transparency seal added alt and title text attribute
-- temporarily disable accessibility option (red button)
-- fix PDO error on using GWT-Mega menu feature
+**11-15-2016**
+
+- Removed undefined variable error
+- Fixed other region menu display
+
+**07-26-2016**
+
+- Used Foundation 6.0 theme framework
+- improved accessibility feature
+- used font-awesome as default icon pack
+- improve slider
+- added theme options
+  - Used tabbing
+  - more CSS customizations
+  - more header,banner and banner settings
+- improve menu system
+  - used off-canvas menu for mobile devices
+  - used sticky menu for header
+- default transparency seal (gwt\_helper\_module) block
+- default PST (Philippine Standard Time) block
+
+**05-12-2016**
+
+- added right class for search block region
+
+**05-11-2016**
+
+- fix for heading font and color
+
+**04-21-2016**
+
+- fix for theme.js error which causes the TinyMCE page to be an error
 
 **03-09-2016**
 
@@ -34,35 +60,12 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 - added quick fix for jQuery compatibility issue
 - improve rendering of element attributes for banner
 
-**04-21-2016**
+**03-03-2016**
 
-- fix for theme.js error which causes the TinyMCE page to be an error
-
-**05-11-2016**
-
-- fix for heading font and color
-
-**05-12-2016**
-
-- added right class for search block region
-
-**07-26-2016**
-
-- Used Foundation 6.0 theme framework
-- improved accessibility feature
-- used font-awesome as default icon pack
-- improve slider
-- added theme options
-	- Used tabbing
-	- more CSS customizations
-	- more header,banner and banner settings
-- improve menu system
-	- used off-canvas menu for mobile devices
-	- used sticky menu for header
-- default transparency seal (gwt\_helper\_module) block
-- default PST (Philippine Standard Time) block
-
-**11-15-2016**
-
-- Removed undefined variable error
-- Fixed other region menu display
+- Change Version Branding Pansit version 2.0
+- Revert default media query from Foundation
+- Improved background footer
+- transparency seal image resized into 225px square
+- transparency seal added alt and title text attribute
+- temporarily disable accessibility option (red button)
+- fix PDO error on using GWT-Mega menu feature
