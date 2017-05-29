@@ -346,6 +346,12 @@ Press esc, or click the close the button to close this dialog box.
     endif;
     ?>
 
+  <?php
+  if(!empty($page['panel_top']) ||
+    !empty($page['panel_top_2']) ||
+    !empty($page['panel_top_3']) ||
+    !empty($page['panel_top_4'])):
+    ?>
   <div id="panel-top" class="content-container">
     <div class="row">
       <?php if($panel_top = render($page['panel_top'])): ?>
@@ -378,6 +384,7 @@ Press esc, or click the close the button to close this dialog box.
       <?php endif ?>
     </div>
   </div>
+  <?php endif ?>
   
   <div id="main" role="document" class="content-container">
     <div class="row">
@@ -420,6 +427,12 @@ Press esc, or click the close the button to close this dialog box.
     </div>
   </div>
 
+  <?php
+  if(!empty($page['panel_bottom']) ||
+    !empty($page['panel_bottom_2']) ||
+    !empty($page['panel_bottom_3']) ||
+    !empty($page['panel_bottom_4'])):
+    ?>
   <div id="panel-bottom" class="content-container">
     <div class="row">
       <?php if($panel_bottom = render($page['panel_bottom'])): ?>
@@ -452,6 +465,7 @@ Press esc, or click the close the button to close this dialog box.
       <?php endif ?>
     </div>
   </div>
+  <?php endif ?>
 
   <?php
   if(!empty($page['footer']) ||
