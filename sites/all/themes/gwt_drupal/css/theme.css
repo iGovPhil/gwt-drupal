@@ -97,7 +97,6 @@ h6{font-size: 16px}
   border: 0;
   border-bottom: 1px solid #e6e6e6;
 }
-
 .dropdown.menu>li.is-dropdown-submenu-parent>a:after{
   border-color: rgba(0, 0, 0, 0.4) transparent transparent transparent;
   margin-right: 3px;
