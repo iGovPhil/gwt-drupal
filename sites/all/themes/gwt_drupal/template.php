@@ -15,179 +15,149 @@ if (theme_get_setting('gwt_drupal_rebuild_registry') && !defined('MAINTENANCE_MO
   drupal_theme_rebuild();
 }
 
+
 /**
- * gwt_drupal edit
- */
-/**
- * theme override of link main menu
+ * Implements THEME_links__system_main_menu().
+ *
+ * Theme override of link main menu.
  */
 function gwt_drupal_links__system_main_menu($variables) {
-  // $links = $variables['links'];
   $links = menu_tree_all_data('main-menu', null, 4);
-  /*
-  $test = '<pre>'.print_r($links, 1).'</pre>';
-  return $test;
-  // */
 
-  // heading not needed in main menu
+  // Heading not needed in main menu.
   $heading = $variables['heading'];
-  // global $language_url;
   $output = '';
-
   $output .= _gwt_drupal_link_render($links, 0, $variables);
 
   return $output;
 }
+
 /**
- * theme override of link main menu mobile version
+ * Theme override of link main menu mobile version.
  */
 function gwt_drupal_links__system_main_menu_mobile($variables) {
   $main_menu = menu_tree_all_data('main-menu', null, 4);
   $links = $main_menu;
 
   $menu_top_right = menu_tree_all_data('menu-top-right', null, 4);
-  if($menu_top_right){
+  if ($menu_top_right) {
     $links = array_merge($links, $menu_top_right);
   }
 
-  // heading not needed in main menu
+  // Heading not needed in main menu.
   $heading = $variables['heading'];
-  // global $language_url;
   $output = '';
-
   $output .= _gwt_drupal_link_render($links, 0, $variables);
 
   return $output;
 }
 
 /**
- * theme override of link top right menu
- * TODO: add auto creation of menu top_right
+ * Theme override of link top right menu.
+ *
+ * @todo add auto creation of menu top_right.
  */
 function gwt_drupal_links__menu_top_right($variables) {
   $links = menu_tree_all_data('menu-top-right', null, 4);
 
-  // heading not needed in main menu
+  // Heading not needed in main menu.
   $heading = $variables['heading'];
-  // global $language_url;
   $output = '';
-
   $output .= _gwt_drupal_link_render($links, 0, $variables);
 
   return $output;
 }
 
 /**
- * theme override of link auxiliary_menu
- * TODO: create automatically an auxiliary_menu machine_name: menu-auxiliary-menu
+ * Theme override of link auxiliary_menu.
+ *
+ * @todo Create automatically an auxiliary_menu.
+ *   Machine name is menu-auxiliary-menu.
  */
-function gwt_drupal_links__menu_auxiliary_menu($variables){
+function gwt_drupal_links__menu_auxiliary_menu($variables) {
   $links = menu_tree_all_data('menu-auxiliary-menu', null, 4);
-  // print_r($links);
-
-  // heading not needed in main menu
+  // Heading not needed in main menu.
   $heading = $variables['heading'];
-  // global $language_url;
   $output = '';
-
   $output .= _gwt_drupal_link_render($links, 0, $variables);
 
   return $output;
 }
 
 /**
- * theme override of link auxiliary_menu
- * TODO: create automatically an auxiliary_menu machine_name: menu-auxiliary-menu
+ * Theme override of link auxiliary_menu.
+ *
+ * @todo Create automatically an auxiliary_menu.
+ *   Machine name is menu-auxiliary-menu.
  */
-function gwt_drupal_links__menu_auxiliary_right_menu($variables){
+function gwt_drupal_links__menu_auxiliary_right_menu($variables) {
   $links = menu_tree_all_data('menu-auxiliary-right-menu', null, 4);
-  // print_r($links);
 
-  // heading not needed in main menu
+  // Heading not needed in main menu.
   $heading = $variables['heading'];
-  // global $language_url;
   $output = '';
-
   $output .= _gwt_drupal_link_render($links, 0, $variables);
 
   return $output;
 }
 
 /**
- * theme override of link main menu mobile version
+ * Theme override of link main menu mobile version.
  */
 function gwt_drupal_links__menu_auxiliary_mobile($variables) {
   $auxiliary_menu = menu_tree_all_data('menu-auxiliary-menu', null, 4);
   $auxiliary_right_menu = menu_tree_all_data('menu-auxiliary-right-menu', null, 4);
   $links = $auxiliary_menu;
-  if($auxiliary_right_menu){
+
+  if ($auxiliary_right_menu) {
     $links = array_merge($auxiliary_menu, $auxiliary_right_menu);
   }
 
-  // heading not needed in main menu
+  // Heading not needed in main menu.
   $heading = $variables['heading'];
-  // global $language_url;
   $output = '';
-
   $output .= _gwt_drupal_link_render($links, 0, $variables);
 
   return $output;
 }
 
 /**
- *
+ * Helper function tp render the link as li element.
  */
-/*function gwt_drupal_menu_tree(){
-  // echo '<pre>'.print_r(func_get_args(),1).'</pre>';
-}
-function gwt_drupal_menu_link(){
-  // echo '<pre>'.print_r(func_get_args(),1).'</pre>';
-
-  // drupal_set_message('hello');
-}*/
-
-/**
- * helper function
- * render the link as li element
- */
-function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array()){
-  if($levels_deep > 3){
+function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array()) {
+  if ($levels_deep > 3) {
     return;
   }
 
   $attributes = $variables['attributes'];
-  // check if the attrib of menu is hidden, if hidden, hide menu
+  // Check if the attrib of menu is hidden, if hidden, hide menu.
   foreach ($links as $key => $link_full) {
-    // if link is hidden, remove from node
-    if($link_full['link']['hidden']){
+    // If link is hidden, remove from node.
+    if ($link_full['link']['hidden']) {
       unset($links[$key]);
     }
   }
 
   $output = '';
   if (count($links) > 0) {
-    if($levels_deep == 0){
-      // $attributes['class'][] = 'left';
-      // parent attributes only
-      // drupal_set_message($attributes['class']);
-      if(isset($variables['parent_attr'])){
+    if ($levels_deep == 0) {
+      if (isset($variables['parent_attr'])) {
         $attributes = array_merge($attributes, $variables['parent_attr']);
         unset($variables['parent_attr']);
       }
     }
-    // reset classes
-    // $attributes['class'] = array();
-    $attributes['class'][] = 'level-'.$levels_deep;
 
-    if($levels_deep > 0){
-      // $attributes['class'][] = 'nested';
+    $attributes['class'][] = 'level-' . $levels_deep;
+
+    if ($levels_deep > 0) {
+      // @todo Remove this section if not in use.
     }
 
-    if($levels_deep > 0){
+    if ($levels_deep > 0) {
       $output .= '<ul' . drupal_attributes($attributes) . '>';
     }
-    else{
-      if((isset($variables['no_container']) && !$variables['no_container']) || !isset($variables['no_container'])){
+    else {
+      if ((isset($variables['no_container']) && !$variables['no_container']) || !isset($variables['no_container'])) {
         $output .= '<ul' . drupal_attributes($attributes) . '>';
       }
     }
@@ -195,27 +165,27 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
     $num_links = count($links);
 
     $i = 1;
-    // if drupal helper exists add mega menu  
-    if(module_exists('gwt_drupal_helper')){
+    // If drupal helper exists add mega menu.
+    if (module_exists('gwt_drupal_helper')) {
       $mega_menu = gwt_drupal_mega_menu_load_all();
     }
     foreach ($links as $key => $link_full) {
-      // check if the key is really a link by checking if the key is an int
+      // Check if the key is really a link by checking if the key is an int.
       $keys = explode(' ', $key);
       $menu_id = $keys[count($keys)-1];
-      if(!is_numeric($menu_id)){
+      if (!is_numeric($menu_id)) {
         break;
       }
 
       $attr = array();
       $link = $link_full['link'];
-      $class = array('menu-'.$menu_id);
+      $class = array('menu-' . $menu_id);
       $has_sub_menu = false;
-      if(isset($link_full['below']) && !empty($link_full['below'])){
+      if (isset($link_full['below']) && !empty($link_full['below'])) {
         $has_sub_menu = true;
-        // only show has-dropdown if below items is not hidden
-        if(_gwt_drupal_has_sub_menu($link_full['below'])){
-          // $class[] = 'has-dropdown';
+        // Only show has-dropdown if below items is not hidden.
+        if (_gwt_drupal_has_sub_menu($link_full['below'])){
+          // @todo Remove this section if not in use.
         }
         $class[] = 'not-click';
       }
@@ -230,15 +200,13 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
       if (isset($link['href']) && ($link['href'] == $_GET['q'] || ($link['href'] == '<front>' && drupal_is_front_page())) && (empty($link['language']) || $link['language']->language == $language_url->language)) {
         $class[] = 'active';
       }
-      // add custom divider for the links
-      // $output .= '<li class="divider"></li>';
 
-      if(module_exists('gwt_drupal_helper')){
+      if (module_exists('gwt_drupal_helper')) {
         $mlid = $link['mlid'];
-        if(isset($mega_menu[$mlid])){
-          $class = array('menu-'.$menu_id, 'has-megamenu');
+        if (isset($mega_menu[$mlid])) {
+          $class = array('menu-' . $menu_id, 'has-megamenu');
           $attr['data-menu-link'] = array($menu_id);
-          // disable children menu dropdown to avoid conflict
+          // Disable children menu dropdown to avoid conflict.
           $has_sub_menu = false;
         }
       }
@@ -256,7 +224,8 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
         }
       }
       elseif (!empty($link['title'])) {
-        // Some links are actually not links, but we wrap these in <span> for adding title and class attributes.
+        // Some links are actually not links, but we wrap these in <span> for
+        // adding title and class attributes.
         if (empty($link['html'])) {
           $link['title'] = check_plain($link['title']);
         }
@@ -267,24 +236,21 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
         $output .= '<span' . $span_attributes . '>' . $link['title'] . '</span>';
       }
 
-      // recursion
-      // check if there are submenu
-      // support up to 4 levels
-      if($has_sub_menu){
-        $output .= _gwt_drupal_link_render($link_full['below'], $levels_deep+1, $variables);
+      // Recursion.
+      // Check if there are submenu.
+      // Support up to 4 levels.
+      if ($has_sub_menu) {
+        $output .= _gwt_drupal_link_render($link_full['below'], $levels_deep + 1, $variables);
       }
       $i++;
       $output .= "</li>\n";
     }
 
-    // add custom divider for the links
-    // $output .= '<li class="divider"></li>';
-
-    if($levels_deep > 0){
+    if ($levels_deep > 0) {
       $output .= '</ul>';
     }
-    else{
-      if((isset($variables['no_container']) && !$variables['no_container']) || !isset($variables['no_container'])){
+    else {
+      if ((isset($variables['no_container']) && !$variables['no_container']) || !isset($variables['no_container'])) {
         $output .= '</ul>';
       }
     }
@@ -294,17 +260,18 @@ function _gwt_drupal_link_render($links, $levels_deep = 0, $variables = array())
 }
 
 /**
- * helper function
- * checks if the sub menu has non hidden menu
- * @return (bool)$has_item - returns true if there has non hidden sub-menu
+ * Helper function that checks if the sub menu has non hidden menu.
+ *
+ * @return bool $has_item
+ *   Returns true if there has non hidden sub-menu.
  */
-function _gwt_drupal_has_sub_menu($below_menu = array()){
-  if(empty($below_menu)){
+function _gwt_drupal_has_sub_menu($below_menu = array()) {
+  if (empty($below_menu)) {
     return false;
   }
 
-  foreach($below_menu as $key => $link_full){
-    if($link_full['link']['hidden']){
+  foreach ($below_menu as $key => $link_full) {
+    if ($link_full['link']['hidden']) {
       unset($below_menu[$key]);
     }
   }
@@ -312,14 +279,6 @@ function _gwt_drupal_has_sub_menu($below_menu = array()){
   $has_item = !empty($below_menu);
   return $has_item;
 }
-
-/**
- * end gwt_drupal edit
- */
-
-
-
-
 
 /**
  * Return a themed breadcrumb trail.
@@ -744,7 +703,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
     elseif(!empty($variables['page']['panel_bottom_3']) && empty($variables['page']['panel_bottom_4'])){
       $variables['panel_bottom_3_class'] = ' large-6';
     }
-  } 
+  }
 
   // load the color used from theme_settings
   // TODO: use the drupal way of printing attributes
@@ -859,8 +818,8 @@ background-size: cover;',
   }
   $variables['gwt_drupal_banner_styles'] = drupal_attributes($banner_attr);
 
-  $style_settings = '';  
-  $style_settings .= '.content-style{';  
+  $style_settings = '';
+  $style_settings .= '.content-style{';
   $content_border_position = theme_get_setting('gwt_drupal_content_border_position');
   if($content_border_position > 0){
     $style_settings .= 'border-style: solid !important; ';
@@ -940,7 +899,7 @@ background-size: cover;',
   if($menu_auxiliary_menu && $menu_auxiliary_right_menu){
     $variables['menu_auxiliary_mobile'] = array_merge($menu_auxiliary_menu, $menu_auxiliary_right_menu);
   }
-  
+
   $accessibility = array();
   /*
   $gwt_drupal_acc_statement = theme_get_setting('gwt_drupal_acc_statement') ? theme_get_setting('gwt_drupal_acc_statement') : '';
@@ -1028,7 +987,7 @@ background-size: cover;',
         'attributes' => array(
           'class' => array_merge(array('skips'), $data['class']),
           'accesskey' => $data['key'],
-          // 
+          //
           ),
         )
       );
@@ -1052,7 +1011,7 @@ function _gwt_drupal_mega_menu_formatted(){
     return;
   }
   $output = '';
-  
+
   $mega_menu = gwt_drupal_mega_menu_load_all();
   // $output .= '<pre>'.print_r($mega_menu, 1).'</pre>';
   // print_r($mega_menu);
@@ -1089,7 +1048,7 @@ function _gwt_drupal_mega_menu_formatted(){
       $mega_menu_sub_items .= "<li class=\"tab-title active\">";
       $mega_menu_sub_items .= '<a href="#mega-menu-item-'.$mlid.'" data-tab-link="'.$mlid.'">'.$node_view['#node']->title.'</a>';
       $mega_menu_sub_items .= "</li>\n";
-      
+
       $mega_menu_sub_items_content = '';
       $mega_menu_sub_items_content .= "<div class=\"mega-sub-content active\" id=\"mega-menu-item-".$mlid."\" data-tab-item=\"".$mlid."\">\n";
       $mega_menu_sub_items_content .= '<h3 class="mega-menu-title">'.$node_view['#node']->title.'</h3>';
@@ -1295,7 +1254,7 @@ function gwt_drupal_preprocess_region(&$variables, $hook) {
     case 'ear_content_2':
       $variables['classes_array'][] = $heading_class;
       break;
-    
+
     default:
       # code...
       break;
@@ -1336,12 +1295,12 @@ function gwt_drupal_preprocess_block(&$variables, $hook) {
       $variables['classes_array'][] = 'content-style';
       # code...
       break;
-    
+
     default:
       # code...
       break;
   }
-  
+
 
   // Add Aria Roles via attributes.
   switch ($variables['block']->module) {
@@ -1707,7 +1666,7 @@ function gwt_drupal_block_view($delta = ''){
   switch ($delta) {
     case 'gwt_drupal_helper_slides':
       // check if there are already a gwt slides content types
-      
+
       // load gwt slides content types
       // print slides into foundation based slider
       $block['subject'] = '';
