@@ -24,7 +24,7 @@ if (theme_get_setting('gwt_drupal_rebuild_registry') && !defined('MAINTENANCE_MO
 function gwt_drupal_links__system_main_menu($variables) {
   $links = menu_tree_all_data('main-menu', null, 4);
 
-  // Deading not needed in main menu.
+  // Heading not needed in main menu.
   $heading = $variables['heading'];
   $output = '';
   $output .= _gwt_drupal_link_render($links, 0, $variables);
@@ -55,7 +55,7 @@ function gwt_drupal_links__system_main_menu_mobile($variables) {
 /**
  * Theme override of link top right menu.
  *
- * TODO: add auto creation of menu top_right.
+ * @todo add auto creation of menu top_right.
  */
 function gwt_drupal_links__menu_top_right($variables) {
   $links = menu_tree_all_data('menu-top-right', null, 4);
