@@ -568,7 +568,7 @@ function gwt_drupal_preprocess_page(&$variables, $hook) {
   $variables['sidebar_second_class'] = ' large-3 medium-3';
   if(!empty($variables['page']['sidebar_first']) && !empty($variables['page']['sidebar_second'])){
     $variables['content_class'] .= ' large-6 medium-6 large-push-3 medium-push-3';
-    $variables['sidebar_first_class'] .= ' large-pull-6 medium-push-6';
+    $variables['sidebar_first_class'] .= ' large-pull-6 medium-pull-6';
   }
   elseif(!empty($variables['page']['sidebar_first']) && empty($variables['page']['sidebar_second'])){
     $variables['content_class'] .= ' large-9 medium-9 large-push-3 medium-push-3';
