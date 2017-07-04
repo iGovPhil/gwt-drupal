@@ -15,7 +15,7 @@ For a list of known issues and RFEs, check the [issue tracking system](https://g
 - ~~some access keys not working properly (site map)~~ accessibility features temporarily disabled
 
 ## CHANGE LOGS
-**06-04-2017**
+**06-07-2017**
 - fix medium layout error in main content
 
 **02-23-2017**
